@@ -1,7 +1,13 @@
 
 from django.urls import path, include
-from . import views
+from .views import *
 
+# urls
 urlpatterns = [
-    path('', views.home, name="Home")
+    path('', shopper.home, name="home"),
+    path('login/', Account.login_view, name="login"),
+    path('register/', Account.register_view, name="register"),
+    path('shopper/home', shopper.home, name="shopper_home")
 ]
+
+# APIs
