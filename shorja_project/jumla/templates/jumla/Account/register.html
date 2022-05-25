@@ -6,7 +6,10 @@
 </head>
 <body>
 <h1> تسجيل حساب جديد </h1>
-<form action="" method="POST">
+  {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+<form action="{% url 'register' %}" method="POST">
     {% csrf_token %}
     {{form.as_p}}
     <input type="submit" value="تسجيل">
