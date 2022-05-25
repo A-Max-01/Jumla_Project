@@ -106,11 +106,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Baghdad'
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True
 
 AUTH_USER_MODEL = "jumla.User"
 # Static files (CSS, JavaScript, Images)

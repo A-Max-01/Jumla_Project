@@ -1,5 +1,5 @@
 import datetime
-
+from django.utils import timezone
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
@@ -7,15 +7,20 @@ from django.contrib.auth.models import AbstractUser
 # المستخدم
 
 
-
 class User(AbstractUser):
     phone_number = models.CharField(max_length=11)
+    address = models.CharField(max_length=255, null=True)
+    #
+    # def create_user(self, username, phone_number, password, **kwargs):
+    #
+    #     if not username:
+    #         raise ValueError("The given username must be set")
+    #
 
 # الفئات
 
 
 class Category(models.Model):
-
     name = models.CharField(max_length=100)
 
     class Meta:
@@ -39,7 +44,7 @@ class Governorate(models.Model):
 
 class Shop(models.Model):
     shopName = models.CharField(max_length=255)
-    shopOwner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="shopOwner")
+    shopOwner = models.OneToOneField(User, on_delete=models.CASCADE, related_name="shopOwner")
 
     def __str__(self):
         return f"{self.shopName}"
@@ -51,10 +56,10 @@ class Shop(models.Model):
 class Product(models.Model):
     ProductName = models.CharField(max_length=255)
     Size = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=12, decimal_places=2)
     description = models.CharField(max_length=255)
     shopOwner = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="shop_products")
-    Date = models.DateTimeField(default=datetime.datetime.now())
+    Date = models.DateTimeField()
     Available = models.BooleanField(default=True)
     Category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="product_Category")
 
@@ -77,7 +82,7 @@ class Image(models.Model):
 
 class Cart(models.Model):
     userOwner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_cart")
-    Date = models.DateTimeField(default=datetime.datetime.now())
+    Date = models.DateTimeField()
     Governorate = models.ForeignKey(Governorate, on_delete=models.CASCADE, related_name="cart_Governorate")
 
     def __str__(self):
@@ -90,9 +95,9 @@ class Bill(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="bill_cart")
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="shop_bill")
     products = models.ManyToManyField(Product, related_name="bill_products")
-    Date = models.DateTimeField(default=datetime.datetime.now())
+    Date = models.DateTimeField()
     quantity = models.IntegerField()
-    total = models.DecimalField(max_digits=5, decimal_places=2)
+    total = models.DecimalField(max_digits=12, decimal_places=2)
 
     def __str__(self):
         return f" {self.cart},  {self.shop}"

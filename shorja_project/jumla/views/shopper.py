@@ -11,7 +11,6 @@ from django.views.decorators.csrf import csrf_exempt
 from ..decorators import *
 
 
-# @allowed_users(allowed_roles=['admin'])
-@admin_only
+# @allowed_users(allowed_roles=['shopper'])
 def home(request):
-    return HttpResponse("shopper user per allowed")
+    return render(request, "jumla/shopper/home.html")
