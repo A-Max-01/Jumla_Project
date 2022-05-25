@@ -10,8 +10,10 @@ urlpatterns = [
         path('register/', Account.register_view, name="register"),
         path('change_password/', Account.change_password, name="change_password"),
     ])),
+    path('shopper/', include([
+        path('shopper/home', shopper.home, name="shopper_home"),
+    ])),
 
-    path('shopper/home', shopper.home, name="shopper_home")
 ]
 
 # APIs
