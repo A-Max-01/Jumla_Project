@@ -81,4 +81,3 @@ def change_password(request):
     context = {'form': form,
                'user': request.user}
     return render(request, "jumla/Account/change_password.html", context)
-
