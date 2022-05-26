@@ -11,6 +11,10 @@ from django.views.decorators.csrf import csrf_exempt
 from ..decorators import *
 
 
+# @login_required()
 # @allowed_users(allowed_roles=['shopper'])
 def home(request):
+    #   It displays products to the customer and includes the search process
+    #   and includes paginator
+
     return render(request, "jumla/shopper/home.html")
