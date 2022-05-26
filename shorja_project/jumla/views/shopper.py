@@ -1,3 +1,4 @@
+
 from django.shortcuts import render
 from django import http
 from django.contrib.auth import authenticate, login, logout
@@ -9,12 +10,20 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
 from ..decorators import *
-
+from ..models import *
 
 # @login_required()
 # @allowed_users(allowed_roles=['shopper'])
+
+
 def home(request):
     #   It displays products to the customer and includes the search process
     #   and includes paginator
 
-    return render(request, "jumla/shopper/home.html")
+    products = Product.objects.all()
+
+
+    cart = Cart.objects.all()
+
+
+    return render(request, "jumla/shopper/home.html", {"products": products})
