@@ -15,7 +15,7 @@ from ..decorators import *
 # from
 # @login_required()
 # @allowed_users(allowed_roles=['shopper'])
-from ..models import Product, Category
+from ..models import *
 
 
 def home(request):

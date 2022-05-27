@@ -4,20 +4,10 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 # Create your models here.
 
-# المستخدم
-
 
 class User(AbstractUser):
     phone_number = models.CharField(max_length=11)
     address = models.CharField(max_length=255, null=True)
-    #
-    # def create_user(self, username, phone_number, password, **kwargs):
-    #
-    #     if not username:
-    #         raise ValueError("The given username must be set")
-    #
-
-# الفئات
 
 
 class Category(models.Model):
@@ -30,16 +20,12 @@ class Category(models.Model):
     def str(self):
         return f"{self.name}"
 
-# المحافظة
-
 
 class Governorate(models.Model):
     name = models.CharField(max_length=100)
 
     def str(self):
         return f"{self.name}"
-
-# المحل
 
 
 class Shop(models.Model):
@@ -48,9 +34,6 @@ class Shop(models.Model):
 
     def str(self):
         return f"{self.shopName}"
-
-
-# المنتجات
 
 
 class Product(models.Model):
@@ -66,8 +49,6 @@ class Product(models.Model):
     def str(self):
         return f"{self.ProductName} ,  {self.Category}"
 
-# لكل منتج اكثر من صورة
-
 
 class Image(models.Model):
     image = models.ImageField(upload_to="images/")
@@ -77,9 +58,6 @@ class Image(models.Model):
         return f"{self.product}"
 
 
-# سلة الزيون
-
-
 class Cart(models.Model):
     userOwner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_cart")
     Date = models.DateTimeField()
@@ -87,8 +65,6 @@ class Cart(models.Model):
 
     def str(self):
         return f" {self.userOwner}, {self.Governorate}"
-
-# الفاتورة
 
 
 class Bill(models.Model):
