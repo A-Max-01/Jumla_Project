@@ -100,4 +100,3 @@ class Bill(models.Model):
 
     def __str__(self):
         return f" {self.cart},  {self.shop}"
-

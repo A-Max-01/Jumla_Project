@@ -21,9 +21,5 @@ def home(request):
     #   and includes paginator
 
     products = Product.objects.all()
-
-
     cart = Cart.objects.all()
-
-
     return render(request, "jumla/shopper/home.html", {"products": products})
