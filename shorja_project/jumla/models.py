@@ -59,7 +59,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=12, decimal_places=2)
     description = models.CharField(max_length=255)
     shopOwner = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="shop_products")
-    Date = models.DateTimeField()
+    Date = models.DateTimeField(default=timezone.now)
     Available = models.BooleanField(default=True)
     Category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="product_Category")
 
