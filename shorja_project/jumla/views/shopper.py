@@ -10,10 +10,12 @@ from django.urls import reverse
 from django.core.paginator import Paginator
 from django.views.decorators.csrf import csrf_exempt
 from ..decorators import *
-from ..models import *
-
+# from ..models import Category, Cart, Product
+# from jumla.models import Category
+# from
 # @login_required()
 # @allowed_users(allowed_roles=['shopper'])
+from ..models import Product, Category
 
 
 def home(request):
@@ -21,5 +23,5 @@ def home(request):
     #   and includes paginator
 
     products = Product.objects.all()
-    cart = Cart.objects.all()
+    cart = Category.objects.filter()
     return render(request, "jumla/shopper/home.html", {"products": products})
