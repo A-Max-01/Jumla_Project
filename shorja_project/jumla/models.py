@@ -67,12 +67,16 @@ class Cart(models.Model):
         return f" {self.userOwner}, {self.Governorate}"
 
 
+class Bill_Items(models.Model):
+    item = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_item")
+    qty = models.IntegerField('item_qty')
+
+
 class Bill(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="bill_cart")
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="shop_bill")
-    products = models.ManyToManyField(Product, related_name="bill_products")
+    products = models.ManyToManyField(Bill_Items, related_name="bill_products")
     Date = models.DateTimeField()
-    quantity = models.IntegerField()
     total = models.DecimalField(max_digits=12, decimal_places=2)
 
     def __str__(self):

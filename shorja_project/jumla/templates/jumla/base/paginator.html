@@ -1,0 +1,13 @@
+ <nav aria-label="Page navigation">
+  <ul class="pagination">
+  {% if page_elements.has_previous %}
+   <li class="page-item"><a class="page-link" href="?page={{ pages.previous_page_number }}">السابق</a></li>
+  {% endif %}
+  {% for i in page_nums %}
+    <li class="page-item"><a class="page-link" href="?page={{ forloop.counter  }}">{{ forloop.counter }}</a></li>
+  {% endfor %}
+      {% if page_elements.has_next %}
+ <li class="page-item"><a class="page-link" href="?page={{ pages.next_page_number }}">التالي</a></li>
+  {% endif %}
+  </ul>
+</nav>

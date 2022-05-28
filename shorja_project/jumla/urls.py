@@ -12,9 +12,8 @@ urlpatterns = [
         path('change_password/', Account.change_password, name="change_password"),
     ])),
     path('shopper/', include([
-        path('shopper/home', shopper.home, name="shopper_home"),
+        # APIs
+        path('add-to-cart', shopper.add_to_cart, name="add_to_cart"),
     ])),
 
 ]
-
-# APIs

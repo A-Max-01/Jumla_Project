@@ -1,9 +1,9 @@
 {% extends 'jumla/base/base.html' %}
-
+{% load static %}
 {% block content %}
 <h1>المنتجات</h1>
 <div class="row">
-    {% for product in products %}
+    {% for product in page_elements %}
         <div class="col-3">
                <div class="card" style="width: 18rem;">
                     {% for image in images %}
@@ -12,14 +12,15 @@
                         {% endif %}
 
     {% endfor %}
-{#                 <img src="..." class="card-img-top" alt="...">#}
                   <div class="card-body">
                     <h5 class="card-title">{{ product.ProductName }}</h5>
                     <p class="card-text">{{ product.description }}</p>
-                    <a href="#" class="btn btn-primary">اضف الى السلة</a>
+                    <p class="card-text">{{ product.shopOwner }}</p>
+                    <a href="#" id="{{ product.id }}" class="btn btn-primary">اضف الى السلة</a>
                   </div>
             </div>
         </div>
     {% endfor %}
 </div>
+    {% include 'jumla/base/paginator.html' %}
 {% endblock content %}
