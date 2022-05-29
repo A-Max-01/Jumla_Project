@@ -60,23 +60,30 @@ class Image(models.Model):
 
 class Cart(models.Model):
     userOwner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_cart")
-    Date = models.DateTimeField()
-    Governorate = models.ForeignKey(Governorate, on_delete=models.CASCADE, related_name="cart_Governorate")
+    Date = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return f" {self.userOwner}, {self.Governorate}"
+        return f"cart user :  {self.userOwner}"
+
+
+class Cart_Governorate(models.Model):
+    cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="cart_id")
+    Governorate = models.ForeignKey(Governorate, on_delete=models.CASCADE, related_name="cart_Governorate")
 
 
 class Bill_Items(models.Model):
     item = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_item")
-    qty = models.IntegerField('item_qty')
+    qty = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f'{self.id}'
 
 
 class Bill(models.Model):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="bill_cart")
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="shop_bill")
     products = models.ManyToManyField(Bill_Items, related_name="bill_products")
-    Date = models.DateTimeField()
+    Date = models.DateTimeField(default=timezone.now)
     total = models.DecimalField(max_digits=12, decimal_places=2)
 
     def __str__(self):

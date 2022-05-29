@@ -12,7 +12,7 @@ from django.contrib.auth.forms import UserCreationForm
 # Create your views here.
 from ..decorators import *
 from ..forms import *
-from ..models import User
+from ..models import *
 
 
 def register_view(request):
@@ -33,6 +33,10 @@ def register_view(request):
                 user = User.objects.create(username=username, phone_number=phone_number, address=Address)
                 user.password = make_password(password)
                 user.save()
+                # to create cart for this user to first time
+                print(user.id)
+                cart = Cart.objects.create(userOwner_id=user.id)
+                cart.save()
             except IntegrityError as e:
                 print(e)
                 return render(request, "jumla/Account/register.html", {

@@ -6,15 +6,18 @@ document.addEventListener('DOMContentLoaded', function() {
        {
            if(element.id !== ""){
                console.log(element.id)
+               button_toggle(element)
                fetch('shopper/add-to-cart', {
                    method:"PUT", body:JSON.stringify(
                        {
-                           "id": element.id,
+                           "product_id": element.id,
                        }
                    )
                })
                    .then(rep => rep.json())
             .then(data => {console.log(data)})
+               console.log(element.innerHTML)
+
 
            }else{
                console.log("don't play with me")
@@ -25,3 +28,10 @@ document.addEventListener('DOMContentLoaded', function() {
        }
      })
 })
+function button_toggle(element){
+    if (element.innerHTML==='اضف الى السلة'){
+        element.innerHTML="حذف"
+    }else{
+        element.innerHTML='اضف الى السلة'
+    }
+}
