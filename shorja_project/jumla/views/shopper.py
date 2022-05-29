@@ -29,8 +29,36 @@ def home(request):
 
 @csrf_exempt
 def add_to_cart(request):
-    # this an api to add/remove products to cart
+    # this an api to add/remove products to cart and create Bills for each shop
     if request.method == "PUT":
         data = json.loads(request.body)
-        print(data)
-    return JsonResponse({'user': {'user_request': request.user.username}, "ali":request.user.username})
+        product = get_object_or_404(Product, id=data.get('product_id'))
+        user_cart = Cart.objects.filter(userOwner=request.user).last()
+        get_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=product.shopOwner.id).last()
+        get_item = Bill_Items.objects.filter(item_id=product.id)
+        print(get_bill.products.all())
+        # print(get_item)
+        # print(get_bill)
+        # bills_products = Bill.objects.filter(cart_id=user_cart.id, products__item=product.shopOwner)
+        # for p in bills_products:
+        #     print(p)
+        # order_items = Bill_Items.objects.filter(bill_products__products=product)
+        # print(order_items)
+        if get_bill:
+            print("only add product the bill is already exist")
+            # print(git_bill)
+            # bill_items = Bill_Items.objects.create(item_id=product.id)
+            # bill_items.save()
+            # git_bill.products.add(bill_items)
+            # git_bill.save()
+
+        else:
+            print("create new bill")
+            # bill = Bill.objects.create(total=0, cart_id=user_cart.id, shop_id=product.shopOwner.id)
+            # bill.save()
+            # bill_items = Bill_Items.objects.create(item_id=product.id)
+            # bill_items.save()
+            # bill.products.add(bill_items)
+            # bill.save()
+
+    return JsonResponse({'user': {'user_request': request.user.username}, "ali": request.user.username})
