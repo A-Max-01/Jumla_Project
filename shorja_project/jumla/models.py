@@ -76,7 +76,7 @@ class Bill_Items(models.Model):
     qty = models.IntegerField(default=1)
 
     def __str__(self):
-        return f'{self.id}'
+        return f'{self.item.id}'
 
 
 class Bill(models.Model):
@@ -88,3 +88,10 @@ class Bill(models.Model):
 
     def __str__(self):
         return f" {self.cart},  {self.shop}"
+
+    def serialize(self):
+        return{
+            "cart": self.cart,
+            'vendor': self.shop,
+            'products': [p for p in self.products.all()]
+        }
