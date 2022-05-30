@@ -1,0 +1,12 @@
+{% extends 'jumla/base/base.html' %}
+{% load static %}
+{% block content %}
+{% for bill in bills %}
+<h1>اسم المحل :  {{ bill.shop }} </h1>
+    المنتجات:
+    {% for product in bill.products.all %}
+    {{ product.item.ProductName }}
+    {% endfor %}
+{% endfor %}
+<a href="#" id="" class="btn btn-primary">تاكيد الطلب</a>
+{% endblock %}

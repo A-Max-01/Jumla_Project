@@ -1,5 +1,9 @@
 {% extends 'jumla/base/base.html' %}
 {% load static %}
+{% block static %}
+    <script  src="{% static 'js_backend/add_to_cart.js' %}"></script>
+    {% endblock %}
+
 {% block content %}
 <h1>المنتجات</h1>
 <div class="row">
