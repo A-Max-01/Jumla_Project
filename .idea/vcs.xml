@@ -2,6 +2,9 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+<<<<<<< HEAD
     <mapping directory="$PROJECT_DIR$/shorja_project/jumla" vcs="Git" />
+=======
+>>>>>>> 5cd8021efb3e3854076843483bd48c152b237cc4
   </component>
 </project>

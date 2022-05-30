@@ -1,3 +1,4 @@
+
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.db import IntegrityError
@@ -12,10 +13,9 @@ from ..models import *
 from ..utilities import *
 
 
+
 # @login_required()
 # @allowed_users(allowed_roles=['shopper'])
-
-
 def home(request):
     #   It displays products to the customer and includes the search process
     #   and includes paginator
@@ -71,3 +71,7 @@ def brows_bill(request):
     cart_bills = Bill.objects.filter(cart_id=user_cart.id)
     context = {'bills': cart_bills}
     return render(request, "jumla/shopper/show_the_bills_ordered.html", context)
+
+    # products = Product.objects.all()
+    # cart = Category.objects.filter()
+    # return render(request, "jumla/shopper/home.html", {"products": products})

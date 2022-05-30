@@ -15,6 +15,7 @@ from ..forms import *
 from ..models import *
 
 
+
 def register_view(request):
     form = RegisterForm()
     if request.method == "POST":
