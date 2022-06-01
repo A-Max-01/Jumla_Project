@@ -41,7 +41,7 @@ def add_to_cart(request):
             # only add/remove product to the bill And it's already exist
             order_bill_item = get_bill.products.filter(bill_products__products__item=product.id)
             if order_bill_item:
-                print("delete")
+                # print("delete")
                 item = Bill_Items.objects.filter(bill_products=get_bill).filter(item_id=product.id).first()
                 # the bill item exist
                 # delete item from bill
@@ -49,7 +49,7 @@ def add_to_cart(request):
                 get_bill.save()
                 item.delete()
             else:
-                print("add item")
+                # print("add item")
                 # add item to the bill
                 bill_items = Bill_Items.objects.create(item_id=product.id)
                 bill_items.save()
@@ -66,12 +66,24 @@ def add_to_cart(request):
     return JsonResponse({'user': {'user_request': request.user.username}, "ali": request.user.username})
 
 
-def brows_bill(request):
+def show_cart_bills_order(request):
+    # this api to send all order bills in user cart
+    # and if the order bill has not any products will delete it
     user_cart = Cart.objects.filter(userOwner=request.user).last()
     cart_bills = Bill.objects.filter(cart_id=user_cart.id)
+    shop_list_id = [result for shop in cart_bills.filter(products__item=None).values('shop') for result in shop.values()]
+    for shop_id in shop_list_id:
+        get_order_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=shop_id)
+        get_order_bill.delete()
     context = {'bills': cart_bills}
     return render(request, "jumla/shopper/show_the_bills_ordered.html", context)
 
-    # products = Product.objects.all()
-    # cart = Category.objects.filter()
-    # return render(request, "jumla/shopper/home.html", {"products": products})
+
+@csrf_exempt
+def check_item_in_bill_order(request):
+    # this api to send products in each bill in the cart
+    user_cart = Cart.objects.filter(userOwner=request.user).last()
+    cart_bills = Bill.objects.filter(cart_id=user_cart.id)
+    products_bill_order = cart_bills.values('products__item')
+    items_in_cart = [result for item in products_bill_order for result in item.values()]
+    return JsonResponse({'items_in_cart': items_in_cart})
