@@ -12,7 +12,6 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" href="{% url 'brows_bills' %}">السلة</a>
-        <a class="nav-link" href="#">السلة</a>
       </li>
         {% if user.is_authenticated %}
                <li class="nav-item">
@@ -38,6 +37,6 @@
   </div>
 </nav>
 {% if user.is_authenticated %}
-<h1>اهلا {{ user.username }}</h1>
+<h1>اهلا {{ user.first_name }}</h1>
 {% endif %}
 
