@@ -127,6 +127,10 @@ class Bill(models.Model):
     def __str__(self):
         return f" {self.cart},  {self.shop}"
 
+    @property
+    def get_total(self):
+        return sum(i.item.price * i.qty for i in self.products.all())
+
     def serialize(self):
         return{
             "cart": self.cart,
