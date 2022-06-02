@@ -20,7 +20,7 @@ def home(request):
     #   It displays products to the customer and includes the search process
     #   and includes paginator
     products = Product.objects.all()
-    img = Image.objects.all()
+    img = product_Images.objects.all()
     paginator_element = MyPaginator(products, 2)
     page_number = request.GET.get('page')
     page_elements = paginator_element.get_pages(page_number)

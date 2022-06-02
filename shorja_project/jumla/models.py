@@ -48,6 +48,8 @@ class User(AbstractUser):
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
+    image = models.ImageField(upload_to="category/", null=True)
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         verbose_name = "Category"
@@ -86,8 +88,8 @@ class Product(models.Model):
         return f"{self.ProductName} ,  {self.Category}"
 
 
-class Image(models.Model):
-    image = models.ImageField(upload_to="images/")
+class product_Images(models.Model):
+    image = models.ImageField(upload_to="images/", null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="Image_Product")
 
     def __str__(self):
