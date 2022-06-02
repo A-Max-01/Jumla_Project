@@ -1,19 +1,50 @@
 {% extends 'jumla/base/base.html' %}
 {% load static %}
+    {% block static %}
+{#    <script  src="{% static 'js_backend/delete_from_cart_order.js' %}"></script>#}
+    <script  src="{% static 'js_backend/add_to_cart.js' %}"></script>
+    {% endblock %}
+{% block Title %}
+    customer cart
+{% endblock %}
 {% block content %}
-{% for bill in bills %}
-<h1>اسم المحل :  {{ bill.shop }} </h1>
-    المنتجات:
-    {% for product in bill.products.all %}
-        <h1>{{ product.item.ProductName }}</h1>
-        <h1>{{ product.item.price }}</h1>
-        <h1>{{ product.qty }}</h1>
 
-    {% endfor %}
+{% for bill in bills %}
+   <table class="table table-hover table-sm">
+  <thead>
+  <tr>
+      <th><h1>اسم المحل :  {{ bill.shop }} </h1></th>
+      <th>
+          <h1>  اجمالي الفاتورة  </h1>
+            <strong id="total" >{{ bill.total }} </strong>
+      </th>
+  </tr>
+    <tr>
+      <th scope="col">اسم المنتج</th>
+      <th scope="col">السعر </th>
+      <th scope="col">الكمية </th>
+      <th scope="col"> </th>
+    </tr>
+  </thead>
+       <tbody>
+       {% for product in bill.products.all %}
+           <tr id="{{ product.id }}">
+            <th>{{ product.item.ProductName }}</th>
+            <th>{{ product.item.price }}</th>
+            <th> <input id="qty" type="number" class="form-control"
+                   style="width: 100px"
+                  value="{{ product.qty }}"/></th>
+{#            <th><button id="{{ product.item_id }}" class="btn btn-danger">حذف</button></th>#}
+            <th><button id="{{ product.item_id }}" class="btn btn-primary">حذف</button></th>
+           </tr>
+           {% endfor %}
+       </tbody>
+   </table>
+
 {% endfor %}
     <br>
     <br>
     <br>
+<a href="#" id="" class="btn-secondary">تاكيد الطلب</a>
 
-<a href="#" id="" class="btn btn-primary">تاكيد الطلب</a>
 {% endblock %}

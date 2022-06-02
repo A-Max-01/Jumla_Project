@@ -30,6 +30,7 @@ def home(request):
 
 @csrf_exempt
 def add_to_cart(request):
+    print('call')
     # this an api to add/remove products to cart and create Bills for each shop
     if request.method == "PUT":
         data = json.loads(request.body)
@@ -45,6 +46,8 @@ def add_to_cart(request):
                 item = Bill_Items.objects.filter(bill_products=get_bill).filter(item_id=product.id).first()
                 # the bill item exist
                 # delete item from bill
+                # get_bill.total -= item.item.price
+                # get_bill.total = get_bill.get_total
                 get_bill.products.remove(item)
                 get_bill.save()
                 item.delete()
@@ -53,17 +56,23 @@ def add_to_cart(request):
                 # add item to the bill
                 bill_items = Bill_Items.objects.create(item_id=product.id)
                 bill_items.save()
+                # get_bill.total += bill_items.item.price
+                # get_bill.total = get_bill.get_total
                 get_bill.products.add(bill_items)
                 get_bill.save()
+            # return JsonResponse({'total': get_bill.get_total})
         else:
             # create new bill
             bill = Bill.objects.create(total=0, cart_id=user_cart.id, shop_id=product.shopOwner.id)
+            # bill.total = bill.get_total
             bill.save()
             bill_items = Bill_Items.objects.create(item_id=product.id)
             bill_items.save()
             bill.products.add(bill_items)
             bill.save()
-    return JsonResponse({'user': {'user_request': request.user.username}, "ali": request.user.username})
+        return JsonResponse({'total': get_bill.get_total})
+    # {'user_request': request.user.first_name}
+    return JsonResponse({'Get': 'the api worked'})
 
 
 def show_cart_bills_order(request):
@@ -75,6 +84,9 @@ def show_cart_bills_order(request):
     for shop_id in shop_list_id:
         get_order_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=shop_id)
         get_order_bill.delete()
+    for bill in cart_bills:
+        bill.total = bill.get_total
+        bill.save()
     context = {'bills': cart_bills}
     return render(request, "jumla/shopper/show_the_bills_ordered.html", context)
 
