@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>client list</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"></head>
+    <style>
+        .logo_div{
+            text-align: center;
+        }
+        .top_left{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .three_icons{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding-left: 300px;
+        }
+        .three_words{
+            padding-left: 630px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .words{
+            padding-right: 15px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .above_icons{
+            height: 20px;
+            margin-top:20px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .under_logo{
+            display: flex;
+            padding-top: 20px;
+            flex-wrap: wrap;
+        }
+        .three_words{
+            font-size: 20px;
+            padding-left: 550px;
+            flex-wrap: wrap;
+        }        
+        #like{
+            padding-left: 30px;
+            height: 40px;
+        }
+        #user{
+            padding-left: 30px;
+            height: 40px;
+        }
+        #shopping{
+            height: 40px;
+        }
+        .client_info{
+            padding-top: 60px;
+            margin: auto;
+            border: 1px solid #60B1AA;
+            height: 90px;
+            width: 1088px;
+            border-radius: 10px;
+        }
+        .big_bills_box{
+            align-items: center;
+            justify-content: center;
+            margin-left: 227px;
+            width: 1083px;
+            height:fit-content;
+            box-sizing: border-box;
+            border: 1px solid #169E8A;
+            padding-bottom: 40px;
+        }
+        #button{
+            align-items: center;
+            justify-content: center;
+            margin-left: 750px;
+            margin-top: 90px;
+        }
+        footer{
+            padding-top: 100px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding-bottom: 0px;
+            background-color: #000000;
+            bottom: 0px;
+            margin:0px;
+            padding:0px;
+            min-width:100%;
+            max-width:100%;
+            background:black;
+            height:auto;
+            
+        }
+        .footer_div{
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            width: 1492px;
+            height:90px;
+            
+        }
+        .lower_span{
+            
+            color: white;
+            text-align: center;
+            justify-content: center;
+        }
+        .logo_par{
+            color: black;
+            padding-left: 40px;
+            font-size: 40px;
+        }
+
+    </style>
+</head>
+<body>
+    <header style="display:flex;flex-wrap:wrap">
+
+        <div class="under_logo">
+            <div class="top_left" style="display:flex;flex-wrap:wrap">
+                <a href=""><img src="/pics/search-bar.png" alt="search" class="above_icons" style="height: 30px;display:flex;padding-left:10px  " ></a>
+                <img src="/pics/logo.jpg" style="height: 90px;display:flex;padding-left:20px ">
+            </div>
+            <div class="three_words" style="display:flex;padding-left:500px">
+                <a href="" class="words">الرئيسة</a>
+                <a href="" class="words" style="padding-left: 20px;" >من نحن</a>
+                <a href="" class="words" style="padding-left: 25px;" >طلبات الزبائن</a>
+            </div>
+            <div class="three_icons">
+                <a href=""><img src="/pics/buy.png" class="above_icons" id="shopping"></a>
+                <a href=""><img src="/pics/hearts.png" class="above_icons" id="like"></a>
+                <a href=""><img src="/pics/businessman--v2.png" class="above_icons" id="user"></a>
+
+            </div>
+    </header>
+    <div style="padding-top: 100px;padding-bottom:40px" >
+        <div class="client_infos_container">
+            <div class="client_info">
+                <span><span><span> </span>&nbsp;<span></span></span></span>               
+            </div>
+        </div>
+    </div>
+    <div class="big_bills_box">
+        <div>
+            <div class="client_bill" style="border: solid;margin:20px;">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">احمالي الفاتورة</th>
+                        <th scope="col">رقم التاجر</th>
+                        <th scope="col">عنوان المتجر</th>
+                        <th scope="col">اسم المتجر</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>10</td>
+                        <td>0788</td>
+                        <td>شارع الصناعة</td>
+                        <td>عبدالباسط</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+              
+
+        </div>
+        <div class="items_div" style="padding-top: 30px;">
+            <div style="text-align: center;justify-content:center">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>السعر</th>
+                            <th>المواصفات</th>
+                            <th>تاريخ الاضافة</th>
+                            <th>الصنف</th>
+                            <th>المنتج</th>
+                            <th><input type="checkbox"></th>
+                        </tr>
+                        <tr>
+                            
+                            <td>150</td>
+                            <td>احمر</td>
+                            <td>2020/1/1</td>
+                            <td>الاثاث</td>
+                            <td>lamp</td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+        
+    </div>
+    <!-- <div class="big_bills_box" style="padding: 20px;margin-top:20px;height:fit-content">
+        <div>
+            <div class="client_bill" style="border: solid;margin:20px">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">احمالي الفاتورة</th>
+                        <th scope="col">رقم التاجر</th>
+                        <th scope="col">عنوان المتجر</th>
+                        <th scope="col">اسم المتجر</th>
+                    </tr>
+                    </thead>
+                    <tbody class="table-group-divider">
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>10</td>
+                        <td>0788</td>
+                        <td>شارع الصناعة</td>
+                        <td>عبدالباسط</td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+              
+
+        </div>
+        <div class="items_div" style="padding-top: 30px;">
+            <div style="text-align: center;justify-content:center">
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>السعر</th>
+                            <th>المواصفات</th>
+                            <th>تاريخ الاضافة</th>
+                            <th>الصنف</th>
+                            <th>المنتج</th>
+                            <th><input type="checkbox"></th>
+                        </tr>
+                        <tr>
+                            
+                            <td>150</td>
+                            <td>احمر</td>
+                            <td>2020/1/1</td>
+                            <td>الاثاث</td>
+                            <td>lamp</td>
+                            <td><input type="checkbox"></td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+         -->
+    </div>
+    <nav aria-label="Page navigation example" style="padding-top: 100px;">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+    <button id="button" type="button" class="btn btn-dark">رجوع</button>
+    
+    <footer class="footer">
+        <div style="padding-top:10px ;">
+            <img src="/pics/logo.jpg" style="height: 200px;padding:0px">
+        </div>
+        <div style="padding-top: 30px;">
+            <span class="lower_span" style="padding-right:90px">من نحن</span>
+            <span class="lower_span" style="padding-right:90px">الرئيسية</span>
+            <span class="lower_span" style="padding-right:90px">طلبات الزبائن</span>
+
+        </div>
+    </footer>
+</body>
+</html>
