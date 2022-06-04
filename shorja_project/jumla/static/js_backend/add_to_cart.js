@@ -4,9 +4,9 @@ check_cart_items()
            let element = ev.target;
            console.log(element.value)
           let total = element.parentElement.parentNode.parentNode.parentElement.childNodes[1].childNodes[1].childNodes[3].childNodes[3]
-         // console.log(total)
          if(element.id==='qty'){
              console.log(element.value)
+             
          }else {
              console.log('is not a qty')
          }
@@ -62,3 +62,12 @@ function  check_cart_items(){
     })
     })
 }
+
+
+
+
+
+
+
+
+

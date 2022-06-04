@@ -2,7 +2,8 @@
 {% load static %}
 
 {% block static %}
-    <script  src="{% static 'js_backend/add_to_cart.js' %}"></script>
+{#    <script  src="{% static 'js_backend/add_to_cart.js' %}"></script>#}
+    <script  src="{% static 'js_backend/delete_from_cart_order.js' %}"></script>
     {% endblock %}
 
 {% block content %}
@@ -21,12 +22,15 @@
                     <h5 class="card-title">{{ product.ProductName }}</h5>
                     <p class="card-text">{{ product.description }}</p>
                     <p class="card-text">{{ product.shopOwner }}</p>
-                    <a href="#" id="{{ product.id }}" class="btn btn-primary">اضف الى السلة</a>
+                      <a href="#" id="btn" data-product_id="{{ product.id }}"
+                   data-bill_id="{{ bill.id }}"
+                   class="btn btn-danger">حذف</a>
+{#                    <a href="#" id="{{ product.id }}" class="btn btn-primary">اضف الى السلة</a>#}
                   </div>
             </div>
         </div>
     {% endfor %}
 </div>
     {% include 'jumla/base/paginator.html' %}
-
+{#<input type="file" name="files" multiple>#}
 {% endblock content %}

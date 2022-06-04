@@ -1,8 +1,8 @@
 {% extends 'jumla/base/base.html' %}
 {% load static %}
     {% block static %}
-{#    <script  src="{% static 'js_backend/delete_from_cart_order.js' %}"></script>#}
-    <script  src="{% static 'js_backend/add_to_cart.js' %}"></script>
+    <script  src="{% static 'js_backend/delete_from_cart_order.js' %}"></script>
+{#    <script  src="{% static 'js_backend/add_to_cart.js' %}"></script>#}
     {% endblock %}
 {% block Title %}
     customer cart
@@ -16,7 +16,7 @@
       <th><h1>اسم المحل :  {{ bill.shop }} </h1></th>
       <th>
           <h1>  اجمالي الفاتورة  </h1>
-            <strong id="total" >{{ bill.total }} </strong>
+            <strong id="{{ bill.id }}" >{{ bill.total }} </strong>
       </th>
   </tr>
     <tr>
@@ -33,9 +33,14 @@
             <th>{{ product.item.price }}</th>
             <th> <input id="qty" type="number" class="form-control"
                    style="width: 100px"
+                        data-product_id="{{ product.item_id }}"
+                         data-bill_id="{{ bill.id }}"
                   value="{{ product.qty }}"/></th>
-{#            <th><button id="{{ product.item_id }}" class="btn btn-danger">حذف</button></th>#}
-            <th><button id="{{ product.item_id }}" class="btn btn-primary">حذف</button></th>
+            <th>
+                <a href="#" id="btn" data-product_id="{{ product.item_id }}"
+                   data-bill_id="{{ bill.id }}"
+                   class="btn btn-danger">حذف</a>
+            </th>
            </tr>
            {% endfor %}
        </tbody>

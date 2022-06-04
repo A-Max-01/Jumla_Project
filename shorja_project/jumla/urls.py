@@ -17,6 +17,7 @@ urlpatterns = [
         path('brows_bills', shopper.show_cart_bills_order, name="brows_bills"),
         # APIs
         path('add-to-cart', shopper.add_to_cart, name="add_to_cart"),
+        path('update_quentity', shopper.update_quentity, name="update_quentity"),
         path('check_item_in_bill_order', shopper.check_item_in_bill_order, name="check_item_in_bill_order"),
 
     ])),
