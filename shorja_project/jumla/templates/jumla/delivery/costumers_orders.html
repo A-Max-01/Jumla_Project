@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home page</title>
+    <style>
+        .logo_div{
+            text-align: center;
+        }
+        .top_left{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .three_icons{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding-left: 300px;
+        }
+        .three_words{
+            padding-left: 630px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .words{
+            padding-right: 15px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .above_icons{
+            height: 20px;
+            margin-top:20px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .under_logo{
+            display: flex;
+            padding-top: 20px;
+            flex-wrap: wrap;
+        }
+        .three_words{
+            font-size: 20px;
+            padding-left: 550px;
+            flex-wrap: wrap;
+        }        
+        #like{
+            padding-left: 30px;
+            height: 40px;
+        }
+        #user{
+            padding-left: 30px;
+            height: 40px;
+        }
+        #shopping{
+            height: 40px;
+        }
+        .client_info{
+            padding-top: 60px;
+            margin: auto;
+            border: 1px solid #60B1AA;
+            height: 90px;
+            width: 1088px;
+            border-radius: 10px;
+        }
+        .information_inbox{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            text-align: center;
+        }
+
+        .middle_info_container{
+            padding-bottom: 300px;
+        }
+        footer{
+            padding-top: 100px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding-bottom: 0px;
+            background-color: #000000;
+            bottom: 0px;
+            margin:0px;
+            padding:0px;
+            min-width:100%;
+            max-width:100%;
+            background:black;
+            height:auto;
+        }
+        .footer_div{
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            width: 1492px;
+            height:90px;
+            
+        }
+        .lower_span {
+            
+            color: black;
+
+
+        }
+        .logo_par{
+            color: white;
+            padding-left: 40px;
+            font-size: 40px;
+        }
+
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"></head>
+
+</head>
+<body>
+    <header style="display:flex;flex-wrap:wrap">
+
+        <div class="under_logo">
+            <div class="top_left" style="display:flex;flex-wrap:wrap">
+                <a href=""><img src="/pics/search-bar.png" alt="search" class="above_icons" style="height: 30px;display:flex;padding-left:10px  " ></a>
+                <img src="/pics/logo.jpg" style="height: 90px;display:flex;padding-left:20px ">
+            </div>
+            <div class="three_words" style="display:flex;padding-left:500px">
+                <a href="" class="words">الرئيسة</a>
+                <a href="" class="words" style="padding-left: 20px;" >من نحن</a>
+                <a href="" class="words" style="padding-left: 25px;" >طلبات الزبائن</a>
+            </div>
+            <div class="three_icons">
+                <a href=""><img src="/pics/buy.png" class="above_icons" id="shopping"></a>
+                <a href=""><img src="/pics/hearts.png" class="above_icons" id="like"></a>
+                <a href=""><img src="/pics/businessman--v2.png" class="above_icons" id="user"></a>
+
+            </div>
+    </header>
+
+   
+    <div style="display:flex;flex-wrap:wrap">
+        <div style="padding-top: 200px;padding-right:40px;">
+            <h4 style="margin-left: 1150px;padding-right:49px;display:flex">طلبات الزبائن</h4>
+        </div>
+        <div class="dropdown" style="padding-top:50px;margin-left:220px;padding-bottom:20px;display:flex">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                المحافظات
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- put the info on the middle -->
+    <div class="client_infos_container" style="">
+        <div class="client_info" style="text-align:right">
+            <div class="information_inbox" style="display: flex;flex-direction:row">
+                <div class="span" style="margin-bottom:300px ;"><span class="span">name:</span class="span"><span class="span">maitham</span class="span"></div>
+
+            </div>
+        </div>
+         <div class="client_info2">
+
+        </div>
+    </div>
+    <nav aria-label="Page navigation example" style="padding-top: 100px;">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+      </nav>
+ 
+  
+    <footer class="footer">
+
+            <div style="padding-top:10px ;">
+                <img src="">
+            </div>
+            <div style="padding-top: 30px;">
+                <span  class="lower_span " style="padding-right:90px">من نحن</span class="span">
+                <span  class="lower_span " style="padding-right:90px">الرئيسية</span class="span">
+                <span  class="lower_span " style="padding-right:90px">طلبات الزبائن</span class="span">
+
+            </div>
+
+    </footer>
+
+</body>
+</html>
