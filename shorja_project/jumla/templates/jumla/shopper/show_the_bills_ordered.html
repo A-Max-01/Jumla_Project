@@ -1,19 +1,247 @@
 {% extends 'jumla/base/base.html' %}
 {% load static %}
 {% block content %}
-{% for bill in bills %}
-<h1>اسم المحل :  {{ bill.shop }} </h1>
-    المنتجات:
-    {% for product in bill.products.all %}
-        <h1>{{ product.item.ProductName }}</h1>
-        <h1>{{ product.item.price }}</h1>
-        <h1>{{ product.qty }}</h1>
 
-    {% endfor %}
-{% endfor %}
-    <br>
-    <br>
-    <br>
 
-<a href="#" id="" class="btn btn-primary">تاكيد الطلب</a>
+
+<div class="mt-16">
+
+    <div class="flex justify-center p-5 ">
+        <div class=" flex">
+            <h1 class="text-teal-600  font-bold mx-4">تسجيل الدخول </h1>
+            <div class=" mt-1 inline-flex items-center">
+                <div class="w-8 h-px ml-2 bg-teal-600"></div>
+                <svg xmlns="http://www.w3.org/2000/svg" class=" inline-block h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                  </svg>
+                  <div class="w-8 h-px mr-2 bg-teal-600"></div>
+                  <h1 class="text-teal-600  font-bold mx-4">  الشراء </h1>
+                  <div class="w-8 h-px ml-2 bg-teal-600"></div>
+                  <svg xmlns="http://www.w3.org/2000/svg" class=" inline-block h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                      <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                    </svg>
+                    <div class="w-8 h-px mr-2 bg-teal-600"></div>
+                    <h1 class="font-normal text-gray-300 mx-4">الدفع</h1>
+                   
+            </div>
+          
+          
+        </div>
+     
+    </div>
+
+    <h1 class="text-right mx-12 text-xl font-semibold">عربة التسوق</h1>
+     
+   <!---checkout-->
+   <div class="float-left ml-32  w-1/6 py-10">
+    <div class="w-80 h-full shadow-md   bg-slate-50 rounded-md  ">
+          <div class="flex flex-col items-center">
+         <!-----headline-->
+              <div class=" mt-3 border-gray-300 border-2 w-72 rounded h-12">
+                 <div class="flex justify-between items-center mt-1">
+                     <h1 class="text-sm m-2 font-bold">المجموع الفرعي :</h1>
+                     <h1 class="m-2">1500 IQD</h1>
+                 </div>
+              </div>
+        
+              <div class="mt-16">
+                        <!---el2-->
+                  <div>
+
+                        <!----delevery button----->
+       <div>
+        
+		<button class="relative text-sm focus:outline-none group mt-4 sm:mt-0"> 
+			<div class="flex items-center justify-between w-52 h-10  px-3 border-2 border-gray-300  rounded hover:bg-gray-300  focus:outline-none focus:ring focus:ring-gray-100">
+				<span class="font-semibold  ">
+                    اختر المحافظة 
+				</span>
+				<svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+					<path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+				</svg>
+			</div>
+			<div class="absolute z-10 flex-col items-start hidden w-full pb-1 bg-white shadow-lg rounded group-focus:flex">
+				<a class="w-full px-4 py-2 text-right hover:bg-gray-200 hover:text-teal-700" href="#">بغداد</a>
+				<a class="w-full px-4 py-2 text-right  hover:bg-gray-200 hover:text-teal-700" href="#">البصره</a>
+				<a class="w-full px-4 py-2 text-right   hover:bg-gray-200 hover:text-teal-700" href="#">اربيل</a>
+				<a class="w-full px-4 py-2 text-right  hover:bg-gray-200 hover:text-teal-700" href="#">سماوة</a>
+				<a class="w-full px-4 py-2 text-right  hover:bg-gray-200 hover:text-teal-700 " href="#">ناصرية</a>
+			</div>
+		</button>
+	</div>
+  
+
+
+                  </div>
+
+              </div>
+              <!---el3-->
+              <div class="mt-5">
+                <input placeholder="عنوان التوصيل"  class=" focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded h-10 w-52 pr-[14px] font-semibold  "type="text" >
+            </div>
+            <!---el4-->
+            <div class="mt-10">
+                <div class=" mb-2 mt-3 drop-shadow-md bg-gray-200 border-2 w-72 rounded h-12">
+                    <div class="flex justify-between items-center mt-1">
+                        <h1 class="text-sm m-2 font-bold">المجموع الكلي :</h1>
+                        <h1 class="m-2">1500 IQD</h1>
+                    </div>
+                 </div>
+            </div>
+            <div class="mb-2">
+    
+            </div>
+
+          </div>
+    </div>
+                    <!----button---->
+                    <div class="float-left w-3/6 mt-12 mb-5  ">
+                        <button class="py-2 px-2 hover:bg-black    w-36 h-11 border-2 text-center drop-shadow-md   border-black  hover:border-white hover:border-lg hover:text-white ">
+                            <div class="inline-flex items-center">
+                                <h1 class="mb-1 mr-2"> تثبيت الطلب</h1>
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 fill-current " viewBox="0 0 20 20" >
+                                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                                  </svg>
+                              
+                        
+                            </div>
+                                
+                             
+                                
+                        
+                           
+                           </button>
+                        </div>
+
+</div>
+
+
+<!-------table----->
+<div class="relative w-8/12 mt-5 mr-5 overflow-x-auto shadow-md sm:rounded-lg">
+<table class="w-full max-w-9xl text-sm text-center text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+        <tr>
+           
+            <th scope="col" class=" text-center text-base  ">
+               <h1 class="text-center mr-5">المنتج</h1>  
+            </th>
+            <th scope="col" class=" text-base px-2 py-3">
+                المتجر
+            </th>
+            <th scope="col" class=" text-base px-2 py-3">
+                المواصفات
+            </th>
+            <th scope="col" class=" text-base px-6  py-3">
+            السعر 
+            </th>
+            <th scope="col" class=" text-base px-6 py-3">
+                تاريخ الاضافة 
+                </th>
+            <th scope="col" class="px-6 py-3 ">
+                <span class="sr-only ">Edit</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody >
+             
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th scope="row" class="px-8 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                <div class="flex">
+              
+                    <div class="flex shrink-0   -mr-6 "><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" class="w-14 h-14  rounded" alt="">
+                    </div>
+                    <div class="mr-5 my-4 ">
+                        <h1 class="whitespace-no-wrap text-center"> Microsoft Surface Pro</h1>
+                    </div>
+                </div>
+             
+              </th>
+            <td class="px-7 py-4">
+                Sliver
+            </td>
+            <td class="px-8 py-4">
+                Laptop
+            </td>
+            <td class="px-1 py-4">
+               2999 IQD
+            </td>
+            <td class="px-1 py-4">
+               20/5/2021
+             </td>
+             <td class="px-5 py-4 text-center">
+               
+                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    <svg id="SvgjsSvg1019" width="28" height="28" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs"><defs id="SvgjsDefs1020"></defs><g id="SvgjsG1021"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 512 512" width="28" height="28"><path d="M435.824,296.954a10,10,0,0,0-10,10v88.791a30.034,30.034,0,0,1-30,30H115.233a30.034,30.034,0,0,1-30-30V135.155a30.034,30.034,0,0,1,30-30h88.791a10,10,0,0,0,0-20H115.233a50.057,50.057,0,0,0-50,50V395.746a50.057,50.057,0,0,0,50,50H395.824a50.057,50.057,0,0,0,50-50V306.955A10,10,0,0,0,435.824,296.954Z" fill="#060608" class="color000 svgShape"></path><rect width="206.495" height="66.596" x="214.903" y="161.57" transform="rotate(-45 318.15 194.868)" fill="#060608" class="color000 svgShape"></rect><polygon points="197.775 315.246 249.815 300.83 212.191 263.206 197.775 315.246" fill="#060608" class="color000 svgShape"></polygon><path d="M427.721,73.566h0a25.027,25.027,0,0,0-35.355,0L381.76,84.172l47.091,47.091,10.606-10.606a25.029,25.029,0,0,0,0-35.355Z" fill="#060608" class="color000 svgShape"></path></svg></g></svg>Edit</a>
+            </td>
+        </tr>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                <div class="flex">
+                    <div class="flex shrink-0 w-14 h-14  -mr-4 "><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"  class = 'w-full h-full rounded 'alt="">
+                    </div>
+                    <div class="mr-5 my-4 ">
+                        <h1 class="whitespace-no-wrap">         Microsoft Surface Pro</h1>
+                    </div>
+                </div>
+       
+            </th>
+            <td class="px-7 py-4">
+                White
+            </td>
+            <td class="px-8 py-4">
+                Laptop PC
+            </td>
+            <td class="px-1 py-4">
+               1999 IQD
+            </td>
+            <td class="px-1 py-4">
+                20/5/2021
+              </td>
+              <td class="px-5 py-4 text-center flex">
+                  <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    <svg id="SvgjsSvg1019" width="28" height="28" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs"><defs id="SvgjsDefs1020"></defs><g id="SvgjsG1021"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 512 512" width="28" height="28"><path d="M435.824,296.954a10,10,0,0,0-10,10v88.791a30.034,30.034,0,0,1-30,30H115.233a30.034,30.034,0,0,1-30-30V135.155a30.034,30.034,0,0,1,30-30h88.791a10,10,0,0,0,0-20H115.233a50.057,50.057,0,0,0-50,50V395.746a50.057,50.057,0,0,0,50,50H395.824a50.057,50.057,0,0,0,50-50V306.955A10,10,0,0,0,435.824,296.954Z" fill="#060608" class="color000 svgShape"></path><rect width="206.495" height="66.596" x="214.903" y="161.57" transform="rotate(-45 318.15 194.868)" fill="#060608" class="color000 svgShape"></rect><polygon points="197.775 315.246 249.815 300.83 212.191 263.206 197.775 315.246" fill="#060608" class="color000 svgShape"></polygon><path d="M427.721,73.566h0a25.027,25.027,0,0,0-35.355,0L381.76,84.172l47.091,47.091,10.606-10.606a25.029,25.029,0,0,0,0-35.355Z" fill="#060608" class="color000 svgShape"></path></svg></g></svg>Edit</a>
+                    
+                 
+            </td>
+         
+        </tr>
+        <tr class="bg-white dark:bg-gray-800">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                <div class="flex">
+                    <div class="flex shrink-0 w-14 h-14  -mr-4 "><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80"  class = 'w-full h-full rounded 'alt="">
+                    </div>
+                    <div class="mr-10 my-4 text-center ">
+                        <h1 class="whitespace-no-wrap "> Magic Mouse 2</h1>
+                    </div>
+                </div>
+               
+            </th>
+            <td class="px-7 py-4">
+                Black
+            </td>
+            
+            <td class="px-8 py-4">
+                Accessories
+            </td>
+          
+            <td class="px-1 py-4">
+             99 IQD
+            </td>
+            <td class="px-1 py-4">
+                20/5/2021
+              </td>
+            <td class="px-5 py-4 text-center">
+               
+                <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">
+                    <svg id="SvgjsSvg1019" width="28" height="28" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs"><defs id="SvgjsDefs1020"></defs><g id="SvgjsG1021"><svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" viewBox="0 0 512 512" width="28" height="28"><path d="M435.824,296.954a10,10,0,0,0-10,10v88.791a30.034,30.034,0,0,1-30,30H115.233a30.034,30.034,0,0,1-30-30V135.155a30.034,30.034,0,0,1,30-30h88.791a10,10,0,0,0,0-20H115.233a50.057,50.057,0,0,0-50,50V395.746a50.057,50.057,0,0,0,50,50H395.824a50.057,50.057,0,0,0,50-50V306.955A10,10,0,0,0,435.824,296.954Z" fill="#060608" class="color000 svgShape"></path><rect width="206.495" height="66.596" x="214.903" y="161.57" transform="rotate(-45 318.15 194.868)" fill="#060608" class="color000 svgShape"></rect><polygon points="197.775 315.246 249.815 300.83 212.191 263.206 197.775 315.246" fill="#060608" class="color000 svgShape"></polygon><path d="M427.721,73.566h0a25.027,25.027,0,0,0-35.355,0L381.76,84.172l47.091,47.091,10.606-10.606a25.029,25.029,0,0,0,0-35.355Z" fill="#060608" class="color000 svgShape"></path></svg></g></svg>Edit</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+</div>
+
+        </div>
+      
+
 {% endblock %}
