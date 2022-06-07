@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>landing page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"></head>
+    <style>
+        nav{
+            background-color: black;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .words_logo{
+            padding-left: 380px;
+            
+        }
+        .circles{
+            
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            margin-top: 150px;
+            margin-right: 100px;
+        }
+        .cir{
+            border-radius: 50%;
+            height: 25px;
+            width: 25px;
+            
+        }
+        .ci{
+            height: 80px;
+            border-radius: 80px;
+            padding-left: 10px;
+            width: 80px;
+            
+        }
+        .body{
+            display: flex;
+            flex-direction:column;
+            flex-wrap: wrap;
+            padding-top: 200px;
+            margin-left: 100px;
+        }
+        .left_body{
+            border: black;
+            border-radius: 20px;
+        }
+        .footer{
+            position: fixed;
+            bottom: 0px;
+            height:max-content;
+            width: 1400px;
+            background-color: black;
+            justify-content: right;
+        }
+       
+        .lower_span {
+            
+            color: white;
+            justify-content:right ;
+
+        }
+ 
+        
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <img src="/pics/logo.jpg" style="height: 100px; padding:0%">
+        </div>
+        <div class="words_logo">
+            <a href="" style="text-decoration:none;">التصنيفات</a>
+            <a href="" style="text-decoration:none;padding-left:20px">المتاجر</a>
+            <a href="" style="text-decoration:none;padding-left:20px">منتجات منوعة</a>
+            <a href="" style="text-decoration:none;padding-left:20px">من نحن</a>
+            <a href="" style="text-decoration:none;padding-left:20px">الرئيسية</a>
+        </div>
+        <div class="icons" style="padding-left: 100px;">
+            <a href=""><img src="/Jumla_Project/shorja_project/" style="height:20px;"></a>
+            <a href=""><img src=""><img></a>
+            <a href=""><img src=""><img></a>
+            <a href=""><img src=""><img></a>
+        </div>
+    </nav>
+    <div class="circles">
+        <span class="cir" style="margin-right: 150px;"><img src="/pics/child.jpg" alt="" class="ci"></span>
+        <span class="cir"><img src="/pics/clothes.jpg" alt="" class="ci"></span>
+        <span class="cir" style="padding-left: 150px;"><img src="/pics/kitchen.jpg" alt="" class="ci"></span>
+        <span class="cir" style="padding-left: 150px;"><img src="/pics/phone_and_headphone.jpg" alt="" class="ci"></span>
+        <span class="cir" style="padding-left: 150px;"><img src="/pics/maeup.jpg" alt="" class="ci"></span>
+        <span class="cir" style="padding-left: 150px;"><img src="/pics/acce.jpg" alt="" class="ci"></span>
+    </div>
+    <div class="body" style="border: black;display:flex;flex-direction:row">
+        <div class="left_body" style="border: black;margin-top:80px">
+            <div style="display: flex;flex-direction:column">
+                <p class="input_word" style="margin-left: 140px;font-weight:bolder">الأسم</p>
+                <input type="text" style="width:200px; ">
+            </div>
+            <div style="display: flex;flex-direction:column;padding-top:20px">
+                <p class="input_word" style="margin-left: 140px;font-weight:bolder">الصنف</p>
+                <input type="text" style="width:200px; ">
+            </div>
+            <div style="display: flex;flex-direction:column;padding-top:20px">
+                <p class="input_word" style="margin-left: 140px;font-weight:bolder">الهاتف</p>
+                <input type="text" style="width:200px; ">
+            </div>
+            <div style="display: flex;flex-direction:column;padding-top:20px">
+                <p class="input_word" style="margin-left: 140px;font-weight:bolder">العنوان</p>
+                <input type="text" style="width:200px; ">
+            </div>
+        </div>      
+  
+        <div class="right_body" style="padding-left: 300px;display:flex;flex-direction:column">
+            <div class="first_row_of_items" style="display: flex;flex-direction:row">
+                <div class="card" style="width: 200px;height:100px">
+                    <img src="/pics/maeup.jpg" class="card-img-top" alt="..." height="100px">
+                    <div class="card-body" style="padding-top: 5px;">
+                    <h5 class="card-title" >make up</h5>
+                    <p class="card-text">150,000IQD</p>
+                    <button type="button" class="btn btn-outline-dark" style="width:133px">اضف الى العربة</button>
+                    </div>
+                </div>
+                <div class="div_for_padding_cards" style="padding-left: 10px;">
+                    <div class="card" style="width: 200px;height:100px">
+                        <img src="/pics/maeup.jpg" class="card-img-top" alt="..." height="100px">
+                        <div class="card-body" style="padding-top: 5px;">
+                        <h5 class="card-title" >make up</h5>
+                        <p class="card-text">150,000IQD</p>
+                        <button type="button" class="btn btn-outline-dark" style="width:133px">اضف الى العربة</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding-left: 10px;">
+                    <div class="card" style="width: 200px;height:100px">
+                        <img src="/pics/maeup.jpg" class="card-img-top" alt="..." height="100px">
+                        <div class="card-body" style="padding-top: 5px;">
+                        <h5 class="card-title" >make up</h5>
+                        <p class="card-text">150,000IQD</p>
+                        <button type="button" class="btn btn-outline-dark" style="width:133px">اضف الى العربة</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="first_row_of_items" style="display: flex;flex-direction:row;padding-top:140px">
+                <div class="card" style="width: 200px;height:100px">
+                    <img src="/pics/maeup.jpg" class="card-img-top" alt="..." height="100px">
+                    <div class="card-body" style="padding-top: 5px;">
+                    <h5 class="card-title" >make up</h5>
+                    <p class="card-text">150,000IQD</p>
+                    <button type="button" class="btn btn-outline-dark" style="width:133px">اضف الى العربة</button>
+                    </div>
+                </div>
+                <div class="div_for_padding_cards" style="padding-left: 10px;">
+                    <div class="card" style="width: 200px;height:100px">
+                        <img src="/pics/maeup.jpg" class="card-img-top" alt="..." height="100px">
+                        <div class="card-body" style="padding-top: 5px;">
+                        <h5 class="card-title" >make up</h5>
+                        <p class="card-text">150,000IQD</p>
+                        <button type="button" class="btn btn-outline-dark" style="width:133px">اضف الى العربة</button>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding-left: 10px;">
+                    <div class="card" style="width: 200px;height:100px">
+                        <img src="/pics/maeup.jpg" class="card-img-top" alt="..." height="100px">
+                        <div class="card-body" style="padding-top: 5px;">
+                        <h5 class="card-title" >make up</h5>
+                        <p class="card-text">150,000IQD</p>
+                        <button type="button" class="btn btn-outline-dark" style="width:133px">اضف الى العربة</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <footer class="footer" >
+
+        <div style="right:20px;justify-content:left;margin-left:700px">
+            <span  class="lower_span " style="padding-right:60px">احدث المنتجات</span class="span">
+            <span  class="lower_span " style="padding-right:60px"> منتجات متداولة</span class="span">
+            <span  class="lower_span " style="padding-right:90px">التخفيضات و العروض</span class="span">
+            <span  class="lower_span " style="padding-right:60px">المتاجر </span class="span">
+
+        </div>
+
+    </footer>
+    
+    
+    
+</body>
+</html>
