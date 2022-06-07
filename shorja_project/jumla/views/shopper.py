@@ -13,8 +13,6 @@ from ..models import *
 from ..utilities import *
 
 
-
-# @login_required()
 # @allowed_users(allowed_roles=['shopper'])
 # @login_required()
 def home(request):
@@ -30,7 +28,7 @@ def home(request):
 
 
 @csrf_exempt
-# @login_required()
+@login_required()
 def add_to_cart(request):
     # this an api to add/remove products to cart and create Bills for each shop
     if request.method == "PUT":
@@ -59,31 +57,63 @@ def add_to_cart(request):
         else:
             # create new bill
             bill = Bill.objects.create(total=0, cart_id=user_cart.id, shop_id=product.shopOwner.id)
-            # bill.total = bill.get_total
             bill.save()
             bill_items = Bill_Items.objects.create(item_id=product.id)
             bill_items.save()
             bill.products.add(bill_items)
             bill.save()
         get_bill.total = get_bill.get_total
-        return JsonResponse({'total': get_bill.get_total})
-    # {'user_request': request.user.first_name}
+        return JsonResponse({'bill_total': get_bill.get_total,
+                             'cart_total': user_cart.get_cart_total(),
+                             })
     return JsonResponse({'Get': 'the api worked'})
 
 
+@login_required()
 def show_cart_bills_order(request):
     # this api to send all order bills in user cart
     # and if the order bill has not any products will delete it
     user_cart = Cart.objects.filter(userOwner=request.user).last()
     cart_bills = Bill.objects.filter(cart_id=user_cart.id)
-    shop_list_id = [result for shop in cart_bills.filter(products__item=None).values('shop') for result in shop.values()]
-    for shop_id in shop_list_id:
+    user_cart.total = user_cart.get_cart_total()
+    user_cart.save()
+    cities = Governorate.objects.all()
+    bills_not_have_products = [result for shop in cart_bills.filter(total=0).values('shop') for result in shop.values()]
+    for shop_id in bills_not_have_products:
         get_order_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=shop_id)
         get_order_bill.delete()
     for bill in cart_bills:
         bill.total = bill.get_total
         bill.save()
-    context = {'bills': cart_bills}
+
+        # POST Method for checkout
+    if request.method == "POST":
+        # check for bills.total == 0 then delete it
+        # create new cart for request.user
+        if user_cart.total == 0:
+            # if user current cart no have any bills than redirect to home to Buy some products
+
+            return redirect('home')
+        else:
+            # else check for bills and create new cart
+            city = request.POST.get('city')
+            for shop_id in bills_not_have_products:
+                get_order_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=shop_id)
+                get_order_bill.delete()
+            try:
+                user_cart.checkout = True
+                user_cart.city_id = city
+                user_cart.save()
+                cart = Cart.objects.create(userOwner_id=request.user.id)
+                cart.save()
+                return redirect('home')
+            except:
+                return redirect('brows_bills')
+
+    context = {'bills': cart_bills,
+               'cities': cities,
+               'user_cart': user_cart
+               }
     return render(request, "jumla/shopper/show_the_bills_ordered.html", context)
 
 
@@ -106,10 +136,11 @@ def update_quentity(request):
         user_cart = Cart.objects.filter(userOwner=request.user).last()
         get_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=product.shopOwner.id).last()
         if get_bill:
-            # order_bill_item = get_bill.products.filter(bill_products__products__item=product.id)
             item = Bill_Items.objects.filter(bill_products=get_bill).filter(item_id=product.id).first()
             if item:
                 item.qty = qty
                 item.save()
-                return JsonResponse({'total': get_bill.get_total})
+                return JsonResponse({'bill_total': get_bill.get_total,
+                                     'cart_total': user_cart.get_cart_total(),
+                                     })
     return JsonResponse({'Get': 'the api worked'})

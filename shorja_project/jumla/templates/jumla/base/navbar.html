@@ -15,22 +15,27 @@
                     
                             <div x-show="dropdownOpen" class="absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl z-20 " >
                                 <div class="">
-                                    <a href="#" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900  border-b   hover:bg-teal-500 hover:text-white">
-                                        <h1 class="text-center  text-medium  font-semibold ">  
-                                            <span>user@gmail.com</span> </h1>
+                                     {% if user.is_authenticated %}
+
+                                          <a href="#" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900  border-b   hover:bg-teal-500 hover:text-white">
+                                        <h1 class="text-center  text-medium  font-semibold ">
+                                            <span>{{ user.first_name }}</span> </h1>
                                     </a>
-                                    <a href="#" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900     hover:bg-teal-500 hover:text-white">
-                                        <h1 class="text-center  text-medium  font-semibold ">  تسجيل الدخول </h1>
-                                    </a>
-                                    <a href="#" class="transition-colors duration-200 block px-2 py-3 text-normal text-gray-900    hover:bg-teal-500 hover:text-white">
-                                        <h1 class="text-center font-semibold text-medium  ">انشاء حساب جديد</h1>
-                                    </a>
-                                    <a href="#" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900   hover:bg-teal-500 hover:text-white">
+                                          <a href="{% url 'change_password' %}" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900   hover:bg-teal-500 hover:text-white">
                                         <h1 class="text-center text-medium  font-semibold"> تغيير الرمز </h1>
                                     </a>
-                                    <a href="#" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900 border-t hover:bg-teal-500 hover:text-white">
+                                    <a href="{% url 'logout' %}" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900 border-t hover:bg-teal-500 hover:text-white">
                                         <h1 class="text-center text-medium  font-semibold"> تسجيل الخروج   </h1>
                                     </a>
+                                   {% else %}
+                                    <a href="{% url 'login' %}" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900     hover:bg-teal-500 hover:text-white">
+                                        <h1 class="text-center  text-medium  font-semibold ">  تسجيل الدخول </h1>
+                                    </a>
+                                    <a href="{% url 'register' %}" class="transition-colors duration-200 block px-2 py-3 text-normal text-gray-900    hover:bg-teal-500 hover:text-white">
+                                        <h1 class="text-center font-semibold text-medium  ">انشاء حساب جديد</h1>
+                                    </a>
+
+                                    {% endif %}
                                 </div>
                               
                             </div>
@@ -38,13 +43,16 @@
            
                 </li>
                   <!----heart-->
+            {% if user.is_authenticated %}
                   <li class="pl-2 inline-block  ">
                     <button  class="relative z-10 block w-8 h-8 hover:bg-slate-500/75  drop-shadow-md rounded  focus:outline-none focus:border-gray-300 ">
                         <svg class="w-5 h-5 mr-1.5   " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z"/></svg> 
                        
                     </button>
                   </li>
+            {% endif %}
                   <!----cart -->
+            {% if user.is_authenticated %}
                   <li class="pl-2 inline-block">
                       <a href="{% url 'brows_bills' %}">
 
@@ -55,6 +63,7 @@
                           </a>
                    
               </li>
+            {% endif %}
                   <!----search-->
                   <li class="pl-2 inline-block ">
                     <button  class="relative z-10 block w-8 h-8 hover:bg-slate-500/75  drop-shadow-md rounded  focus:outline-none focus:border-gray-300 ">

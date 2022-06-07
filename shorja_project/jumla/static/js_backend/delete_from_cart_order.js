@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', function(){
     fetch('http://127.0.0.1:8000/shopper/check_item_in_bill_order')
     .then(rep => rep.json())
     .then(data => {
-        // console.log(data.items_in_cart)
         btn.forEach((ele)=>{
             // console.log(ele.dataset.product_id)
             if(data.items_in_cart.includes(parseInt(ele.dataset.product_id))){
@@ -23,7 +22,7 @@ document.addEventListener('DOMContentLoaded', function(){
     })
 
     let input_qty = document.querySelectorAll('#qty')
-    console.log(input_qty);
+    // console.log(input_qty);
     input_qty.forEach((ele)=>{
         ele.addEventListener('change', func)
     })
@@ -34,8 +33,9 @@ function func(ev){
     // console.log("change function")
     let product_id = ev.currentTarget.dataset.product_id
     let qty = ev.currentTarget.value
-    console.log(qty)
-    if(qty >=0 && qty <=50){
+    let cart_total = document.getElementById('cart_total')
+
+    if(qty >=1 && qty <=50){
         if(product_id){
             let total = document.getElementById(ev.currentTarget.dataset.bill_id)
              console.log('between range')
@@ -48,10 +48,10 @@ function func(ev){
     })
          .then(rep => rep.json())
             .then(data => {
-                console.log(data)
                 if(total){
             console.log('have total')
-                      total.textContent = data.total
+                      total.textContent = data.bill_total
+                        cart_total.textContent = data.cart_total
         }else{
             console.log('not have total')
         }
@@ -66,9 +66,10 @@ function func(ev){
 }
 function add_or_remove_item_from_cart(ev){
     let product_id = ev.currentTarget.dataset.product_id
+    let cart_total = document.getElementById('cart_total')
     if(product_id){
         button_toggle(ev.currentTarget)
-    let total = document.getElementById(ev.currentTarget.dataset.bill_id)
+    let bill_total = document.getElementById(ev.currentTarget.dataset.bill_id)
 
         fetch('http://127.0.0.1:8000/shopper/add-to-cart', {
                    method:"PUT", body:JSON.stringify(
@@ -79,10 +80,10 @@ function add_or_remove_item_from_cart(ev){
                })
                    .then(rep => rep.json())
             .then(data => {
-                // console.log(data.total)
-                  if(total){
+                  if(bill_total){
             console.log('have total')
-                      total.textContent = data.total
+                      bill_total.textContent = data.bill_total
+                      cart_total.textContent = data.cart_total
         }else{
             console.log('not have total')
         }
