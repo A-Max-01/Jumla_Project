@@ -47,6 +47,12 @@ class User(AbstractUser):
 
 
 class Category(models.Model):
+    parent = models.ForeignKey('self',
+                               verbose_name='parent',
+                               related_name='children',
+                               null=True,
+                               blank=True,
+                               on_delete=models.CASCADE)
     name = models.CharField(max_length=100)
     image = models.ImageField(upload_to="category/", null=True)
     is_active = models.BooleanField(default=True)
@@ -56,7 +62,9 @@ class Category(models.Model):
         verbose_name_plural = "Categories"
 
     def __str__(self):
-        return f"{self.name}"
+        if self.parent:
+            return f'-   {self.name}'
+        return f'{self.name}'
 
 
 class Governorate(models.Model):
@@ -92,6 +100,10 @@ class product_Images(models.Model):
     image = models.ImageField(upload_to="images/", null=True)
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="Image_Product")
 
+    class Meta:
+        verbose_name = "product_Image"
+        verbose_name_plural = "product_Images"
+
     def __str__(self):
         return f"{self.product}"
 
@@ -99,14 +111,18 @@ class product_Images(models.Model):
 class Cart(models.Model):
     userOwner = models.ForeignKey(User, on_delete=models.CASCADE, related_name="user_cart")
     Date = models.DateTimeField(default=timezone.now)
+    total = models.DecimalField(default=0, max_digits=12, decimal_places=2, null=True)
+    checkout = models.BooleanField(default=False, null=True)
+    city = models.ForeignKey(Governorate, on_delete=models.CASCADE, related_name="cart_city", null=True)
 
     def __str__(self):
         return f"cart user :  {self.userOwner}"
 
-
-class Cart_Governorate(models.Model):
-    cart_id = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="cart_id")
-    Governorate = models.ForeignKey(Governorate, on_delete=models.CASCADE, related_name="cart_Governorate")
+    def get_cart_total(self):
+        bills = Bill.objects.filter(cart_id=self.id)
+        self.total = sum(b.total for b in bills)
+        self.save()
+        return self.total
 
 
 class Bill_Items(models.Model):
@@ -126,6 +142,12 @@ class Bill(models.Model):
 
     def __str__(self):
         return f" {self.cart},  {self.shop}"
+
+    @property
+    def get_total(self):
+        self.total = sum(i.item.price * i.qty for i in self.products.all())
+        self.save()
+        return self.total
 
     def serialize(self):
         return{
