@@ -1,0 +1,182 @@
+{% extends 'jumla/base/base.html' %}
+{% load static %}
+{% block static %}
+    {% if user.is_authenticated %}
+
+    <script  src="{% static 'js_frontend/counter.js' %}"></script>
+    {% endif %}
+{% endblock %}
+{% block content %}
+
+<div class="flex justify-center p-5">
+    <div class=" shadow-md  rounded-lg max-w-lg">
+        <a href="#">
+            <img class="rounded-t-lg" src="https://images.unsplash.com/photo-1468436139062-f60a71c5c892?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
+        </a>
+        <div class="flex justify-center p-5 mt-4 ">
+            <div class="card">
+                <img class="w-24 h-24 rounded" src="https://images.unsplash.com/photo-1526570207772-784d36084510?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
+            </div>
+            <div class="card">
+                <img class="w-24 h-24 rounded" src="https://images.unsplash.com/photo-1537498425277-c283d32ef9db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
+            </div>
+            <div class="card">
+                <img class="w-24 h-24 rounded" src="https://images.unsplash.com/photo-1514826786317-59744fe2a548?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNTM0NjUyMw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt="">
+            </div>
+        </div>
+        
+    </div>
+    <div class=" w-3/6 h-full rounded ">
+        <div class="  p-5 -mt-2">
+            <div class="flex mb-5 justify-around ">
+                <h1 class="ml-28 -mr-10 text-right text-xl font-semibold">mac book air </h1>
+                <h1 class=" text-lg font-semibold">1500 IQD</h1>
+            </div>
+            <p class="text-right ">ما الذي يبقى في الغرفة حتى عندما يغادر الجميع؟ أضواء السقف! إنها توفر إضاءة عامة، لكن تصاميمها تعبر عن أشياء خاصة في ذوقك. سواء كنت تريد انطباع صناعي،أو لمسة طبيعية، أو طراز تقليدي أو تصميم آخر، لدينا أضواء سقف مناسبة لك.</p>
+            <div class="flex mt-5  ">
+
+  
+    
+                <!--- size buttons-->
+                  <div class="flex flex-col mr-5 ">
+                    <h1 class=" text-right  text-xl font-medium">الحجم</h1>
+                    <div class=" float-right  flex mt-2.5  ">
+                      <div>
+                          <button class=" focus:border-3  focus:shadow-xl  focus:shadow-indigo-500/40 focus:bg-gray-200 focus:outline-none    w-10 h-10 focus:rounded-lg  m-1 ">XXL</button>
+                      </div>
+                      <div>
+                          <button class="focus:border-3  focus:shadow-xl  focus:shadow-indigo-500/40  focus:bg-gray-200 focus:outline-none    w-10 h-10 focus:rounded-lg  m-1">XL</button>
+                      </div>
+                      <div>
+                          <button class="focus:border-3  focus:shadow-xl  focus:shadow-indigo-500/40  focus:bg-gray-200 focus:outline-none    w-10 h-10 focus:rounded-lg  m-1">L</button>
+                      </div>
+                      <div>
+                          <button class="focus:border-3  focus:shadow-xl  focus:shadow-indigo-500/40  focus:bg-gray-200 focus:outline-none    w-10 h-10 focus:rounded-lg  m-1 ">M</button>
+                      </div>
+                      <div>
+                          <button class="focus:border-3  focus:shadow-xl  focus:shadow-indigo-500/40 focus:bg-gray-200  focus:outline-none    w-10 h-10 focus:rounded-lg  m-1 ">S</button>
+                      </div>
+                  </div>
+                  </div>
+                    <!----quantity-->
+                  <div class="mr-5">
+                      <h1 class=" mb-3 text-center  text-xl font-medium">الكمية</h1>
+                      <div  class = " flex   mx-5 ">  
+              
+                          <!-- adding button and heading to show the digits -->
+                          <!--increment() and decrement() functions on button click-->
+                            <button class="mx-2  focus:outline-none " onclick="increment()">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 ml-2 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                 </svg></button>  
+                                 <div class=" border-3 shadow-xl   shadow-indigo-500/40  bg-gray-200 outline-none   w-10 h-10 rounded-lg   text-center">
+                                   <h2 id="counting" class="text-xl mt-1 "></h2>
+                                 </div>
+                           
+                            <button  class=" mx-2 focus:outline-none " onclick="decrement()">
+                               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 ml-2 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                   <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
+                                 </svg></button>         
+                        </div>
+                    </div>
+          
+              </div>
+            <div class="w-full h-px bg-gray-400 mt-5 "></div>
+
+            <div class="flex justify-around mt-5">
+                <div class="flex mt-4">
+                    <button class="rounded-full mr-2 mt-1 w-10 h-10 bg-gray-200 p-0 border-2 border-white focus:outline-none focus:ring-2 focus:ring-gray-300     inline-flex items-center justify-center text-gray-500 ml-2">
+                        <svg fill="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-5 h-5" viewBox="0 0 24 24">
+                          <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"></path>
+                        </svg>
+                      </button>
+                 
+                        <div class="dropdown">
+                            <button class="rounded-full outline-0 mr-2 mt-1 w-10 h-10 bg-gray-200 p-0 border-2 border-white  focus:outline-none focus:ring-2 focus:ring-gray-300 inline-flex items-center justify-center text-gray-500" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                                  </svg>
+                              </button>
+                    
+                          
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <div class="flex flex-col text-center">
+                                    <div class="flex justify-around">
+                                        <h1 class="font-semibold  ">moonlight </h1>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 -mx-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd" />
+                                          </svg>
+                                    </div>
+                                  
+                                    <div class="dropdown-divider"></div>
+                                    <div class="flex justify-around">
+                                        <h1 class="font-semibold text-sm ">الكرادة</h1>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 -mx-10 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                                          </svg>
+                                    </div>
+                                   
+                                    <div class="dropdown-divider"></div>
+                                    <div class="flex justify-around">
+                                        <h1 class="font-semibold   ">045546564152</h1>
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 mr-2 w-5" viewBox="0 0 20 20" fill="currentColor">
+                                            <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                                          </svg>
+                                    </div>
+                                 
+                                </div>
+                            </div>
+                          </div>
+
+                     
+                </div>
+
+                <div class="mt-4 mr-36">
+                    <button class=" hover:bg-black  hover:shadow-lg  py-2.5 px-8 border-2 text-center drop-shadow-md  focus:outline-none  border-black  hover:border-white hover:border-lg hover:text-white  rounded ">
+                                <div class="inline-flex items-center">
+                                    <h1 class="mb-1 mr-2 "> اضف الى السلة </h1>
+                                       <svg xmlns="http://www.w3.org/2000/svg"  class="h-4 w-4 mr-2 fill-current "  viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                         </svg>
+                        
+                        
+                    
+                              </div>
+                        
+                
+                
+        
+                    
+                                </button>
+  
+
+                  </div>
+
+            </div>
+          
+              
+     
+        
+       
+              <div class="flex justify-content-center  mt-10">
+             
+          
+                  
+                  
+            </div>
+ 
+      
+
+
+
+
+
+        </div>
+    
+          
+    </div>
+</div>
+
+
+{% endblock content %}
