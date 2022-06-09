@@ -44,15 +44,16 @@
                 </li>
                   <!----heart-->
             {% if user.is_authenticated %}
+                {% if  request.user.groups.all.first.name == "customer" %}
                   <li class="pl-2 inline-block  ">
                     <button  class="relative z-10 block w-8 h-8 hover:bg-slate-500/75  drop-shadow-md rounded  focus:outline-none focus:border-gray-300 ">
                         <svg class="w-5 h-5 mr-1.5   " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z"/></svg> 
                        
                     </button>
                   </li>
-            {% endif %}
                   <!----cart -->
-            {% if user.is_authenticated %}
+
+
                   <li class="pl-2 inline-block">
                       <a href="{% url 'brows_bills' %}">
 
@@ -63,6 +64,7 @@
                           </a>
                    
               </li>
+                    {% endif %}
             {% endif %}
                   <!----search-->
                   <li class="pl-2 inline-block ">
@@ -74,8 +76,10 @@
                   </li>
         
             </ul>
-                      
+
+
             <div class="mt-1 pl-1">
+
                 <a href="{% url 'home' %}" class = "text-white hover:text-slate-100 inline-block pl-10 ">
 
                    <h1 class="hover:text-gray-300">
@@ -84,12 +88,27 @@
                 </a>
                 <a href="#" class = "text-white inline-block pl-10">
                    <h1  class="hover:text-gray-300"> من نحن</h1></a>
+
                 <a href="#" class = "text-white inline-block pl-10">
                     <h1  class="hover:text-gray-300">منتجات متنوعة </h1></a>
-                <a href="#" class = "text-white inline-block pl-10">
+
+                     <a href="" class = "text-white inline-block pl-10">
                     <h1  class="hover:text-gray-300" >
                         المتاجر
                     </h1></a>
+               {% if request.user.groups.all.first.name == "vendor" %}
+                   <a href="{% url 'view_customer_bills' %}" class = "text-white inline-block pl-10">
+                        <h1  class="hover:text-gray-300" >
+                            طلبات الزبائن
+                        </h1></a>
+                   <a href="{% url 'vendor_home' %}" class = "text-white inline-block pl-10">
+                        <h1  class="hover:text-gray-300" >
+                            منتجاتك
+                        </h1></a>
+               {% endif %}
+
+
+
             </div>
             
 

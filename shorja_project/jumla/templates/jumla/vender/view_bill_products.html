@@ -1,0 +1,55 @@
+{% extends 'jumla/base/base.html' %}
+{% load static %}
+
+{% block content %}
+
+<table class="w-full max-w-9xl text-sm text-center text-gray-500 dark:text-gray-400">
+    <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+
+        <tr>
+
+            <th scope="col" class=" text-center text-base  ">
+               <h1 class="text-center mr-5">المنتج</h1>
+            </th>
+
+            <th scope="col" class=" text-base  py-3">
+                 الكمية
+            </th>
+            <th scope="col" class=" text-base px-6  py-3">
+            السعر
+            </th>
+            <th scope="col" class="px-6 py-3 ">
+                <span class="sr-only ">Edit</span>
+            </th>
+        </tr>
+    </thead>
+    <tbody >
+    {% for product in bill_products %}
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+            <th scope="row" class="px-8 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                <div class="flex">
+
+                    <div class="flex shrink-0   -mr-6 "><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" class="w-14 h-14  rounded" alt="">
+                    </div>
+                    <div class="mr-5 my-4   ">
+                        <h1 class="whitespace-no-wrap "> {{ product.item.ProductName }} </h1>
+
+                    </div>
+                </div>
+
+              </th>
+
+            <td class="px-8 py-4">
+                {{ product.qty }}
+            </td>
+            <td class="px-1 py-4">
+               {{ product.item.price }}
+            </td>
+
+
+        </tr>
+       {% endfor %}
+    </tbody>
+
+</table>
+{% endblock %}

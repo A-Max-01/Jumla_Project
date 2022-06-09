@@ -61,6 +61,10 @@ class Category(models.Model):
         verbose_name = "Category"
         verbose_name_plural = "Categories"
 
+    @property
+    def children(self):
+        return self.children
+
     def __str__(self):
         if self.parent:
             return f'-   {self.name}'
@@ -89,7 +93,7 @@ class Product(models.Model):
     description = models.CharField(max_length=255)
     shopOwner = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="shop_products")
     Date = models.DateTimeField(default=timezone.now)
-    Available = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=True)
     Category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name="product_Category")
 
     def __str__(self):

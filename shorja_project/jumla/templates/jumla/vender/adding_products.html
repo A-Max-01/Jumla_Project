@@ -48,7 +48,7 @@
             font-size: 20px;
             padding-left: 550px;
             flex-wrap: wrap;
-        }        
+        }
         #like{
             padding-left: 30px;
             height: 40px;
@@ -61,7 +61,7 @@
             height: 40px;
         }
         .product_modifying_container{
-            
+
             border: solid;
             display: flex;
             flex-direction: column;
@@ -123,10 +123,10 @@
             position: absolute;
             width: 1492px;
             height:90px;
-            
+
         }
         .lower_span {
-            
+
             color: white;
 
 
@@ -158,70 +158,80 @@
                 <a href=""><img src="/pics/businessman--v2.png" class="above_icons" id="user"></a>
                 <a href=""><img src="/pics/search-bar.png" alt="search" class="above_icons" style="height: 40px;width:70px;display:flex;padding-left:10px  " ></a>
             </div>
+        </div>
     </nav>
     <div class="product_modifying_container">
-        <div style="margin-left:600px;margin-top:50px">
+         <form  action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+              <div style="margin-left:600px;margin-top:50px">
             <h3 class="h_product">اضافة المنتج</h3>
         </div>
-        <div class="details_container">
+              <div class="details_container">
             <p class="p">اسم المنتج</p>
-            <input class="inputs" type="text" placeholder="">
+            <input name="product_name" class="inputs" type="text" placeholder="">
         </div>
         <div class="details_container">
             <p class="p">القياس </p>
-            <input class="inputs" type="text" placeholder="">
+            <input name="product_size" class="inputs" type="text" placeholder="">
         </div>
 
         <div class="details_container">
             <p class="p">الصنف </p>
-            <select class="form-select" aria-label="Default select example" style="width: 300px; margin-left:150px">
-                <option selected></option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select name="category" class="form-select" aria-label="Default select example" style="width: 300px; margin-left:150px">
+                <option selected> أختر الصنف</option>
+                {% for category in categories %}
+                    {% if category.parent %}
+                    <option value="{{ category.id }}">{{ category.name }} - {{ category.parent }}</option>
+                        {% else %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endif %}
+
+                {% endfor %}
               </select>
         </div>
         <div class="details_container">
             <p class="p">السعر </p>
             <div class="input-group mb-3" style="width: 300px;margin-left:150px">
                 <span class="input-group-text">IQD</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                <input name="price" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
             </div>
         </div>
-        <div class="details_container">
-            <p class="p">الكمية</p>
-            <input class="inputs" type="text" placeholder="">
-        </div>
+
         <div class="details_container">
             <p class="p">الوصف</p>
-            <input style="height: 200px;" class="inputs" type="text" placeholder="">
+            <input name="description" style="height: 200px;" class="inputs" type="text" placeholder="">
         </div>
-        <div class="details_container" style="margin-right: 100px;">
+
+             <input type="file" multiple name="files" accept="image/*">
+         <div class="details_container" style="margin-right: 100px;">
             <div style="display: flex;text-align:center;justify-content:center">
                 <div>
-                    <button type="submit" class="btn btn-dark">الغاء</button>
+                    <a href="{% url 'vendor_home' %}" class="btn btn-dark">الغاء</a>
                 </div>
                 <div style="padding-left: 50px;">
                     <button type="submit" class="btn btn-light" style="padding-left: 10px;">  +   اضافة </button>
-                </div>  
+                </div>
             </div>
         </div>
+
+    </form>
     </div>
-    
+
+
     <footer class="footer">
 
         <div style="padding-top:10px ;">
             <img src="/pics/logo.jpg" style="height: 200px;">
         </div>
         <div style="padding-top: 30px;">
-            <span  class="lower_span " style="padding-right:90px">من نحن</span class="span">
-            <span  class="lower_span " style="padding-right:90px">الرئيسية</span class="span">
-            <span  class="lower_span " style="padding-right:90px">طلبات الزبائن</span class="span">
+            <span  class="lower_span " style="padding-right:90px">من نحن</span>
+            <span  class="lower_span " style="padding-right:90px">الرئيسية</span>
+            <span  class="lower_span " style="padding-right:90px">طلبات الزبائن</span>
 
         </div>
 
 </footer>
 
-    
+
 </body>
 </html>

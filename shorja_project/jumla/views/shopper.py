@@ -13,12 +13,13 @@ from ..models import *
 from ..utilities import *
 
 
-# @allowed_users(allowed_roles=['shopper'])
+# @unauthenticated_user
+# @allowed_users(allowed_roles=['customer'])
 # @login_required()
 def home(request):
     #   It displays products to the customer and includes the search process
     #   and includes paginator
-    products = Product.objects.all()
+    products = Product.objects.filter(is_active=True)
     img = product_Images.objects.all()
     paginator_element = MyPaginator(products, 2)
     page_number = request.GET.get('page')
@@ -62,7 +63,7 @@ def add_to_cart(request):
             bill_items.save()
             bill.products.add(bill_items)
             bill.save()
-        get_bill.total = get_bill.get_total
+            get_bill.total = get_bill.get_total
         return JsonResponse({'bill_total': get_bill.get_total,
                              'cart_total': user_cart.get_cart_total(),
                              })
@@ -118,6 +119,7 @@ def show_cart_bills_order(request):
 
 
 @csrf_exempt
+@login_required()
 def check_item_in_bill_order(request):
     # this api to send products in each bill in the cart
     user_cart = Cart.objects.filter(userOwner=request.user).last()
@@ -128,6 +130,7 @@ def check_item_in_bill_order(request):
 
 
 @csrf_exempt
+@login_required()
 def update_quentity(request):
     if request.method == "PUT":
         data = json.loads(request.body)

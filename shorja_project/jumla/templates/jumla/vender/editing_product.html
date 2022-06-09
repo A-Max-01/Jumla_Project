@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>uploading product</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"></head>
+    <title>adding product</title>
     <style>
         .logo_div{
             text-align: center;
@@ -30,7 +29,7 @@
         .words{
             padding-right: 15px;
             text-decoration: none;
-            color: white;
+            color: black;
         }
 
         .above_icons{
@@ -49,23 +48,20 @@
             font-size: 20px;
             padding-left: 550px;
             flex-wrap: wrap;
-        }        
+        }
         #like{
             padding-left: 30px;
             height: 40px;
-            background-color: white;    
         }
         #user{
             padding-left: 30px;
             height: 40px;
-            background-color: white;
         }
         #shopping{
             height: 40px;
-            background-color: white;
         }
         .product_modifying_container{
-            
+
             border: solid;
             display: flex;
             flex-direction: column;
@@ -77,7 +73,6 @@
             width:800px;
             margin: auto;
             margin-top: 100px;
-            
 
         }
         .h_product{
@@ -121,7 +116,6 @@
             max-width:100%;
             background:black;
             height:auto;
-            
         }
         .footer_div{
             display: flex;
@@ -129,10 +123,10 @@
             position: absolute;
             width: 1492px;
             height:90px;
-            
+
         }
         .lower_span {
-            
+
             color: white;
 
 
@@ -142,12 +136,12 @@
             padding-left: 40px;
             font-size: 40px;
         }
-  
-
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"></head>
+
 </head>
 <body>
-    <nav style="display:flex;flex-wrap:wrap;background-color:#000000">
+    <nav style="display:flex;flex-wrap:wrap;">
 
         <div class="under_logo">
             <div class="top_left" style="display:flex;flex-wrap:wrap">
@@ -164,78 +158,83 @@
                 <a href=""><img src="/pics/businessman--v2.png" class="above_icons" id="user"></a>
                 <a href=""><img src="/pics/search-bar.png" alt="search" class="above_icons" style="height: 40px;width:70px;display:flex;padding-left:10px  " ></a>
             </div>
+        </div>
     </nav>
     <div class="product_modifying_container">
-        <div style="margin-left:600px;margin-top:50px">
-            <h3 class="h_product">تعديل المنتج</h3>
-        </div>
-        <div class="details_container">
+         <form  action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+              <div class="details_container">
             <p class="p">اسم المنتج</p>
-            <input class="inputs" type="text" placeholder="">
+            <input name="product_name" value="{{ product.ProductName }}" class="inputs" type="text"  placeholder="">
         </div>
         <div class="details_container">
             <p class="p">القياس </p>
-            <input class="inputs" type="text" placeholder="">
+            <input name="product_size" value="{{ product.Size }}" class="inputs" type="text" placeholder="">
         </div>
 
         <div class="details_container">
             <p class="p">الصنف </p>
-            <select class="form-select" aria-label="Default select example" style="width: 300px; margin-left:150px">
-                <option selected></option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+            <select name="category" class="form-select" aria-label="Default select example" style="width: 300px; margin-left:150px">
+                <option selected value="{{ product.Category_id }}"> {{ product.Category }}</option>
+                {% for category in categories %}
+                    {% if category.parent %}
+                    <option value="{{ category.id }}">{{ category.name }} - {{ category.parent }}</option>
+                        {% else %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endif %}
+
+                {% endfor %}
               </select>
         </div>
         <div class="details_container">
             <p class="p">السعر </p>
             <div class="input-group mb-3" style="width: 300px;margin-left:150px">
                 <span class="input-group-text">IQD</span>
-                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+                <input value="{{ product.price }}" name="price" type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
             </div>
         </div>
-        <div class="details_container">
-            <p class="p">الكمية</p>
-            <input class="inputs" type="text" placeholder="">
-        </div>
+
         <div class="details_container">
             <p class="p">الوصف</p>
-            <input style="height: 200px;" class="inputs" type="text" placeholder="">
+            <input value="{{ product.description }}" name="description" style="height: 200px;" class="inputs" type="text" placeholder="">
         </div>
-        <div class="details_container" style="margin-right: 100px;">
-            <div>
-                <img src="/pics/suits.jpg" class="suits"> <img src="/pics/suits.jpg" class="suits"> <img src="/pics/suits.jpg" class="suits"> 
-            </div>
 
-            
-        </div>
-        <div class="details_container" style="margin-right: 100px;">
+             <input type="file" multiple name="files" accept="image/*">
+          {% for image in images %}
+                        {% if product.id == image.product_id %}
+                        <img src="{{ image.image.url }}" style="width: 100px; height: 100px" class="card-img-top" alt="...">
+                        {% endif %}
+         {% endfor %}
+         <div class="details_container" style="margin-right: 100px;">
             <div style="display: flex;text-align:center;justify-content:center">
                 <div>
-                    <button type="submit" class="btn btn-dark">الغاء</button>
+                    <a href="{% url 'vendor_home' %}" class="btn btn-dark">الغاء</a>
                 </div>
                 <div style="padding-left: 50px;">
-                    <button type="submit" class="btn btn-light" style="padding-left: 10px;">حفظ</button>
+                    <button type="submit" class="btn btn-light" style="padding-left: 10px;">  تحديث </button>
                 </div>
             </div>
         </div>
 
-        
+    </form>
     </div>
+
+
     <footer class="footer">
 
-            <div style="padding-top:10px ;">
-                <p class="logo_par" style="color: white;">LOGO</p>
-            </div>
-            <div style="padding-top: 30px;">
-                <span  class="lower_span " style="padding-right:90px">من نحن</span class="span">
-                <span  class="lower_span " style="padding-right:90px">الرئيسية</span class="span">
-                <span  class="lower_span " style="padding-right:90px">طلبات الزبائن</span class="span">
+        <div style="padding-top:10px ;">
+            <img src="/pics/logo.jpg" style="height: 200px;">
+        </div>
+        <div style="padding-top: 30px;">
+            <span  class="lower_span " style="padding-right:90px">من نحن</span>
+            <span  class="lower_span " style="padding-right:90px">الرئيسية</span>
+            <span  class="lower_span " style="padding-right:90px">طلبات الزبائن</span>
 
-            </div>
+        </div>
 
-    </footer>
-    
-    
+</footer>
+
+
 </body>
 </html>

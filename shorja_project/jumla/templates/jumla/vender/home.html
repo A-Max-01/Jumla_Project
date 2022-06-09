@@ -1,0 +1,71 @@
+{% extends 'jumla/base/base.html' %}
+{% load static %}
+{% block static %}
+    {% if user.is_authenticated %}
+    <script  src="{% static 'js_backend/vendor.js' %}"></script>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <div class="container">
+<div class="ms-auto text-muted">
+                    Search:
+                    <div class="ms-2 d-inline-block">
+                        <form action="" method="get">
+                            <input type="text" class="form-control form-control-sm" name="q">
+                        </form>
+                    </div>
+                </div>
+    <table class="table p-3 center-block">
+  <thead>
+  <tr>
+      <th>
+          <a href="{% url 'create_product' %}">
+              اضافة منتج جديد
+          </a>
+
+      </th>
+  </tr>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">اسم المنتج</th>
+      <th scope="col">سعر المنتج</th>
+      <th scope="col">الصنف</th>
+      <th scope="col">التوفر</th>
+      <th scope="col">تاريخ الاضافة</th>
+        <th>...</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for product in products %}
+
+    <tr>
+    <th><a href="{% url 'update_product' product.id %}"> {{ product.id }}</a></th>
+      <th scope="row">{{ product.ProductName }}</th>
+      <td>{{ product.price }}</td>
+      <td>{{ product.Category.name }}</td>
+      <td>
+          {% if product.is_active %}
+              <input id="is_activ" class="form-check-input"
+                     data-product_id = {{ product.id }}
+                     type="checkbox"  checked />
+          {% else %}
+              <input id="is_activ" class="form-check-input"
+                     data-product_id = {{ product.id }}
+                     type="checkbox"  />
+          {% endif %}
+
+      </td>
+    <th>{{ product.Date|date:'Y-m-d a' }}</th>
+    <th>
+        <a href="#" id="btn" class="btn btn-danger"
+        data-product_id = {{ product.id }}
+        >حذف</a>
+    </th>
+    </tr>
+
+    {% endfor %}
+
+  </tbody>
+</table>
+    </div>
+{% endblock %}

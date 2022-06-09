@@ -1,0 +1,37 @@
+{% extends 'jumla/base/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="container">
+
+    <table class="table p-3 center-block">
+  <thead>
+
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">اسم الزبون</th>
+      <th scope="col">رقم الزبون </th>
+      <th scope="col">العنوان</th>
+      <th scope="col">اجمالي الفاتورة</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for bill in bills %}
+
+    <tr>
+{#    <th><a href="{% url 'update_product' product.id %}"> {{ product.id }}</a></th>#}
+        <th><a href="{% url 'view_bill_products' bill.id %}">{{ bill.id }}</a> </th>
+      <th scope="row">{{ bill.cart.userOwner.first_name}}</th>
+    <th>{{ bill.cart.userOwner}}</th>
+    <th>{{ bill.cart.userOwner.address}}</th>
+    <th>{{ bill.total}}</th>
+
+
+    </tr>
+
+    {% endfor %}
+
+  </tbody>
+</table>
+    </div>
+{% endblock %}
