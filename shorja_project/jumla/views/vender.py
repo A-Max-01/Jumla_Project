@@ -67,27 +67,31 @@ def delete_product_and_update_is_active(request):
 @allowed_users(allowed_roles=['vendor'])
 def create_new_product(request):
     categories = Category.objects.all()
+    form = vendor_forms.Create_product()
     if request.method == "POST":
-        files = request.FILES.getlist('files')
-        product_name = request.POST.get('product_name')
-        product_size = request.POST.get('product_size')
-        category = request.POST.get('category')
-        price = request.POST.get('price')
-        description = request.POST.get('description')
-
-        if product_name and product_size and category and price and description and files:
-            shop = get_object_or_404(Shop, shopOwner_id=request.user.id)
-            if shop:
-                product = Product.objects.create(ProductName=product_name, shopOwner_id=shop.id, Size=product_size,
-                                                 Category_id=category, price=price, description=description)
-                product.save()
-                for file in files:
-                    image_product = product_Images.objects.create(product_id=product.id, image=file)
-                    image_product.save()
-                return redirect('vendor_home')
-        else:
-            return redirect('create_product')
-    context = {'categories': categories}
+        form = vendor_forms.Create_product(request.POST)
+        print(form)
+    #     files = request.FILES.getlist('files')
+    #     product_name = request.POST.get('product_name')
+    #     product_size = request.POST.get('product_size')
+    #     category = request.POST.get('category')
+    #     price = request.POST.get('price')
+    #     description = request.POST.get('description')
+    #
+    #     if product_name and product_size and category and price and description and files:
+    #         shop = get_object_or_404(Shop, shopOwner_id=request.user.id)
+    #         if shop:
+    #             product = Product.objects.create(ProductName=product_name, shopOwner_id=shop.id, Size=product_size,
+    #                                              Category_id=category, price=price, description=description)
+    #             product.save()
+    #             for file in files:
+    #                 image_product = product_Images.objects.create(product_id=product.id, image=file)
+    #                 image_product.save()
+        return redirect('vendor_home')
+    #     else:
+    #         return redirect('create_product')
+    context = {'categories': categories,
+               'form': form}
     return render(request, 'jumla/vender/adding_products.html', context)
 
 
