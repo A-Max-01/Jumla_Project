@@ -2,6 +2,7 @@
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import Group
 from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
@@ -27,7 +28,9 @@ def register_view(request):
                 "message": "Passwords must match."
             })
         try:
+            group = Group.objects.get(name='customer')
             user = User.objects.create_user(phone_number, first_name, address, password)
+            user.groups.add(group)
             user.save()
             # to create cart for this user to first time
             cart = Cart.objects.create(userOwner_id=user.id)

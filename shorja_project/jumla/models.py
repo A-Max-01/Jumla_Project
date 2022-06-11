@@ -130,7 +130,7 @@ class Cart(models.Model):
 
 
 class Bill_Items(models.Model):
-    item = models.ForeignKey(Product, on_delete=models.CASCADE, related_name="product_item")
+    item = models.ForeignKey(Product, on_delete=models.CASCADE, null=True, related_name="product_item")
     qty = models.IntegerField(default=1)
 
     def __str__(self):
@@ -147,7 +147,7 @@ class Bill(models.Model):
     def __str__(self):
         return f" {self.cart},  {self.shop}"
 
-    @property
+    # @property
     def get_total(self):
         self.total = sum(i.item.price * i.qty for i in self.products.all())
         self.save()

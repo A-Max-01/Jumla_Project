@@ -1,21 +1,24 @@
 
 import json
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.contrib.auth.decorators import login_required
+
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from django.db.models import Q
 from ..decorators import *
+from ..forms import *
 from ..models import *
 from ..utilities import *
 
 
+@login_required(login_url='login')
 @allowed_users(allowed_roles=['vendor'])
 def vendor_home(request):
     shop = get_object_or_404(Shop, shopOwner_id=request.user.id)
     shop_products = Product.objects.filter(shopOwner_id=shop.id)
     q = request.GET.get('q')
-    print(q)
     if q:
         try:
             q = int(q)
@@ -29,13 +32,12 @@ def vendor_home(request):
                 Q(Category__name__icontains=q) |
                 Q(Category__parent__name__icontains=q)
             )
-    context = {'products': shop_products,
-               'user_group': request.user.groups.all()[0].name
-               }
+    context = {'products': shop_products}
     return render(request, "jumla/vender/home.html", context)
 
 
 @csrf_exempt
+@login_required(login_url='login')
 def delete_product_and_update_is_active(request):
     if request.method == "PUT":
         data = json.loads(request.body)
@@ -61,6 +63,8 @@ def delete_product_and_update_is_active(request):
     return JsonResponse({"Get": "this api is worked"})
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['vendor'])
 def create_new_product(request):
     categories = Category.objects.all()
     if request.method == "POST":
@@ -87,11 +91,13 @@ def create_new_product(request):
     return render(request, 'jumla/vender/adding_products.html', context)
 
 
+@login_required(login_url='login')
 def update_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     img = product_Images.objects.all()
     categories = Category.objects.all()
     if request.method == "POST":
+        images = request.FILES.getlist('files')
         product_name = request.POST.get('product_name')
         product_size = request.POST.get('product_size')
         category = request.POST.get('category')
@@ -105,6 +111,9 @@ def update_product(request, product_id):
             product.description = description
             product.Date = timezone.now()
             product.save()
+            for image in images:
+                image_product = product_Images.objects.create(product_id=product.id, image=image)
+                image_product.save()
         return redirect('vendor_home')
     context = {'product': product,
                "images": img,
@@ -112,6 +121,8 @@ def update_product(request, product_id):
     return render(request, "jumla/vender/editing_product.html", context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['vendor'])
 def view_customer_bills(request):
     bills = Bill.objects.filter(cart__checkout=True, shop__shopOwner_id=request.user.id)
     for bill in bills:
@@ -122,6 +133,8 @@ def view_customer_bills(request):
     return render(request, 'jumla/vender/view_customer_bills.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['vendor'])
 def view_bill_products(request, bill_id):
     bill = get_object_or_404(Bill, id=bill_id)
     context = {'bill_products': bill.products.all()}

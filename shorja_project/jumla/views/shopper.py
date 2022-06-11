@@ -13,9 +13,6 @@ from ..models import *
 from ..utilities import *
 
 
-# @unauthenticated_user
-# @allowed_users(allowed_roles=['customer'])
-# @login_required()
 def home(request):
     #   It displays products to the customer and includes the search process
     #   and includes paginator
@@ -29,48 +26,56 @@ def home(request):
 
 
 @csrf_exempt
-@login_required()
+@login_required(login_url='login')
 def add_to_cart(request):
     # this an api to add/remove products to cart and create Bills for each shop
     if request.method == "PUT":
         data = json.loads(request.body)
         product = get_object_or_404(Product, id=data.get('product_id'))
         user_cart = Cart.objects.filter(userOwner=request.user).last()
-        get_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=product.shopOwner.id).last()
-        if get_bill:
-            # only add/remove product to the bill And it's already exist
-            order_bill_item = get_bill.products.filter(bill_products__products__item=product.id)
-            if order_bill_item:
-                # print("delete")
-                # the bill item exist
-                # delete item from bill
-                item = Bill_Items.objects.filter(bill_products=get_bill).filter(item_id=product.id).first()
-                get_bill.products.remove(item)
-                get_bill.save()
-                item.delete()
-            else:
-                # print("add item")
-                # add item to the bill
+        # get_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=product.shopOwner.id).last()
+        try:
+            get_bill = Bill.objects.get(cart_id=user_cart.id, shop_id=product.shopOwner.id)
+            if get_bill:
+                # only add/remove product to the bill And it's already exist
+                order_bill_item = get_bill.products.filter(bill_products__products__item=product.id)
+                if order_bill_item:
+                    # print("delete")
+                    # the bill item exist
+                    # delete item from bill
+                    item = Bill_Items.objects.filter(bill_products=get_bill).filter(item_id=product.id).first()
+                    get_bill.products.remove(item)
+                    get_bill.save()
+                    item.delete()
+                else:
+                    # print("add item")
+                    # add item to the bill
+                    bill_items = Bill_Items.objects.create(item_id=product.id)
+                    bill_items.save()
+                    get_bill.products.add(bill_items)
+                    get_bill.save()
+                return JsonResponse({'bill_total': get_bill.get_total(),
+                                     'cart_total': user_cart.get_cart_total(),
+                                     })
+
+        # else:
+        except:
+                # create new bill
+                bill = Bill.objects.create(total=0, cart_id=user_cart.id, shop_id=product.shopOwner.id)
+                bill.save()
                 bill_items = Bill_Items.objects.create(item_id=product.id)
                 bill_items.save()
-                get_bill.products.add(bill_items)
-                get_bill.save()
-        else:
-            # create new bill
-            bill = Bill.objects.create(total=0, cart_id=user_cart.id, shop_id=product.shopOwner.id)
-            bill.save()
-            bill_items = Bill_Items.objects.create(item_id=product.id)
-            bill_items.save()
-            bill.products.add(bill_items)
-            bill.save()
-            get_bill.total = get_bill.get_total
-        return JsonResponse({'bill_total': get_bill.get_total,
-                             'cart_total': user_cart.get_cart_total(),
-                             })
+                bill.products.add(bill_items)
+                bill.total = bill.get_total()
+                bill.save()
+                # get_bill.total = get_bill.get_total()
+                return JsonResponse({'bill_total': bill.total,
+                                     'cart_total': user_cart.get_cart_total(),
+                                     })
     return JsonResponse({'Get': 'the api worked'})
 
 
-@login_required()
+@login_required(login_url='login')
 def show_cart_bills_order(request):
     # this api to send all order bills in user cart
     # and if the order bill has not any products will delete it
@@ -84,7 +89,7 @@ def show_cart_bills_order(request):
         get_order_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=shop_id)
         get_order_bill.delete()
     for bill in cart_bills:
-        bill.total = bill.get_total
+        bill.total = bill.get_total()
         bill.save()
 
         # POST Method for checkout
@@ -119,7 +124,7 @@ def show_cart_bills_order(request):
 
 
 @csrf_exempt
-@login_required()
+@login_required(login_url='login')
 def check_item_in_bill_order(request):
     # this api to send products in each bill in the cart
     user_cart = Cart.objects.filter(userOwner=request.user).last()
@@ -130,7 +135,7 @@ def check_item_in_bill_order(request):
 
 
 @csrf_exempt
-@login_required()
+@login_required(login_url='login')
 def update_quentity(request):
     if request.method == "PUT":
         data = json.loads(request.body)
@@ -143,7 +148,7 @@ def update_quentity(request):
             if item:
                 item.qty = qty
                 item.save()
-                return JsonResponse({'bill_total': get_bill.get_total,
+                return JsonResponse({'bill_total': get_bill.get_total(),
                                      'cart_total': user_cart.get_cart_total(),
                                      })
     return JsonResponse({'Get': 'the api worked'})

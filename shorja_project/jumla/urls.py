@@ -29,6 +29,10 @@ urlpatterns = [
         # Api
         path('delete_product', vender.delete_product_and_update_is_active, name='delete_product'),
     ])),
+    path('delivery/', include([
+        path('', delivery.home, name='delivery_home'),
+        path('get_cart_bills/<cart_id>', delivery.get_cart_bills, name='get_cart_bills')
+    ])),
 
 ]
 

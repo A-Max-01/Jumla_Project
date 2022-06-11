@@ -96,6 +96,12 @@
                     <h1  class="hover:text-gray-300" >
                         المتاجر
                     </h1></a>
+            {% if  request.user.groups.all.first.name == "delivery" %}
+                <a href="{% url 'delivery_home' %}" class = "text-white inline-block pl-10">
+                        <h1  class="hover:text-gray-300" >
+                            delivery home
+                        </h1></a>
+            {% endif %}
                {% if request.user.groups.all.first.name == "vendor" %}
                    <a href="{% url 'view_customer_bills' %}" class = "text-white inline-block pl-10">
                         <h1  class="hover:text-gray-300" >
