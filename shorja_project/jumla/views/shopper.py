@@ -91,7 +91,6 @@ def show_cart_bills_order(request):
     for bill in cart_bills:
         bill.total = bill.get_total()
         bill.save()
-
         # POST Method for checkout
     if request.method == "POST":
         # check for bills.total == 0 then delete it
@@ -115,7 +114,6 @@ def show_cart_bills_order(request):
                 return redirect('home')
             except:
                 return redirect('brows_bills')
-
     context = {'bills': cart_bills,
                'cities': cities,
                'user_cart': user_cart

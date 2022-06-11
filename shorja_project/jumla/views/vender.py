@@ -92,7 +92,8 @@ def create_new_product(request):
     #         return redirect('create_product')
     context = {'categories': categories,
                'form': form}
-    return render(request, 'jumla/vender/adding_products.html', context)
+    # return render(request, 'jumla/vender/adding_products.html', context)
+    return render(request, "jumla/vender/noor's version/market_addingproduct.html", context)
 
 
 @login_required(login_url='login')
