@@ -1,6 +1,15 @@
-body{
+ @font-face {
+  font-family: air-arabia;
+  src: url(font/air-arabia.ttf);
+} 
+
+
+/* body{
     font-family: 'Tajawal', sans-serif;
-}
+} */
+body {
+  font-family: air-arabia, sans-serif;
+} 
 
 .card {
     margin: 0 1rem;
@@ -20,5 +29,4 @@ body{
   .card:hover {
     transform: scale(1.5);
   }
-  
   

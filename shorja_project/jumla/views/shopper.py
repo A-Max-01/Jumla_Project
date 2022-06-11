@@ -73,19 +73,26 @@ def add_to_cart(request):
 def show_cart_bills_order(request):
     # this api to send all order bills in user cart
     # and if the order bill has not any products will delete it
+    print("owner", request.user)
     user_cart = Cart.objects.filter(userOwner=request.user).last()
     cart_bills = Bill.objects.filter(cart_id=user_cart.id)
+    print("cart bill 1", cart_bills)
     user_cart.total = user_cart.get_cart_total()
     user_cart.save()
+    print("cart bill 2", cart_bills)
     cities = Governorate.objects.all()
     bills_not_have_products = [result for shop in cart_bills.filter(total=0).values('shop') for result in shop.values()]
     for shop_id in bills_not_have_products:
         get_order_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=shop_id)
-        get_order_bill.delete()
+        #TODO  problem here (the delete method deletes the user Bill)
+        # get_order_bill.delete()
+    print("cart bill 3", cart_bills)    
     for bill in cart_bills:
         bill.total = bill.get_total
+        print("bill total", bill.total)
         bill.save()
-
+        print(bill)
+    print("cart bill 4", cart_bills)    
         # POST Method for checkout
     if request.method == "POST":
         # check for bills.total == 0 then delete it
@@ -109,11 +116,12 @@ def show_cart_bills_order(request):
                 return redirect('home')
             except:
                 return redirect('brows_bills')
-
+    print("cart_bill 5", cart_bills)
     context = {'bills': cart_bills,
                'cities': cities,
                'user_cart': user_cart
                }
+    print(context)
     return render(request, "jumla/shopper/show_the_bills_ordered.html", context)
 
 
