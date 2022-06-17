@@ -7,8 +7,8 @@ def unauthenticated_user(view_func):
         if request.user.is_authenticated:
             return redirect("home")
         else:
-            # return view_func(request, *args, **kwargs)
-            return redirect('login')
+            return view_func(request, *args, **kwargs)
+            # return redirect('login')
     return wrapper_func
 
 
@@ -20,12 +20,17 @@ def allowed_users(allowed_roles=[]):
                 group = request.user.groups.all()[0].name
             if group in allowed_roles:
                 return view_func(request, *args, **kwargs)
-            elif not group:
-                return view_func(request, *args, **kwargs)
-            elif group == 'vendor':
-                return redirect('vendor_home')
             else:
-                return HttpResponse(group)
+                return HttpResponse('not in group')
+                # return redirect('login')
+            # elif not group:
+                # return view_func(request, *args, **kwargs)
+                # return HttpResponse('not have group')
+            # elif group == 'vendor':
+            #     return redirect('vendor_home')
+            # else:
+            #     # return HttpResponse(group)
+            #     return redirect('login')
         return wrapper_func
     return decorator
 

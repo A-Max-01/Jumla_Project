@@ -1,15 +1,13 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="ar" dir="rtl">
-{#<html lang="en">#}
 {% block html %}
 {% endblock %}
+
 <head>
  <title>{% block Title %}{% endblock %}</title>
 {% include 'jumla/base/header.html' %}
- {% block static %}
 
-    {% endblock %}
 
 </head>
 <body>
@@ -23,6 +21,9 @@
     {% endblock %}
 </div>
 
-  {#{% include 'jumla/base/footer.html' %}#}
+  {% include 'jumla/base/footer.html' %}
+{% block static %}
+
+    {% endblock %}
 </body>
 </html>

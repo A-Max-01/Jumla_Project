@@ -16,6 +16,7 @@ from ..forms import *
 from ..models import *
 
 
+@unauthenticated_user
 def register_view(request):
     if request.method == "POST":
         password = request.POST.get('password')
@@ -46,6 +47,7 @@ def register_view(request):
     return render(request, "jumla/Account/register.html", context)
 
 
+@unauthenticated_user
 def login_view(request):
     if request.method == "POST":
         phone_number = request.POST.get('phone_number')

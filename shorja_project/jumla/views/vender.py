@@ -1,4 +1,3 @@
-
 import json
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.contrib.auth.decorators import login_required
@@ -42,9 +41,19 @@ def delete_product_and_update_is_active(request):
     if request.method == "PUT":
         data = json.loads(request.body)
         product = get_object_or_404(Product, id=data.get('product_id'))
-        type = data.get('type')
+        operation_type = data.get('type')
         if product:
-            if type == "delete":
+            if operation_type == 'delete_image':
+                image_url = data.get('image_url')
+                product_images = product_Images.objects.filter(product_id=product.id)
+                if product_images:
+                    for i in product_images:
+                        if i.image.url == image_url:
+                            path = i.image.path
+                            i.image.storage.delete(path)
+                            i.delete()
+                return JsonResponse({"PUT": "delete image done"})
+            if operation_type == "delete":
                 # to delete a product that must delete it images form media folder
                 product_images = product_Images.objects.filter(product_id=product.id)
                 if product_images:
@@ -53,7 +62,7 @@ def delete_product_and_update_is_active(request):
                         i.image.storage.delete(path)
                 product.delete()
                 return JsonResponse({"PUT": "delete ok"})
-            elif type == "update_checkbox":
+            elif operation_type == "update_checkbox":
                 if product.is_active:
                     product.is_active = False
                 else:
@@ -64,65 +73,60 @@ def delete_product_and_update_is_active(request):
 
 
 @login_required(login_url='login')
-@allowed_users(allowed_roles=['vendor'])
+# @allowed_users(allowed_roles=['vendor'])
 def create_new_product(request):
     categories = Category.objects.all()
     form = vendor_forms.Create_product()
     if request.method == "POST":
         form = vendor_forms.Create_product(request.POST)
-        print(form)
-    #     files = request.FILES.getlist('files')
-    #     product_name = request.POST.get('product_name')
-    #     product_size = request.POST.get('product_size')
-    #     category = request.POST.get('category')
-    #     price = request.POST.get('price')
-    #     description = request.POST.get('description')
-    #
-    #     if product_name and product_size and category and price and description and files:
-    #         shop = get_object_or_404(Shop, shopOwner_id=request.user.id)
-    #         if shop:
-    #             product = Product.objects.create(ProductName=product_name, shopOwner_id=shop.id, Size=product_size,
-    #                                              Category_id=category, price=price, description=description)
-    #             product.save()
-    #             for file in files:
-    #                 image_product = product_Images.objects.create(product_id=product.id, image=file)
-    #                 image_product.save()
-        return redirect('vendor_home')
-    #     else:
-    #         return redirect('create_product')
+        if form.is_valid():
+            files = request.FILES.getlist('files')
+            product_name = form.cleaned_data['ProductName']
+            product_size = form.cleaned_data['Size']
+            category = form.cleaned_data['Category']
+            price = form.cleaned_data['price']
+            description = form.cleaned_data['description']
+            shop = get_object_or_404(Shop, shopOwner_id=request.user.id)
+            if shop:
+                create_product = Product.objects.create(ProductName=product_name, shopOwner_id=shop.id,
+                                                        Size=product_size, Category_id=category.id, price=price,
+                                                        description=description)
+                create_product.save()
+                if files:
+                    for file in files:
+                        image_product = product_Images.objects.create(product_id=create_product.id, image=file)
+                        image_product.save()
+            return redirect('vendor_home')
+        else:
+            return redirect('create_product')
     context = {'categories': categories,
                'form': form}
-    # return render(request, 'jumla/vender/adding_products.html', context)
-    return render(request, "jumla/vender/noor's version/market_addingproduct.html", context)
+    return render(request, 'jumla/vender/adding_products.html', context)
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['vendor'])
 def update_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     img = product_Images.objects.all()
     categories = Category.objects.all()
+    form = vendor_forms.Create_product(instance=product)
+    if request.method == "PUT":
+        return HttpResponse('Put')
     if request.method == "POST":
         images = request.FILES.getlist('files')
-        product_name = request.POST.get('product_name')
-        product_size = request.POST.get('product_size')
-        category = request.POST.get('category')
-        price = request.POST.get('price')
-        description = request.POST.get('description')
-        if product:
-            product.ProductName = product_name
-            product.Size = product_size
-            product.Category_id = category
-            product.price = price
-            product.description = description
-            product.Date = timezone.now()
-            product.save()
-            for image in images:
-                image_product = product_Images.objects.create(product_id=product.id, image=image)
-                image_product.save()
+        form = vendor_forms.Create_product(request.POST, instance=product)
+        if form.is_valid():
+            form.save()
+            if images:
+                for image in images:
+                    image_product = product_Images.objects.create(product_id=product.id, image=image)
+                    image_product.save()
         return redirect('vendor_home')
     context = {'product': product,
                "images": img,
-               'categories': categories}
+               'form': form,
+               }
     return render(request, "jumla/vender/editing_product.html", context)
 
 
@@ -131,7 +135,6 @@ def update_product(request, product_id):
 def view_customer_bills(request):
     bills = Bill.objects.filter(cart__checkout=True, shop__shopOwner_id=request.user.id)
     for bill in bills:
-        bill.total = bill.get_total
         if bill.total == 0:
             bill.delete()
     context = {'bills': bills}
@@ -143,4 +146,4 @@ def view_customer_bills(request):
 def view_bill_products(request, bill_id):
     bill = get_object_or_404(Bill, id=bill_id)
     context = {'bill_products': bill.products.all()}
-    return render(request, 'jumla/vender/view_bill_products.html',context)
+    return render(request, 'jumla/vender/view_bill_products.html', context)

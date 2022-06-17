@@ -23,7 +23,7 @@
     {% endfor %}
                   <div class="card-body">
                     <h5 class="card-title">{{ product.ProductName }}</h5>
-                    <p class="card-text">{{ product.description }}</p>
+{#                    <p class="card-text">{{ product.description }}</p>#}
                     <p class="card-text">{{ product.shopOwner }}</p>
                       {% if user.is_authenticated %}
                           {% if request.user.groups.all.first.name == "customer" %}

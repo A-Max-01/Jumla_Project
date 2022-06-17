@@ -18,8 +18,11 @@ from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+# from shorja_project.jumla.admin import admin_site
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    # path('myadmin/', admin_site.urls),
     path('', include("jumla.urls")),
 ]
 

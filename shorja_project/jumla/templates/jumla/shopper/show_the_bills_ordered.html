@@ -107,7 +107,7 @@
         
         
                 
-       {% endfor %}
+            {% endfor %}
     
                
             </tbody>
@@ -133,7 +133,8 @@
     
     <!----box2 -->
     <div class=" flex flex-col justify-center  ">
-
+ <form action="{% url 'brows_bills' %}" method="POST">
+        {% csrf_token %}
         <div class="w-full h-full   shadow   bg-slate-50 rounded-md ">
           <div class="flex flex-col p-5">
               <div class="flex justify-center">
@@ -163,13 +164,13 @@
 
               <!----button---->
               <div class="  flex justify-center mt-20 ">
-                <button class="py-2 px-2 hover:bg-black  hover:shadow-lg    w-36 h-11 border-2 text-center drop-shadow-md   border-black  hover:border-white hover:border-lg hover:text-white ">
+                <button type="submit" class="py-2 px-2 hover:bg-black  hover:shadow-lg    w-36 h-11 border-2 text-center drop-shadow-md   border-black  hover:border-white hover:border-lg hover:text-white ">
                     <div class="inline-flex items-center">
                         <h1 class="mb-1 mr-2 "> تثبيت الطلب</h1>
                         <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 fill-current " viewBox="0 0 20 20" >
                             <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                           </svg>
-                      
+
                 
                     </div>
                         
@@ -185,7 +186,7 @@
           </div>
           
 
-                    </div>
+        </div></form>
 
 
                     
@@ -220,29 +221,13 @@
               
             </div>
             
-  
-<<<<<<< HEAD
-</table>
-<div class="flex justify-between  border-t">
-    <div class=" p-4  ">
-        <h1  class="    text-xl text-black    mb-2" > المتجر :<span class=" text-gray-500 text-xl mr-2">{{ bill.shop }}</span> </h1>
-        <h1   class=" text-xl  text-base    text-black ">اجمالي الفاتورة : <span id="{{ bill.id }}" class=" text-gray-500 text-xl" >{{ bill.total }} </span> </h1>
-        <h1  class=" text-xl  text-base    text-black ">تاريخ الفاتورة <span class=" text-gray-500 text-xl" >{{ bill.Date }} </span> </h1>
+
 
     </div>
-</div>
-</div>
-<br>
-<br>
-<br>
-{% endfor %}
 
-=======
->>>>>>> 0eabc51f6473e7d3173576588b869cbac55221ed
-    </div>
-    
 
 </div>
-      
 
-{% endblock %}
+
+</div></div>
+{% endblock content%}

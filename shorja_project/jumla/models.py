@@ -45,6 +45,10 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
     objects = CustomUserManager()
 
+    class Meta:
+        verbose_name = "user"
+        verbose_name_plural = "users"
+
 
 class Category(models.Model):
     parent = models.ForeignKey('self',
@@ -59,20 +63,23 @@ class Category(models.Model):
 
     class Meta:
         verbose_name = "Category"
-        verbose_name_plural = "Categories"
-
-    @property
-    def children(self):
-        return self.children
+        verbose_name_plural = "الفئات"
 
     def __str__(self):
         if self.parent:
-            return f'-   {self.name}'
-        return f'{self.name}'
+            childs = self.children.all()
+            for child in childs:
+                return f'{self.name} - {child.name}'
+        else:
+            return f'{self.name}'
 
 
 class Governorate(models.Model):
     name = models.CharField(max_length=100)
+
+    class Meta:
+        verbose_name = "المحافظة"
+        verbose_name_plural = "المحافظات"
 
     def __str__(self):
         return f"{self.name}"
@@ -122,6 +129,7 @@ class Cart(models.Model):
     def __str__(self):
         return f"cart user :  {self.userOwner}"
 
+    # @property
     def get_cart_total(self):
         bills = Bill.objects.filter(cart_id=self.id)
         self.total = sum(b.total for b in bills)
@@ -142,7 +150,7 @@ class Bill(models.Model):
     shop = models.ForeignKey(Shop, on_delete=models.CASCADE, related_name="shop_bill")
     products = models.ManyToManyField(Bill_Items, related_name="bill_products")
     Date = models.DateTimeField(default=timezone.now)
-    total = models.DecimalField(max_digits=12, decimal_places=2)
+    total = models.DecimalField(max_digits=12, decimal_places=2, default=0)
 
     def __str__(self):
         return f" {self.cart},  {self.shop}"

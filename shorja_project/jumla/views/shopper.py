@@ -13,6 +13,8 @@ from ..models import *
 from ..utilities import *
 
 
+# @allowed_users(allowed_roles=['admin', 'customer', 'vendor', 'delivery'])
+# @allowed_users(allowed_roles=['admin', 'customer',])
 def home(request):
     #   It displays products to the customer and includes the search process
     #   and includes paginator
@@ -23,89 +25,64 @@ def home(request):
     page_elements = paginator_element.get_pages(page_number)
     context = {"images": img, "page_elements": page_elements[1], "page_nums": page_elements[0]}
     return render(request, "jumla/shopper/home.html", context)
+    # return render(request, "jumla/landing_page/landing_page.html")
 
 
 @csrf_exempt
 @login_required(login_url='login')
 def add_to_cart(request):
     # this an api to add/remove products to cart and create Bills for each shop
+    global order_bill_item
     if request.method == "PUT":
         data = json.loads(request.body)
         product = get_object_or_404(Product, id=data.get('product_id'))
         user_cart = Cart.objects.filter(userOwner=request.user).last()
         # get_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=product.shopOwner.id).last()
+        get_bill, created = Bill.objects.get_or_create(cart_id=user_cart.id, shop_id=product.shopOwner.id)
         try:
-            get_bill = Bill.objects.get(cart_id=user_cart.id, shop_id=product.shopOwner.id)
-            if get_bill:
-                # only add/remove product to the bill And it's already exist
-                order_bill_item = get_bill.products.filter(bill_products__products__item=product.id)
-                if order_bill_item:
-                    # print("delete")
-                    # the bill item exist
-                    # delete item from bill
-                    item = Bill_Items.objects.filter(bill_products=get_bill).filter(item_id=product.id).first()
-                    get_bill.products.remove(item)
-                    get_bill.save()
-                    item.delete()
-                else:
-                    # print("add item")
-                    # add item to the bill
-                    bill_items = Bill_Items.objects.create(item_id=product.id)
-                    bill_items.save()
-                    get_bill.products.add(bill_items)
-                    get_bill.save()
-                return JsonResponse({'bill_total': get_bill.get_total(),
-                                     'cart_total': user_cart.get_cart_total(),
-                                     })
-
-        # else:
-        except:
-                # create new bill
-                bill = Bill.objects.create(total=0, cart_id=user_cart.id, shop_id=product.shopOwner.id)
-                bill.save()
-                bill_items = Bill_Items.objects.create(item_id=product.id)
-                bill_items.save()
-                bill.products.add(bill_items)
-                bill.total = bill.get_total()
-                bill.save()
-                # get_bill.total = get_bill.get_total()
-                return JsonResponse({'bill_total': bill.total,
-                                     'cart_total': user_cart.get_cart_total(),
-                                     })
+            # delete item from bill
+            order_bill_item = get_bill.products.get(item_id=product.id)
+            get_bill.products.remove(order_bill_item)
+            order_bill_item.delete()
+        except Bill_Items.DoesNotExist:
+            # create an item and added to bill items
+            bill_items = Bill_Items.objects.create(item_id=product.id)
+            bill_items.save()
+            get_bill.products.add(bill_items)
+        get_bill.get_total()
+        return JsonResponse({'cart_total': user_cart.get_cart_total()})
     return JsonResponse({'Get': 'the api worked'})
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles=['customer', 'admin'])
 def show_cart_bills_order(request):
     # this api to send all order bills in user cart
     # and if the order bill has not any products will delete it
+    cities = Governorate.objects.all()
     user_cart = Cart.objects.filter(userOwner=request.user).last()
     cart_bills = Bill.objects.filter(cart_id=user_cart.id)
     user_cart.total = user_cart.get_cart_total()
-    user_cart.save()
-    cities = Governorate.objects.all()
     bills_not_have_products = [result for shop in cart_bills.filter(total=0).values('shop') for result in shop.values()]
     for shop_id in bills_not_have_products:
         get_order_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=shop_id)
         get_order_bill.delete()
     for bill in cart_bills:
         bill.total = bill.get_total()
-        bill.save()
         # POST Method for checkout
     if request.method == "POST":
         # check for bills.total == 0 then delete it
         # create new cart for request.user
         if user_cart.total == 0:
             # if user current cart no have any bills than redirect to home to Buy some products
-
             return redirect('home')
         else:
             # else check for bills and create new cart
-            city = request.POST.get('city')
             for shop_id in bills_not_have_products:
                 get_order_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=shop_id)
                 get_order_bill.delete()
             try:
+                city = request.POST.get('city')
                 user_cart.checkout = True
                 user_cart.city_id = city
                 user_cart.save()
@@ -140,7 +117,7 @@ def update_quentity(request):
         product = get_object_or_404(Product, id=data.get('product_id'))
         qty = data.get('qty')
         user_cart = Cart.objects.filter(userOwner=request.user).last()
-        get_bill = Bill.objects.filter(cart_id=user_cart.id, shop_id=product.shopOwner.id).last()
+        get_bill = Bill.objects.filter(cart__userOwner_id=request.user.id, shop_id=product.shopOwner.id).last()
         if get_bill:
             item = Bill_Items.objects.filter(bill_products=get_bill).filter(item_id=product.id).first()
             if item:

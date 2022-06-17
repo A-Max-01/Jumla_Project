@@ -1,10 +1,11 @@
-
+from django.contrib import admin
 from django.urls import path, include
 from .views import *
 
 # urls
 urlpatterns = [
     path('', shopper.home, name="home"),
+    # path('admin/', admin.site.urls, name='admin'),
     path('Account/', include([
 
         path('register/', Account.register_view, name="register"),
