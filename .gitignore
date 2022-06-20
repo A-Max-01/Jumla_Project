@@ -7,7 +7,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-Procfile.txt
+#Procfile.txt
 # C extensions
 *.so
 .idea
