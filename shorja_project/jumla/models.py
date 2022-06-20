@@ -67,9 +67,7 @@ class Category(models.Model):
 
     def __str__(self):
         if self.parent:
-            childs = self.children.all()
-            for child in childs:
-                return f'{self.name} - {child.name}'
+            return f'{self.name} - {self.parent.name}'
         else:
             return f'{self.name}'
 

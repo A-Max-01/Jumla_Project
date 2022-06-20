@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>adding product</title>
+    <style>
+       /* .logo_div{
+            text-align: center;
+        }
+        .top_left{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .three_icons{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            padding-left: 300px;
+        }
+        .three_words{
+            padding-left: 630px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .words{
+            padding-right: 15px;
+            text-decoration: none;
+            color: black;
+        }
+
+        .above_icons{
+            height: 20px;
+            margin-top:20px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .under_logo{
+            display: flex;
+            padding-top: 20px;
+            flex-wrap: wrap;
+        }
+        .three_words{
+            font-size: 20px;
+            padding-left: 550px;
+            flex-wrap: wrap;
+        }        
+        #like{
+            padding-left: 30px;
+            height: 40px;
+        }
+        #user{
+            padding-left: 30px;
+            height: 40px;
+        }
+        #shopping{
+            height: 40px;
+        }
+        .product_modifying_container{
+            
+            border: solid;
+            display: flex;
+            flex-direction: column;
+            flex-wrap: wrap;
+            border-radius: 30px;
+            border-color: #7FB5FF;
+            height:fit-content ;
+            padding-bottom: 100px;
+            width:800px;
+            margin: auto;
+            margin-top: 100px;
+
+        }
+        .h_product{
+            text-align: center;
+            justify-content: center;
+        }
+        .details_container{
+            text-align: center ;
+            margin-top: 40px;
+            margin-left: 100px;
+        }
+        .p{
+            height: 21px;
+            margin-left: 100px;
+            font-family: 'AirArabia';
+            font-style: normal;
+            font-weight: 700;
+            font-size: 16px;
+            line-height: 21px;
+            color: #000000;
+        }
+        .inputs{
+            margin-right: 100px;
+            width:300px ;
+        }
+        .suit{
+
+        }
+        footer{
+            padding-top: 100px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            padding-bottom: 0px;
+            background-color: #000000;
+            bottom: 0px;
+            margin:0px;
+            padding:0px;
+            min-width:100%;
+            max-width:100%;
+            background:black;
+            height:auto;
+        }
+        .footer_div{
+            display: flex;
+            justify-content: space-between;
+            position: absolute;
+            width: 1492px;
+            height:90px;
+            
+        }
+        .lower_span {
+            
+            color: white;
+
+
+        }
+        .logo_par{
+            color: white;
+            padding-left: 40px;
+            font-size: 40px;
+        }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous"></head>
+
+</head>
+<body>
+    <nav style="display:flex;flex-wrap:wrap;">
+
+        <div class="under_logo">
+            <div class="top_left" style="display:flex;flex-wrap:wrap">
+                <img src="/pics/logo.jpg" style="height: 90px;display:flex;padding-left:20px ">
+            </div>
+            <div class="three_words" style="display:flex;padding-left:500px">
+                <a href="" class="words">الرئيسة</a>
+                <a href="" class="words" style="padding-left: 20px;" >من نحن</a>
+                <a href="" class="words" style="padding-left: 25px;" >طلبات الزبائن</a>
+            </div>
+            <div class="three_icons">
+                <a href=""><img src="/pics/buy.png" class="above_icons" id="shopping"></a>
+                <a href=""><img src="/pics/hearts.png" class="above_icons" id="like"></a>
+                <a href=""><img src="/pics/businessman--v2.png" class="above_icons" id="user"></a>
+                <a href=""><img src="/pics/search-bar.png" alt="search" class="above_icons" style="height: 40px;width:70px;display:flex;padding-left:10px  " ></a>
+            </div>
+    </nav>
+    <div class="product_modifying_container">
+        <div style="margin-left:600px;margin-top:50px">
+            <h3 class="h_product">اضافة المنتج</h3>
+        </div>
+        <div class="details_container">
+            <p class="p">اسم المنتج</p>
+            <input class="inputs" type="text" placeholder="">
+        </div>
+        <div class="details_container">
+            <p class="p">القياس </p>
+            <input class="inputs" type="text" placeholder="">
+        </div>
+
+        <div class="details_container">
+            <p class="p">الصنف </p>
+            <select class="form-select" aria-label="Default select example" style="width: 300px; margin-left:150px">
+                <option selected></option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+        </div>
+        <div class="details_container">
+            <p class="p">السعر </p>
+            <div class="input-group mb-3" style="width: 300px;margin-left:150px">
+                <span class="input-group-text">IQD</span>
+                <input type="text" class="form-control" aria-label="Dollar amount (with dot and two decimal places)">
+            </div>
+        </div>
+        <div class="details_container">
+            <p class="p">الكمية</p>
+            <input class="inputs" type="text" placeholder="">
+        </div>
+        <div class="details_container">
+            <p class="p">الوصف</p>
+            <input style="height: 200px;" class="inputs" type="text" placeholder="">
+        </div>
+        <div class="details_container" style="margin-right: 100px;">
+            <div style="display: flex;text-align:center;justify-content:center">
+                <div>
+                    <button type="submit" class="btn btn-dark">الغاء</button>
+                </div>
+                <div style="padding-left: 50px;">
+                    <button type="submit" class="btn btn-light" style="padding-left: 10px;">  +   اضافة </button>
+                </div>  
+            </div>
+        </div>
+    </div>
+    
+    <footer class="footer">
+
+        <div style="padding-top:10px ;">
+            <img src="/pics/logo.jpg" style="height: 200px;">
+        </div>
+        <div style="padding-top: 30px;">
+            <span  class="lower_span " style="padding-right:90px">من نحن</span class="span">
+            <span  class="lower_span " style="padding-right:90px">الرئيسية</span class="span">
+            <span  class="lower_span " style="padding-right:90px">طلبات الزبائن</span class="span">
+
+        </div>
+
+</footer>
+
+    
+</body>
+</html>

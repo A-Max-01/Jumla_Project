@@ -18,12 +18,13 @@ from ..utilities import *
 def home(request):
     #   It displays products to the customer and includes the search process
     #   and includes paginator
+    test = Category.objects.all()
     products = Product.objects.filter(is_active=True)
     img = product_Images.objects.all()
     paginator_element = MyPaginator(products, 2)
     page_number = request.GET.get('page')
     page_elements = paginator_element.get_pages(page_number)
-    context = {"images": img, "page_elements": page_elements[1], "page_nums": page_elements[0]}
+    context = {"images": img, "page_elements": page_elements[1], "page_nums": page_elements[0], "cate": test}
     return render(request, "jumla/shopper/home.html", context)
     # return render(request, "jumla/landing_page/landing_page.html")
 
