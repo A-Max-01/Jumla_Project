@@ -1,5 +1,17 @@
 asgiref==3.5.1
+certifi==2022.5.18.1
+charset-normalizer==2.0.12
+crispy-bootstrap5==0.6
 Django==4.0.4
+django-crispy-forms==1.14.0
+django-jazzmin==2.5.0
+gunicorn==20.1.0
+idna==3.3
 Pillow==9.1.1
+PyJWT==2.4.0
+pytz==2022.1
+requests==2.27.1
 sqlparse==0.4.2
+twilio==7.9.2
 tzdata==2022.1
+urllib3==1.26.9
