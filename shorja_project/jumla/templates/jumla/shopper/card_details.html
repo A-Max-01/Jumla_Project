@@ -1,11 +1,6 @@
 {% extends 'jumla/base/base.html' %}
 {% load static %}
-{% block static %}
-    {% if user.is_authenticated %}
 
-    <script  src="{% static 'js_frontend/counter.js' %}"></script>
-    {% endif %}
-{% endblock %}
 {% block content %}
 
 <div class="flex justify-center p-5">
