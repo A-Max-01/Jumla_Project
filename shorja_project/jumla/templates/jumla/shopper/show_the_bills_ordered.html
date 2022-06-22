@@ -39,17 +39,17 @@
 
 
 <h1 class="text-right mx-3 text-xl font-semibold py-5">عربة التسوق</h1>
-<div class="grid grid-cols-3   gap-4">
 
+<div class="grid grid-cols-4 gap-3">
 
-   
-     
+  <div class="col-span-2 md:col-span-3  p-2">
+        
     {% for bill in bills %}
-    <div class=" col-span-2">
+  
      
 
 
-        <div class="flex flex-col">
+  
             
           <div class="overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="py-4 inline-block min-w-full sm:px-6 lg:px-8">
@@ -143,86 +143,88 @@
           </div>
 
           
-        </div>
-
-
-
- 
-
-        </div>
-        {% endfor %}  
-        
-
       
 
 
-<div class="">
-    <div class="  flex flex-col justify-center shadow rounded row-span-2 mb-5">
-        
-        
-        <!---el4-->
-        <div class="flex justify-center mt-2">
-           <div class=" mb-2 mt-3 drop-shadow-md bg-gray-100   w-72 rounded h-12">
-               <div class="flex justify-between items-center mt-1">
-                   <h1 class="text-sm m-2  text-center">المجموع الكلي :</h1>
-                   <h1 id="cart_total" class="m-2 text-center"> IQD {{ user_cart.total}}</h1>
-               </div>
-            </div>
-       </div>
 
-       <div class="mt-5 border-t border-dashed  space-y-4 py-4">
+ 
 
-     <!---el3-->
-                <div class="mt-5 flex  justify-center">
-               <input placeholder="عنوان التوصيل" value="{{ user.address }}"
-                      class=" text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded h-10 w-52 pr-[14px]   "type="text" >
-                 </div>
+ 
+        {% endfor %}  
+  </div>
 
 
-
-
-                 <div class="flex justify-center">
-                    <select name="city"  class="  form-select bg-white border-gray-300 border-2 focus:outline-none focus:ring focus:ring-gray-100 text-center
-                rounded-lg h-10 w-52    " aria-label="select">
-                        <option selected  >  اختر المحافظة   </option>
-                        {% for city in cities %}
-                        <option value="{{ city.id }}">{{ city.name }}</option>
-                        {% endfor %}
-                    </select>
-                  </div>
-
-
-
-                    <!----button---->
-          <div class="  flex justify-center pt-10 ">
-            <button class="py-2  hover:bg-black  hover:shadow-lg    w-36 h-11 border-2 text-center drop-shadow-md   border-black  hover:border-white hover:border-lg hover:text-white ">
-                <div class="inline-flex items-center">
-                    <h1 class="mb-1 mr-2 "> تثبيت الطلب</h1>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 fill-current " viewBox="0 0 20 20" >
-                        <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                      </svg>
-                  
-            
-                </div>
-                    
-                 
-                    
-            
-               
-               </button>
-            </div>
+  <div class="col-span-1   ">
   
-       </div>
 
-   
+
+    <div class=" flex flex-col justify-center py-5 mt-5    shadow rounded ">
+          
+          
+      <!---el4-->
+      <div class="flex justify-center   ">
+         <div class=" mb-2  drop-shadow-md bg-gray-100   w-72 rounded h-12">
+             <div class="flex justify-between items-center mt-1">
+                 <h1 class="text-sm m-2  text-center">المجموع الكلي :</h1>
+                 <h1 id="cart_total" class="m-2 text-center"> IQD {{ user_cart.total}}</h1>
+             </div>
+          </div>
+     </div>
+
+     <div class="mt-5 border-t border-dashed  ">
+
+   <!---el3-->
+              <div class="mt-5 flex  justify-center">
+             <input placeholder="عنوان التوصيل" value="{{ user.address }}"
+                    class=" text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded h-10 w-52 pr-[14px]   "type="text" >
+               </div>
+
+
+
+
+               <div class="flex justify-center">
+                  <select name="city"  class="  form-select bg-white border-gray-300 border-2 focus:outline-none focus:ring focus:ring-gray-100 text-center
+              rounded-lg h-10 w-52    " aria-label="select">
+                      <option selected  >  اختر المحافظة   </option>
+                      {% for city in cities %}
+                      <option value="{{ city.id }}">{{ city.name }}</option>
+                      {% endfor %}
+                  </select>
+                </div>
+
+
+
+                  <!----button---->
+        <div class="  flex justify-center pt-10 ">
+          <button class="py-2  hover:bg-black  hover:shadow-lg    w-36 h-11 border-2 text-center drop-shadow-md   border-black  hover:border-white hover:border-lg hover:text-white ">
+              <div class="inline-flex items-center">
+                  <h1 class="mb-1 mr-2 "> تثبيت الطلب</h1>
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 fill-current " viewBox="0 0 20 20" >
+                      <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+                    </svg>
+                
+          
+              </div>
+                  
+               
+                  
+          
+             
+             </button>
+          </div>
+
+     </div>
+
+ 
 
 </div> 
-
-</div>
- 
-   
     
-</div>
+    
+    
 
+
+
+  </div>
+</div>
    
 {% endblock %}

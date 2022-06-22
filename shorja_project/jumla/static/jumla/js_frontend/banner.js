@@ -16,5 +16,12 @@ const cb = function(entries){
 const io = new IntersectionObserver(cb);
 io.observe(appear);
 
+
+
+
+
+
+
+
  
 });
