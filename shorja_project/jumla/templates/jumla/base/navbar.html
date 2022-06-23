@@ -1,138 +1,128 @@
 {% load static %}
 <nav class="bg-black">
-    <div class="container p-2 mx-auto">
-        <div class=" flex justify-between">
-           
-            <ul class="sm:self-center   ">
-              <li class="pl-2 inline-block  ">
-                        <!----user----->
-                        <div x-data="{ dropdownOpen: false }" class="relative ">
-                            <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block w-8 h-8 hover:bg-slate-500/75  drop-shadow-md rounded hover:ring-white     focus:outline-none focus:border-gray-300 ">
-                                
-                                <svg class="w-5 h-5 mr-1.5   text-white   " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z"/></svg>
-                            </button>
-                    
-                            <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
-                    
-                            <div x-show="dropdownOpen" class="absolute right-0 w-40 mt-2 py-2 bg-white border rounded shadow-xl z-20 " >
-                                <div class="">
-                                     {% if user.is_authenticated %}
 
-                                          <a href="#" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900  border-b   hover:bg-teal-500 hover:text-white">
+        <div class="flex justify-around p-2 ">
+            <div class="flex py-2 -mr-2">
+                <!---user-->
+                <div x-data="{ dropdownOpen: false }" class="relative ">
+                    <button @click="dropdownOpen = !dropdownOpen" class="relative z-10 block rounded-md  p-2 focus:outline-none hover:bg-slate-500/75  drop-shadow-md rounded hover:ring-white">
+                        <svg class="w-5 h-5     text-white   " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M15.71,12.71a6,6,0,1,0-7.42,0,10,10,0,0,0-6.22,8.18,1,1,0,0,0,2,.22,8,8,0,0,1,15.9,0,1,1,0,0,0,1,.89h.11a1,1,0,0,0,.88-1.1A10,10,0,0,0,15.71,12.71ZM12,12a4,4,0,1,1,4-4A4,4,0,0,1,12,12Z"/></svg>
+                    </button>
+
+                    <div x-show="dropdownOpen" @click="dropdownOpen = false" class="fixed inset-0 h-full w-full z-10"></div>
+
+                    <div x-show="dropdownOpen" class="absolute right-0 mt-2 bg-white rounded-md shadow-lg overflow-hidden z-20" style="width:20rem;">
+                        <div class="py-2">
+                            {% if user.is_authenticated %}
+
+                                          <a href="#" class="transition-colors duration-200  w-full py-3 text-normal text-gray-900  border-b   hover:bg-teal-500 hover:text-white">
                                         <h1 class="text-center  text-medium  font-semibold ">
-                                            <span>{{ user.first_name }}</span> </h1>
+                                            <span >{{ user.first_name }}</span> </h1>
                                     </a>
-                                          <a href="{% url 'change_password' %}" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900   hover:bg-teal-500 hover:text-white">
+                                          <a href="{% url 'change_password' %}" class="transition-colors duration-200  w-full w-full py-3 text-normal text-gray-900   hover:bg-teal-500 hover:text-white">
                                         <h1 class="text-center text-medium  font-semibold"> تغيير الرمز </h1>
                                     </a>
-                                    <a href="{% url 'logout' %}" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900 border-t hover:bg-teal-500 hover:text-white">
+                                    <a href="{% url 'logout' %}" class="transition-colors duration-200  w-full py-3 text-normal text-gray-900 border-t hover:bg-teal-500 hover:text-white">
                                         <h1 class="text-center text-medium  font-semibold"> تسجيل الخروج   </h1>
                                     </a>
                                    {% else %}
-                                    <a href="{% url 'login' %}" class="transition-colors duration-200 block px-4 py-3 text-normal text-gray-900     hover:bg-teal-500 hover:text-white">
+                                    <a href="{% url 'login' %}" class="transition-colors duration-200  w-full py-3 text-normal text-gray-900     hover:bg-teal-500 hover:text-white">
                                         <h1 class="text-center  text-medium  font-semibold ">  تسجيل الدخول </h1>
                                     </a>
-                                    <a href="{% url 'register' %}" class="transition-colors duration-200 block px-2 py-3 text-normal text-gray-900    hover:bg-teal-500 hover:text-white">
+                                    <a href="{% url 'register' %}" class="transition-colors duration-200  w-full  py-3 text-normal text-gray-900    hover:bg-teal-500 hover:text-white">
                                         <h1 class="text-center font-semibold text-medium  ">انشاء حساب جديد</h1>
                                     </a>
 
                                     {% endif %}
-                                </div>
-                              
-                            </div>
                         </div>
-           
-                </li>
-                  <!----heart-->
-            {% if user.is_authenticated %}
-                {% if  request.user.groups.all.first.name == "customer" %}
-                  <li class="pl-2 inline-block  ">
-                    <button  class="relative z-10 block w-8 h-8 hover:bg-slate-500/75  drop-shadow-md rounded  focus:outline-none focus:border-gray-300 ">
-                        <svg class="w-5 h-5 mr-1.5   " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z"/></svg> 
-                       
-                    </button>
-                  </li>
-                  <!----cart -->
+
+                    </div>
+                </div>
 
 
-                  <li class="pl-2 inline-block">
-                      <a href="{% url 'brows_bills' %}">
+                <!----heart-->
+                {% if user.is_authenticated %}
+                <div class=" inline-block   ">
+                  <button  class=" z-10 block rounded-md  p-2 focus:outline-none hover:bg-slate-500/75  drop-shadow-md rounded hover:ring-white ">
+                      <svg class="w-5 h-5    " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M20.16,5A6.29,6.29,0,0,0,12,4.36a6.27,6.27,0,0,0-8.16,9.48l6.21,6.22a2.78,2.78,0,0,0,3.9,0l6.21-6.22A6.27,6.27,0,0,0,20.16,5Zm-1.41,7.46-6.21,6.21a.76.76,0,0,1-1.08,0L5.25,12.43a4.29,4.29,0,0,1,0-6,4.27,4.27,0,0,1,6,0,1,1,0,0,0,1.42,0,4.27,4.27,0,0,1,6,0A4.29,4.29,0,0,1,18.75,12.43Z"/></svg>
 
-                    <button  class="relative z-10 block w-8 h-8 hover:bg-slate-500/75  drop-shadow-md rounded  focus:outline-none focus:border-gray-300 ">
-                    
-                        <svg   class = 'w-5 h-5 mr-1.5   ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M19,7H16V6A4,4,0,0,0,8,6V7H5A1,1,0,0,0,4,8V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V8A1,1,0,0,0,19,7ZM10,6a2,2,0,0,1,4,0V7H10Zm8,13a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V9H8v1a1,1,0,0,0,2,0V9h4v1a1,1,0,0,0,2,0V9h2Z"/></svg>
-                    </button>
-                          </a>
-                   
-              </li>
-                    {% endif %}
-            {% endif %}
-                  <!----search-->
-                  <li class="pl-2 inline-block ">
-                    <button  class="relative z-10 block w-8 h-8 hover:bg-slate-500/75  drop-shadow-md rounded  focus:outline-none focus:border-gray-300 ">
-                
-                      <svg class = 'h-5 w-5 w-5 h-5 mr-1.5'  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M21.71,20.29,18,16.61A9,9,0,1,0,16.61,18l3.68,3.68a1,1,0,0,0,1.42,0A1,1,0,0,0,21.71,20.29ZM11,18a7,7,0,1,1,7-7A7,7,0,0,1,11,18Z"/></svg>
-                    </button>
-                  
-                  </li>
-        
-            </ul>
+                  </button>
+                </div>
+                    {% if  request.user.groups.all.first.name == "customer" %}
+                <!---basket-->
+                <div class=" inline-block   ">
+                    <a href="{% url 'brows_bills' %}" class=" z-10 block rounded-md  p-2 focus:outline-none hover:bg-slate-500/75  drop-shadow-md rounded hover:ring-white ">
+
+                            <svg   class = 'w-5 h-5    ' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="#FFFFFF" d="M19,7H16V6A4,4,0,0,0,8,6V7H5A1,1,0,0,0,4,8V19a3,3,0,0,0,3,3H17a3,3,0,0,0,3-3V8A1,1,0,0,0,19,7ZM10,6a2,2,0,0,1,4,0V7H10Zm8,13a1,1,0,0,1-1,1H7a1,1,0,0,1-1-1V9H8v1a1,1,0,0,0,2,0V9h4v1a1,1,0,0,0,2,0V9h2Z"/></svg>
+
+                    </a>
+
+                  </div>
+                {% endif %}
+
+          {% endif %}
 
 
-            <div class="mt-1 pl-1">
-
-                <a href="{% url 'home' %}" class = "text-white hover:text-slate-100 inline-block pl-10 ">
+            </div>
+            <div class="m-1">
+                <div class=" flex  p-2">
+                    <a href="{% url 'home' %}" class = "text-white px-3 hover:text-slate-100 inline-block pl-10 ">
 
                    <h1 class="hover:text-gray-300">
                     الرئيسية
                     </h1>
                 </a>
-                <a href="#" class = "text-white inline-block pl-10">
+                <a href="#" class = "text-white px-3 inline-block pl-10">
                    <h1  class="hover:text-gray-300"> من نحن</h1></a>
 
-                <a href="#" class = "text-white inline-block pl-10">
+                <a href="#" class = "text-white px-3 inline-block pl-10">
                     <h1  class="hover:text-gray-300">منتجات متنوعة </h1></a>
 
-                     <a href="" class = "text-white inline-block pl-10">
+                     <a href="" class = "text-white px-3 inline-block pl-10">
                     <h1  class="hover:text-gray-300" >
                         المتاجر
                     </h1></a>
             {% if  request.user.groups.all.first.name == "delivery" %}
-                <a href="{% url 'delivery_home' %}" class = "text-white inline-block pl-10">
+                <a href="{% url 'delivery_home' %}" class = "text-white px-3 inline-block pl-10">
                         <h1  class="hover:text-gray-300" >
                             delivery home
                         </h1></a>
             {% endif %}
                {% if request.user.groups.all.first.name == "vendor" %}
-                   <a href="{% url 'view_customer_bills' %}" class = "text-white inline-block pl-10">
+                   <a href="{% url 'view_customer_bills' %}" class = "text-white px-3 inline-block pl-10">
                         <h1  class="hover:text-gray-300" >
                             طلبات الزبائن
                         </h1></a>
-                   <a href="{% url 'vendor_home' %}" class = "text-white inline-block pl-10">
+                   <a href="{% url 'vendor_home' %}" class = "text-white px-3 inline-block pl-10">
                         <h1  class="hover:text-gray-300" >
                             منتجاتك
                         </h1></a>
                {% endif %}
             {% if request.user.is_staff %}
-            <a href="http://127.0.0.1:8000/admin/" class = "text-white inline-block pl-10">
+            <a href="http://127.0.0.1:8000/admin/" class = "text-white px-3 inline-block pl-10">
                         <h1  class="hover:text-gray-300" >
                             Admin
                         </h1></a>
             {% endif %}
 
-
+                </div>
             </div>
-            
-                <!---logo---->
-         
-               <!-- <h6 class="text-white text-4xl -mt-1">LOGO</h6>    -->
-                   
-            <img src="{% static 'jumla/images/logo2.png' %}" class="w-20 h-20" alt="">
-        </div>
-    
-    </div>
-</nav>
 
+
+                <!---logo---->
+
+               <!-- <h6 class="text-white text-4xl -mt-1">LOGO</h6>    -->
+                   <div class="brand-image">
+                  <img src="{% static 'jumla/images/shorja.jpg' %}" class="h-12 w-12" alt="">
+
+                    <!----<h1 class="text-2xl  mt-2 text-white"><span class="text-teal-300">الشورجة</span> بيدك</h1>---->
+                   </div>
+
+
+        </div>
+
+
+</nav>
 
 
 
