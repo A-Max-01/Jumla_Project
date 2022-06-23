@@ -5,7 +5,7 @@ from .views import *
 # urls
 urlpatterns = [
     path('', shopper.home, name="home"),
-    # path('admin/', admin.site.urls, name='admin'),
+    # path('',  HomePageView.as_view(), name="home"),
     path('Account/', include([
 
         path('register/', Account.register_view, name="register"),

@@ -1,27 +1,21 @@
 
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError
 import json
-from django.db.models import Count
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 from ..decorators import *
 from ..models import *
 from ..utilities import *
 
 
-# @allowed_users(allowed_roles=['admin', 'customer', 'vendor', 'delivery'])
-# @allowed_users(allowed_roles=['admin', 'customer',])
 def home(request):
     #   It displays products to the customer and includes the search process
     #   and includes paginator
     test = Category.objects.all()
     products = Product.objects.filter(is_active=True)
     img = product_Images.objects.all()
-    paginator_element = MyPaginator(products, 2)
+    paginator_element = MyPaginator(products, 8)
     page_number = request.GET.get('page')
     page_elements = paginator_element.get_pages(page_number)
     context = {"images": img, "page_elements": page_elements[1], "page_nums": page_elements[0], "cate": test}

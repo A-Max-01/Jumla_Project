@@ -11,37 +11,6 @@
     {% endif %}
 {% endblock %}
 {% block content %}
-
-{#<<<<<<< HEAD#}
-{#<h1>المنتجات</h1>#}
-{#<div class="row">#}
-{#    {% for product in page_elements %}#}
-{#        <div class="col-3">#}
-{#               <div class="card" style="width: 18rem;">#}
-{#                    {% for image in images %}#}
-{#                        {% if product.id == image.product_id %}#}
-{#                        <img src="{{ image.image.url }}" style="width: 100px; height: 100px" class="card-img-top" alt="...">#}
-{#                        {% endif %}#}
-{##}
-{#    {% endfor %}#}
-{#                  <div class="card-body">#}
-{#                    <h5 class="card-title">{{ product.ProductName }}</h5>#}
-{#                    <p class="card-text">{{ product.description }}</p>#}
-{#                    <p class="card-text">{{ product.shopOwner }}</p>#}
-{#                      {% if user.is_authenticated %}#}
-{#                          {% if request.user.groups.all.first.name == "customer" %}#}
-{#                          <a href="#" id="btn" data-product_id="{{ product.id }}"#}
-{#                   data-bill_id="{{ bill.id }}"#}
-{#                   class="btn btn-danger">حذف</a>#}
-{#                          {% endif %}#}
-{#                      {% endif %}#}
-{#                  </div>#}
-{#            </div>#}
-{#        </div>#}
-{#    {% endfor %}#}
-
-
-
 <!----box1-->
 <style>
 ::-webkit-scrollbar {
@@ -576,17 +545,24 @@ p.star{
     
     <sectionone>
   
-        <div class="product">
+   {% for cate in cate %}
+  <div class="product">
+
             <picture>
-                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
+                <img src="{{ cate.image.url }}" alt="">
+{#                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">#}
             </picture>
             <div class="detail">
                 <p>  <div class="flex flex-col justify-center items-center pl-16">
                     <div class=" flex  mt-5 ">
-                        <h1 >الجمال </h1>
-                        <h1>والعناية</h1>
+                        {% if cate.parent %}
+                            <h3>{{ cate.name }} - {{ cate.parent.name }}</h3>
+                            {% else %}
+                             <h3 >{{ cate.name }} </h3>
+                        {% endif %}
+
                     </div>
-               
+
                     <button class=" mt-4 text-gray-400 hover:text-white font-light  border-t w-30 h-10    hover:bg-black focus:outline-none focus:ring-1 focus:ring-gray-300 ">
 
                         <div class="inline-flex items-center ">
@@ -594,160 +570,19 @@ p.star{
                             <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 fill-current " viewBox="0 0 20 20" >
                                 <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
                               </svg>
-                          
-                    
+
+
                         </div>
-                            
+
                     </button>
                 </div>
-        
-                </p>
-               
-            </div>
-        </div>
-        <div class="product">
-            <picture>
-                <img src="https://images.unsplash.com/photo-1625490939776-17cef70ec079?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYyNzU3ODE5MA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt="">
-            </picture>
-            <div class="detail">
-                <p>
-                    <div class="flex flex-col justify-center items-center pl-16">
-                        <h1 class="mt-5 ">الكترونيات </h1>
-                        <button class=" mt-4 text-gray-400 hover:text-white font-light  border-t w-30 h-10    hover:bg-black focus:outline-none focus:ring-1 focus:ring-gray-300 ">
-    
-                            <div class="inline-flex items-center">
-                                <h1 class="mb-1 mr-2  text-sm">  اكتشف الان</h1>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 fill-current " viewBox="0 0 20 20" >
-                                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                  </svg>
-                              
-                        
-                            </div>
-                                
-                        </button>
-                    </div>
-            
-                </p>
-               
-            </div>
-        </div>
-    
-        <div class="product">
-            <picture>
-                <img src="https://images.unsplash.com/photo-1604176354204-9268737828e4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxhbGx8fHx8fHx8fHwxNjIzMTYxMjIy&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
-            </picture>
-            <div class="detail">
-                <p>
-                 
-                    <div class="flex flex-col justify-center items-center pl-16">
-                        <h1 class="mt-5 ">الملابس </h1>
-                        <button class=" mt-4  text-gray-400 hover:text-white font-light  border-t w-30 h-10    hover:bg-black focus:outline-none focus:ring-1 focus:ring-gray-300 ">
-    
-                            <div class="inline-flex items-center">
-                                <h1 class="mb-1 mr-2  text-sm">  اكتشف الان</h1>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 fill-current " viewBox="0 0 20 20" >
-                                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                  </svg>
-                              
-                        
-                            </div>
-                                
-                        </button>
-                    </div>
-            
-      
-          
-                   
-                </p>
-               
-            </div>
-        </div>
-        <div class="product">
-            <picture>
-                <img src="https://images.unsplash.com/photo-1575881737088-a5a2bbf44e85?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxhbGx8fHx8fHx8fHwxNjIxNzI2NTM2&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
-            </picture>
-            <div class="detail">
-                <p>
-                    <div class="flex flex-col justify-center items-center pl-16">
-                        <h1 class="mt-5 ">الالعاب </h1>
-                        <button class=" mt-4 text-gray-400 hover:text-white font-light  border-t w-30 h-10    hover:bg-black focus:outline-none focus:ring-1 focus:ring-gray-300 ">
-    
-                            <div class="inline-flex items-center">
-                                <h1 class="mb-1 mr-2  text-sm">  اكتشف الان</h1>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 fill-current " viewBox="0 0 20 20" >
-                                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                  </svg>
-                              
-                        
-                            </div>
-                                
-                        </button>
-                    </div>
-            
-                </p>
-               
-            </div>
-        </div>
-        <div class="product">
-            <picture>
-                <img src="https://images.unsplash.com/photo-1522002293522-f9f35f7ddda8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NTIxOTI4OQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt="">
-            </picture>
-            <div class="detail">
-                <p >
-                    <div class="flex flex-col justify-center items-center pl-12">
-                        <h1 class="mt-5 ">اكسسوارات </h1>
-                        <button class=" mt-4 text-gray-400 hover:text-white font-light  border-t w-30 h-10    hover:bg-black focus:outline-none focus:ring-1 focus:ring-gray-300 ">
-    
-                            <div class="inline-flex items-center">
-                                <h1 class="mb-1 mr-2  text-sm">  اكتشف الان</h1>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 fill-current " viewBox="0 0 20 20" >
-                                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                  </svg>
-                              
-                        
-                            </div>
-                                
-                        </button>
-                    </div>
-            
-                   
-                </p>
-               
-            </div>
-        </div>
-     
 
-        <div class="product">
-            <picture>
-                <img src="https://images.unsplash.com/photo-1572656934803-d2162b2e98bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
-            </picture>
-            <div class="detail">
-                <p>
-                    <div class="flex flex-col   justify-center items-center pl-20">
-                        <div class="flex mt-5 ">
-                            <h1 >مستلزمات  </h1>
-                            <h1>منزلية</h1>
-                        </div>
-              
-                        <button class=" mt-4 text-gray-400 hover:text-white font-light  border-t w-30 h-10    hover:bg-black focus:outline-none focus:ring-1 focus:ring-gray-300 ">
-    
-                            <div class="inline-flex items-center">
-                                <h1 class="mb-1 mr-2  text-sm">  اكتشف الان</h1>
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-2 fill-current " viewBox="0 0 20 20" >
-                                    <path fill-rule="evenodd" d="M9.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L7.414 9H15a1 1 0 110 2H7.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd" />
-                                  </svg>
-                              
-                        
-                            </div>
-                                
-                        </button>
-                    </div>
-                  
                 </p>
-               
+
             </div>
         </div>
-                                                        
+  {% endfor %}
+
        
         
     </sectionone>
@@ -818,7 +653,7 @@ p.star{
        </nav>
        
 
-        <!-----product cards -->
+        <!-----product cards  منتجات وصلت حديثا-->
   
 
         
@@ -1066,7 +901,7 @@ p.star{
         </div>
         </div>
         
-    <!------div2-->
+    <!------div2 التخفيضات و العروض-->
     
  
 
@@ -1311,7 +1146,7 @@ p.star{
 
     
     
-    <!--div3-->
+    <!--div3 منتجات مختارة-->
     
 
     
@@ -1576,10 +1411,11 @@ p.star{
 <div class="mt-2 p-5">
 
     <div class="product-grid">
-        <div class=" bg-white"  >
+        {% for product in page_elements %}
+  <div class=" bg-white"  >
             <div class = "product">
-                <div class = "product-img" class="">
-                
+                <div class = "product-img">
+
                         <div class="img__description">
                             <div class="flex flex-col justify-around">
                                 <div class="flex flex-col -mt-10  -mr-4 ">
@@ -1589,222 +1425,225 @@ p.star{
                                             <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                                           </svg>
                                     </a>
-                                 <a href="#"> 
+                                 <a href="#">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                                       </svg>
                                  </a>
-                                     
+
                                 </div>
-                      
-                          
+
+
                                 <div class="flex -mb-8">
-                                    <h1 class="text-white ml-28"> home center </h1>
-                                    <h1  class="text-white">45 IQD</h1>
+                                    <h1 class="text-white ml-28"> {{ product.shopOwner.shopName }} </h1>
+                                    <h1  class="text-white">{{ product.price }}</h1>
                                 </div>
-        
+
                                 <div class="-mb-10 -p-5 flex justify-center">
                                     <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
-        
+
                                         <div class="inline-flex items-center">
                                             <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>
                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1 " viewBox="0 0 20 20" fill="currentColor">
                                                 <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
                                               </svg>
                                         </div>
-                                            
+
                                     </button>
                                 </div>
-                           
+
                             </div>
-                    
+
                         </div>
-                  
+
+{#                    {% for image in images %}#}
+{#                        {% if product.id == image.product_id %}#}
+{#                        <img src="{{ image.image.url }}" style="width: 100px; height: 100px" class="card-img-top" alt="...">#}
+{#                        {% endif %}#}
+{##}
+{#    {% endfor %}#}
                     <img src = "https://images.unsplash.com/photo-1531877025030-f7696a50770f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY0NjQzNDIzOA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">
-                    
+
                     <img src = "https://images.unsplash.com/photo-1531876653494-b5c5dc360a5b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNTYxNjU5NQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">
-                    
-                
+
+
                 </div>
                <div class ="text-center   p-4 mb-4">
-                <h1 class="text-gray-500">مفارش </h1>
+                <h1 class="text-gray-500">{{ product.ProductName }} </h1>
                </div>
             </div>
         </div>
-        
-        
-        
-        
-        
-        
-        
-        <div class=" bg-white" >
-            <div class = "product" >
-                <div class = "product-img" class="">
-                
-                        <div class="img__description">
-                            <div class="flex flex-col justify-around">
-                                <div class="flex flex-col -mt-10  -mr-4 ">
-                                    <a href="#" class="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                          </svg>
-                                    </a>
-                                 <a href="#"> 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                      </svg>
-                                 </a>
-                                     
-                                </div>
-                      
-                          
-                                <div class="flex -mb-8">
-                                    <h1 class="text-white ml-28"> home center   </h1>
-                                    <h1  class="text-white">15 IQD</h1>
-                                </div>
-        
-                                <div class="-mb-10 -p-5 flex justify-center">
-                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
-        
-                                        <div class="inline-flex items-center">
-                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                                              </svg>
-                                        </div>
-                                            
-                                    </button>
-                                </div>
-                           
-                            </div>
-                    
-                        </div>
-                  
-                    <img src = "https://images.unsplash.com/photo-1597696929736-6d13bed8e6a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY0ODg0MTcwMQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">
-                    
-                    <img src = "https://images.unsplash.com/photo-1610701596007-11502861dcfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1Mjg0MjA5NA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">
-                    
-                
-                </div>
-               <div class ="text-center   p-4 mb-4">
-                <h1 class="text-gray-500"> حاملة ورود </h1>
-               </div>
-            </div>
-        </div>
-        
-        
-        <div class=" bg-white" >
-            <div class = "product">
-                <div class = "product-img" class="">
-                
-                        <div class="img__description">
-                            <div class="flex flex-col justify-around">
-                                <div class="flex flex-col -mt-10  -mr-4 ">
-                                    <a href="#" class="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                          </svg>
-                                    </a>
-                                 <a href="#"> 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                      </svg>
-                                 </a>
-                                     
-                                </div>
-                      
-                          
-                                <div class="flex -mb-8">
-                                    <h1 class="text-white ml-28">   شركة النبع</h1>
-                                    <h1  class="text-white">46 IQD</h1>
-                                </div>
-        
-                                <div class="-mb-10 -p-5 flex justify-center">
-                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
-        
-                                        <div class="inline-flex items-center">
-                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                                              </svg>
-                                        </div>
-                                            
-                                    </button>
-                                </div>
-                           
-                            </div>
-                    
-                        </div>
-                  
-                    <img src = "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNDY4NDgyNw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">
-                    
-                    <img src = "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzMDQzMzEwMQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">
-                    
-                
-                </div>
-               <div class ="text-center   p-4 mb-4">
-                <h1 class="text-gray-500">  iwatch   </h1>
-               </div>
-            </div>
-        </div>
-        <div class=" bg-white" >
-            <div class = "product">
-                <div class = "product-img" class="">
-                
-                        <div class="img__description">
-                            <div class="flex flex-col justify-around">
-                                <div class="flex flex-col -mt-10  -mr-4 ">
-                                    <a href="#" class="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                          </svg>
-                                    </a>
-                                 <a href="#"> 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                      </svg>
-                                 </a>
-                                     
-                                </div>
-                      
-                          
-                                <div class="flex -mb-8">
-                                    <h1 class="text-white ml-28"> فرساتشي</h1>
-                                    <h1  class="text-white">25 IQD</h1>
-                                </div>
-        
-                                <div class="-mb-10 -p-5 flex justify-center">
-                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
-        
-                                        <div class="inline-flex items-center">
-                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                                              </svg>
-                                        </div>
-                                            
-                                    </button>
-                                </div>
-                           
-                            </div>
-                    
-                        </div>
-                  
-                    <img src = "https://images.unsplash.com/photo-1548954638-082b560e0a66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzOTIzMDMyOA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">
-                    
-                    <img src = "https://images.unsplash.com/photo-1610545936431-9983d41e52b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY0MjAyNDA2OA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">
-                    
-                
-                </div>
-               <div class ="text-center   p-4 mb-4">
-                <h1 class="text-gray-500"> باليت مكياج </h1>
-               </div>
-            </div>
-        </div>
+
+{% endfor %}
+    <div class="text-center justify-content-center">
+        {% include 'jumla/base/paginator.html' %}
+    </div>
+
+{#        <div class=" bg-white" >#}
+{#            <div class = "product" >#}
+{#                <div class = "product-img" class="">#}
+{#                #}
+{#                        <div class="img__description">#}
+{#                            <div class="flex flex-col justify-around">#}
+{#                                <div class="flex flex-col -mt-10  -mr-4 ">#}
+{#                                    <a href="#" class="">#}
+{#                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />#}
+{#                                          </svg>#}
+{#                                    </a>#}
+{#                                 <a href="#"> #}
+{#                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />#}
+{#                                      </svg>#}
+{#                                 </a>#}
+{#                                     #}
+{#                                </div>#}
+{#                      #}
+{#                          #}
+{#                                <div class="flex -mb-8">#}
+{#                                    <h1 class="text-white ml-28"> home center   </h1>#}
+{#                                    <h1  class="text-white">15 IQD</h1>#}
+{#                                </div>#}
+{#        #}
+{#                                <div class="-mb-10 -p-5 flex justify-center">#}
+{#                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">#}
+{#        #}
+{#                                        <div class="inline-flex items-center">#}
+{#                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>#}
+{#                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">#}
+{#                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />#}
+{#                                              </svg>#}
+{#                                        </div>#}
+{#                                            #}
+{#                                    </button>#}
+{#                                </div>#}
+{#                           #}
+{#                            </div>#}
+{#                    #}
+{#                        </div>#}
+{#                  #}
+{#                    <img src = "https://images.unsplash.com/photo-1597696929736-6d13bed8e6a8?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY0ODg0MTcwMQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">#}
+{#                    #}
+{#                    <img src = "https://images.unsplash.com/photo-1610701596007-11502861dcfa?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1Mjg0MjA5NA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">#}
+{#                    #}
+{#                #}
+{#                </div>#}
+{#               <div class ="text-center   p-4 mb-4">#}
+{#                <h1 class="text-gray-500"> حاملة ورود </h1>#}
+{#               </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class=" bg-white" >#}
+{#            <div class = "product">#}
+{#                <div class = "product-img" class="">#}
+{#                #}
+{#                        <div class="img__description">#}
+{#                            <div class="flex flex-col justify-around">#}
+{#                                <div class="flex flex-col -mt-10  -mr-4 ">#}
+{#                                    <a href="#" class="">#}
+{#                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />#}
+{#                                          </svg>#}
+{#                                    </a>#}
+{#                                 <a href="#"> #}
+{#                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />#}
+{#                                      </svg>#}
+{#                                 </a>#}
+{#                                     #}
+{#                                </div>#}
+{#                      #}
+{#                          #}
+{#                                <div class="flex -mb-8">#}
+{#                                    <h1 class="text-white ml-28">   شركة النبع</h1>#}
+{#                                    <h1  class="text-white">46 IQD</h1>#}
+{#                                </div>#}
+{#        #}
+{#                                <div class="-mb-10 -p-5 flex justify-center">#}
+{#                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">#}
+{#        #}
+{#                                        <div class="inline-flex items-center">#}
+{#                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>#}
+{#                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">#}
+{#                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />#}
+{#                                              </svg>#}
+{#                                        </div>#}
+{#                                            #}
+{#                                    </button>#}
+{#                                </div>#}
+{#                           #}
+{#                            </div>#}
+{#                    #}
+{#                        </div>#}
+{#                  #}
+{#                    <img src = "https://images.unsplash.com/photo-1434493789847-2f02dc6ca35d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNDY4NDgyNw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">#}
+{#                    #}
+{#                    <img src = "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzMDQzMzEwMQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">#}
+{#                    #}
+{#                #}
+{#                </div>#}
+{#               <div class ="text-center   p-4 mb-4">#}
+{#                <h1 class="text-gray-500">  iwatch   </h1>#}
+{#               </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class=" bg-white" >#}
+{#            <div class = "product">#}
+{#                <div class = "product-img" class="">#}
+{#                #}
+{#                        <div class="img__description">#}
+{#                            <div class="flex flex-col justify-around">#}
+{#                                <div class="flex flex-col -mt-10  -mr-4 ">#}
+{#                                    <a href="#" class="">#}
+{#                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />#}
+{#                                          </svg>#}
+{#                                    </a>#}
+{#                                 <a href="#"> #}
+{#                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />#}
+{#                                      </svg>#}
+{#                                 </a>#}
+{#                                     #}
+{#                                </div>#}
+{#                      #}
+{#                          #}
+{#                                <div class="flex -mb-8">#}
+{#                                    <h1 class="text-white ml-28"> فرساتشي</h1>#}
+{#                                    <h1  class="text-white">25 IQD</h1>#}
+{#                                </div>#}
+{#        #}
+{#                                <div class="-mb-10 -p-5 flex justify-center">#}
+{#                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">#}
+{#        #}
+{#                                        <div class="inline-flex items-center">#}
+{#                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>#}
+{#                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">#}
+{#                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />#}
+{#                                              </svg>#}
+{#                                        </div>#}
+{#                                            #}
+{#                                    </button>#}
+{#                                </div>#}
+{#                           #}
+{#                            </div>#}
+{#                    #}
+{#                        </div>#}
+{#                  #}
+{#                    <img src = "https://images.unsplash.com/photo-1548954638-082b560e0a66?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzOTIzMDMyOA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">#}
+{#                    #}
+{#                    <img src = "https://images.unsplash.com/photo-1610545936431-9983d41e52b5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY0MjAyNDA2OA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">#}
+{#                    #}
+{#                #}
+{#                </div>#}
+{#               <div class ="text-center   p-4 mb-4">#}
+{#                <h1 class="text-gray-500"> باليت مكياج </h1>#}
+{#               </div>#}
+{#            </div>#}
+{#        </div>#}
     </div>
 
 
@@ -1812,238 +1651,238 @@ p.star{
 
     <!---div2-->
 
-
-    <div class="product-grid">
-        <div class=" bg-white"  >
-            <div class = "product">
-                <div class = "product-img" class="">
-                
-                        <div class="img__description">
-                            <div class="flex flex-col justify-around">
-                                <div class="flex flex-col -mt-10  -mr-4 ">
-                                    <a href="#" class="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                          </svg>
-                                    </a>
-                                 <a href="#"> 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                      </svg>
-                                 </a>
-                                     
-                                </div>
-                      
-                          
-                                <div class="flex -mb-8">
-                                    <h1 class="text-white ml-28"> اليسر للساعات</h1>
-                                    <h1  class="text-white">50 IQD</h1>
-                                </div>
-        
-                                <div class="-mb-10 -p-5 flex justify-center">
-                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
-        
-                                        <div class="inline-flex items-center">
-                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1 " viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                                              </svg>
-                                        </div>
-                                            
-                                    </button>
-                                </div>
-                           
-                            </div>
-                    
-                        </div>
-                  
-                    <img src = "https://images.unsplash.com/photo-1507680434567-5739c80be1ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt = "front product image">
-                    
-                    <img src = "https://images.unsplash.com/photo-1554151447-b9d2197448f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt = "rear product image" class = "rear-img">
-                    
-                
-                </div>
-               <div class ="text-center   p-4 mb-4">
-                <h1 class="text-gray-500">ساعة  </h1>
-               </div>
-            </div>
-        </div>
-        
-        
-        
-        
-        
-        
-        
-        <div class=" bg-white" >
-            <div class = "product" >
-                <div class = "product-img" class="">
-                
-                        <div class="img__description">
-                            <div class="flex flex-col justify-around">
-                                <div class="flex flex-col -mt-10  -mr-4 ">
-                                    <a href="#" class="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                          </svg>
-                                    </a>
-                                 <a href="#"> 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                      </svg>
-                                 </a>
-                                     
-                                </div>
-                      
-                          
-                                <div class="flex -mb-8">
-                                    <h1 class="text-white ml-20">    الحسن للعيونات </h1>
-                                    <h1  class="text-white">30 IQD</h1>
-                                </div>
-        
-                                <div class="-mb-10 -p-5 flex justify-center">
-                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
-        
-                                        <div class="inline-flex items-center">
-                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                                              </svg>
-                                        </div>
-                                            
-                                    </button>
-                                </div>
-                           
-                            </div>
-                    
-                        </div>
-                  
-                    <img src = "https://images.unsplash.com/photo-1483412468200-72182dbbc544?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY0NzcxMzc0MA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">
-                    
-                    <img src = "https://images.unsplash.com/photo-1450027179084-b3ff1fce4bb5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NTQyNDM5Mw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">
-                    
-                
-                </div>
-               <div class ="text-center   p-4 mb-4">
-                <h1 class="text-gray-500">  نظارة طبية </h1>
-               </div>
-            </div>
-        </div>
-        
-        
-        <div class=" bg-white" >
-            <div class = "product">
-                <div class = "product-img" class="">
-                
-                        <div class="img__description">
-                            <div class="flex flex-col justify-around">
-                                <div class="flex flex-col -mt-10  -mr-4 ">
-                                    <a href="#" class="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                          </svg>
-                                    </a>
-                                 <a href="#"> 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                      </svg>
-                                 </a>
-                                     
-                                </div>
-                      
-                          
-                                <div class="flex -mb-8">
-                                    <h1 class="text-white ml-28">   شركة النبع</h1>
-                                    <h1  class="text-white">46 IQD</h1>
-                                </div>
-        
-                                <div class="-mb-10 -p-5 flex justify-center">
-                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
-        
-                                        <div class="inline-flex items-center">
-                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                                              </svg>
-                                        </div>
-                                            
-                                    </button>
-                                </div>
-                           
-                            </div>
-                    
-                        </div>
-                  
-                    <img src = "https://images.unsplash.com/photo-1568910748155-01ca989dbdd6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzMTE0NzA4Mw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">
-                    
-                    <img src = "https://images.unsplash.com/photo-1518444667766-94728310399f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt = "rear product image" class = "rear-img">
-                    
-                
-                </div>
-               <div class ="text-center   p-4 mb-4">
-                <h1 class="text-gray-500">  سماعة بلوتوث   </h1>
-               </div>
-            </div>
-        </div>
-        <div class=" bg-white" >
-            <div class = "product">
-                <div class = "product-img" class="">
-                
-                        <div class="img__description">
-                            <div class="flex flex-col justify-around">
-                                <div class="flex flex-col -mt-10  -mr-4 ">
-                                    <a href="#" class="">
-                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                          </svg>
-                                    </a>
-                                 <a href="#"> 
-                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                                      </svg>
-                                 </a>
-                                     
-                                </div>
-                      
-                          
-                                <div class="flex -mb-8">
-                                    <h1 class="text-white ml-28">defacto </h1>
-                                    <h1  class="text-white">25 IQD</h1>
-                                </div>
-        
-                                <div class="-mb-10 -p-5 flex justify-center">
-                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
-        
-                                        <div class="inline-flex items-center">
-                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">
-                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                                              </svg>
-                                        </div>
-                                            
-                                    </button>
-                                </div>
-                           
-                            </div>
-                    
-                        </div>
-                  
-                    <img src = "https://images.unsplash.com/photo-1615615228002-890bb61cac6e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNTM2MjM5Ng&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">
-                    
-                    <img src = "https://images.unsplash.com/photo-1615743771721-e2ee843a41c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NTQyNDE1NA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">
-                    
-                
-                </div>
-               <div class ="text-center   p-4 mb-4">
-                <h1 class="text-gray-500"> حذاء رياضي  </h1>
-               </div>
-            </div>
-        </div>
-    </div>
+{##}
+{#    <div class="product-grid">#}
+{#        <div class=" bg-white"  >#}
+{#            <div class = "product">#}
+{#                <div class = "product-img">#}
+{#                #}
+{#                        <div class="img__description">#}
+{#                            <div class="flex flex-col justify-around">#}
+{#                                <div class="flex flex-col -mt-10  -mr-4 ">#}
+{#                                    <a href="#" class="">#}
+{#                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />#}
+{#                                          </svg>#}
+{#                                    </a>#}
+{#                                 <a href="#"> #}
+{#                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />#}
+{#                                      </svg>#}
+{#                                 </a>#}
+{#                                     #}
+{#                                </div>#}
+{#                      #}
+{#                          #}
+{#                                <div class="flex -mb-8">#}
+{#                                    <h1 class="text-white ml-28"> اليسر للساعات</h1>#}
+{#                                    <h1  class="text-white">50 IQD</h1>#}
+{#                                </div>#}
+{#        #}
+{#                                <div class="-mb-10 -p-5 flex justify-center">#}
+{#                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">#}
+{#        #}
+{#                                        <div class="inline-flex items-center">#}
+{#                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>#}
+{#                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1 " viewBox="0 0 20 20" fill="currentColor">#}
+{#                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />#}
+{#                                              </svg>#}
+{#                                        </div>#}
+{#                                            #}
+{#                                    </button>#}
+{#                                </div>#}
+{#                           #}
+{#                            </div>#}
+{#                    #}
+{#                        </div>#}
+{#                  #}
+{#                    <img src = "https://images.unsplash.com/photo-1507680434567-5739c80be1ac?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt = "front product image">#}
+{#                    #}
+{#                    <img src = "https://images.unsplash.com/photo-1554151447-b9d2197448f9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt = "rear product image" class = "rear-img">#}
+{#                    #}
+{#                #}
+{#                </div>#}
+{#               <div class ="text-center   p-4 mb-4">#}
+{#                <h1 class="text-gray-500">ساعة  </h1>#}
+{#               </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        #}
+{#        #}
+{#        #}
+{#        #}
+{#        #}
+{#        #}
+{#        #}
+{#        <div class=" bg-white" >#}
+{#            <div class = "product" >#}
+{#                <div class = "product-img" class="">#}
+{#                #}
+{#                        <div class="img__description">#}
+{#                            <div class="flex flex-col justify-around">#}
+{#                                <div class="flex flex-col -mt-10  -mr-4 ">#}
+{#                                    <a href="#" class="">#}
+{#                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />#}
+{#                                          </svg>#}
+{#                                    </a>#}
+{#                                 <a href="#"> #}
+{#                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />#}
+{#                                      </svg>#}
+{#                                 </a>#}
+{#                                     #}
+{#                                </div>#}
+{#                      #}
+{#                          #}
+{#                                <div class="flex -mb-8">#}
+{#                                    <h1 class="text-white ml-20">    الحسن للعيونات </h1>#}
+{#                                    <h1  class="text-white">30 IQD</h1>#}
+{#                                </div>#}
+{#        #}
+{#                                <div class="-mb-10 -p-5 flex justify-center">#}
+{#                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">#}
+{#        #}
+{#                                        <div class="inline-flex items-center">#}
+{#                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>#}
+{#                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">#}
+{#                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />#}
+{#                                              </svg>#}
+{#                                        </div>#}
+{#                                            #}
+{#                                    </button>#}
+{#                                </div>#}
+{#                           #}
+{#                            </div>#}
+{#                    #}
+{#                        </div>#}
+{#                  #}
+{#                    <img src = "https://images.unsplash.com/photo-1483412468200-72182dbbc544?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY0NzcxMzc0MA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">#}
+{#                    #}
+{#                    <img src = "https://images.unsplash.com/photo-1450027179084-b3ff1fce4bb5?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NTQyNDM5Mw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">#}
+{#                    #}
+{#                #}
+{#                </div>#}
+{#               <div class ="text-center   p-4 mb-4">#}
+{#                <h1 class="text-gray-500">  نظارة طبية </h1>#}
+{#               </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        #}
+{#        #}
+{#        <div class=" bg-white" >#}
+{#            <div class = "product">#}
+{#                <div class = "product-img" class="">#}
+{#                #}
+{#                        <div class="img__description">#}
+{#                            <div class="flex flex-col justify-around">#}
+{#                                <div class="flex flex-col -mt-10  -mr-4 ">#}
+{#                                    <a href="#" class="">#}
+{#                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />#}
+{#                                          </svg>#}
+{#                                    </a>#}
+{#                                 <a href="#"> #}
+{#                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />#}
+{#                                      </svg>#}
+{#                                 </a>#}
+{#                                     #}
+{#                                </div>#}
+{#                      #}
+{#                          #}
+{#                                <div class="flex -mb-8">#}
+{#                                    <h1 class="text-white ml-28">   شركة النبع</h1>#}
+{#                                    <h1  class="text-white">46 IQD</h1>#}
+{#                                </div>#}
+{#        #}
+{#                                <div class="-mb-10 -p-5 flex justify-center">#}
+{#                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">#}
+{#        #}
+{#                                        <div class="inline-flex items-center">#}
+{#                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>#}
+{#                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">#}
+{#                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />#}
+{#                                              </svg>#}
+{#                                        </div>#}
+{#                                            #}
+{#                                    </button>#}
+{#                                </div>#}
+{#                           #}
+{#                            </div>#}
+{#                    #}
+{#                        </div>#}
+{#                  #}
+{#                    <img src = "https://images.unsplash.com/photo-1568910748155-01ca989dbdd6?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzMTE0NzA4Mw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">#}
+{#                    #}
+{#                    <img src = "https://images.unsplash.com/photo-1518444667766-94728310399f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt = "rear product image" class = "rear-img">#}
+{#                    #}
+{#                #}
+{#                </div>#}
+{#               <div class ="text-center   p-4 mb-4">#}
+{#                <h1 class="text-gray-500">  سماعة بلوتوث   </h1>#}
+{#               </div>#}
+{#            </div>#}
+{#        </div>#}
+{#        <div class=" bg-white" >#}
+{#            <div class = "product">#}
+{#                <div class = "product-img" class="">#}
+{#                #}
+{#                        <div class="img__description">#}
+{#                            <div class="flex flex-col justify-around">#}
+{#                                <div class="flex flex-col -mt-10  -mr-4 ">#}
+{#                                    <a href="#" class="">#}
+{#                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />#}
+{#                                            <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />#}
+{#                                          </svg>#}
+{#                                    </a>#}
+{#                                 <a href="#"> #}
+{#                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                        <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />#}
+{#                                      </svg>#}
+{#                                 </a>#}
+{#                                     #}
+{#                                </div>#}
+{#                      #}
+{#                          #}
+{#                                <div class="flex -mb-8">#}
+{#                                    <h1 class="text-white ml-28">defacto </h1>#}
+{#                                    <h1  class="text-white">25 IQD</h1>#}
+{#                                </div>#}
+{#        #}
+{#                                <div class="-mb-10 -p-5 flex justify-center">#}
+{#                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">#}
+{#        #}
+{#                                        <div class="inline-flex items-center">#}
+{#                                            <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>#}
+{#                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">#}
+{#                                                <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />#}
+{#                                              </svg>#}
+{#                                        </div>#}
+{#                                            #}
+{#                                    </button>#}
+{#                                </div>#}
+{#                           #}
+{#                            </div>#}
+{#                    #}
+{#                        </div>#}
+{#                  #}
+{#                    <img src = "https://images.unsplash.com/photo-1615615228002-890bb61cac6e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNTM2MjM5Ng&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">#}
+{#                    #}
+{#                    <img src = "https://images.unsplash.com/photo-1615743771721-e2ee843a41c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1NTQyNDE1NA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">#}
+{#                    #}
+{#                #}
+{#                </div>#}
+{#               <div class ="text-center   p-4 mb-4">#}
+{#                <h1 class="text-gray-500"> حذاء رياضي  </h1>#}
+{#               </div>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
 </div>
 
 
