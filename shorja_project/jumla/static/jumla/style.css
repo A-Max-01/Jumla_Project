@@ -30,3 +30,6 @@ body {
     transform: scale(1.5);
   }
   
+  .asteriskField {
+    display: none;
+}
