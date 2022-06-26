@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', function(){
             // console.log(ele.dataset.product_id)
             if(data.items_in_cart.includes(parseInt(ele.dataset.product_id))){
                 // console.log('true')
+                ele.innerHTML='حذف'
 
             }else{
                 // console.log('false')
@@ -94,7 +95,7 @@ function add_or_remove_item_from_cart(ev){
     }
 }
 function button_toggle(element){
-    if (element.innerHTML==='اضف الى السلة'){
+    if (element.innerHTML==='  اضف الى السلة'){
         element.innerHTML="حذف"
         element.className = 'btn btn-danger'
     }else{

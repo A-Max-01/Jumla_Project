@@ -66,7 +66,7 @@ class Category(models.Model):
 
     def __str__(self):
         if self.parent:
-            return f'{self.name} - {self.parent.name}'
+            return f'{self.parent.name} - {self.name} '
         else:
             return f'{self.name}'
 

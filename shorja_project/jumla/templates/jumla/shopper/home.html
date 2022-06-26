@@ -172,7 +172,7 @@
                         {% if cate.parent %}
                             <h3>{{ cate.name }} - {{ cate.parent.name }}</h3>
                             {% else %}
-                             <h3 >{{ cate.name }} </h3>
+                             <h3>{{ cate.name }} </h3>
                         {% endif %}
 
                     </div>
@@ -991,7 +991,10 @@
                                 </div>
 
                                 <div class="-mb-10 -p-5 flex justify-center">
-                                    <button class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
+                                    <button id="btn"
+                                            data-product_id="{{ product.id }}"
+                                            data-bill_id="{{ bill.id }}"
+                                            class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
 
                                         <div class="inline-flex items-center">
                                             <h1 class="mb-1 mr-2  text-sm">  اضف الى السلة</h1>
