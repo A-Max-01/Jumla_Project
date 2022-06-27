@@ -1,3 +1,4 @@
+import datetime
 
 from django.contrib.auth.decorators import login_required
 import json
@@ -12,15 +13,21 @@ from ..utilities import *
 def home(request):
     #   It displays products to the customer and includes the search process
     #   and includes paginator
-    test = Category.objects.all()
+    latest_products = Product.objects.order_by('-Date')[:4]
+    random_selected_products = Product.objects.order_by('?')[:4]
+    discount = Product.objects.order_by('?')[:4]
+    category = Category.objects.all()
     products = Product.objects.filter(is_active=True)
     img = product_Images.objects.all()
     paginator_element = MyPaginator(products, 8)
     page_number = request.GET.get('page')
     page_elements = paginator_element.get_pages(page_number)
-    context = {"images": img, "page_elements": page_elements[1], "page_nums": page_elements[0], "cate": test}
+    context = {"page_elements": page_elements[1], "page_nums": page_elements[0], "cate": category,
+               'latest_products': latest_products, 'random_selected_products': random_selected_products,
+                'discount_products': discount,
+
+               }
     return render(request, "jumla/shopper/home.html", context)
-    # return render(request, "jumla/landing_page/landing_page.html")
 
 
 @csrf_exempt
@@ -45,7 +52,9 @@ def add_to_cart(request):
             bill_items.save()
             get_bill.products.add(bill_items)
         get_bill.get_total()
-        return JsonResponse({'cart_total': user_cart.get_cart_total()})
+        return JsonResponse({'bill_total': get_bill.get_total(),
+                             'cart_total': user_cart.get_cart_total(),
+                             })
     return JsonResponse({'Get': 'the api worked'})
 
 
@@ -110,6 +119,8 @@ def update_quentity(request):
     if request.method == "PUT":
         data = json.loads(request.body)
         product = get_object_or_404(Product, id=data.get('product_id'))
+        one_img = product.Image_Product
+        print(one_img)
         qty = data.get('qty')
         user_cart = Cart.objects.filter(userOwner=request.user).last()
         get_bill = Bill.objects.filter(cart__userOwner_id=request.user.id, shop_id=product.shopOwner.id).last()

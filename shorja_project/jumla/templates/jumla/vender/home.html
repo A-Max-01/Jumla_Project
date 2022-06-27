@@ -4,9 +4,176 @@
     {% if user.is_authenticated %}
     <script  src="{% static 'js_backend/vendor.js' %}"></script>
     {% endif %}
+
+    
 {% endblock %}
+
+
+
+    
 {% block content %}
-    <div class="container">
+
+
+
+          
+
+     
+
+          
+      
+   
+   
+        
+ 
+        <div class="flex flex-col justify-center min-h-screen pr-16  py-36  ">
+
+            <div class="flex justify-between p-5">
+               
+    
+    
+                <div class="w-36 h-10 text-center  hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-2 focus:outline-none focus:ring-gray-300  px-3 py-2.5 text-sm  rounded">
+    
+                    <a href="{% url 'create_product' %}">
+                        اضافة منتج جديد
+                    </a>
+          
+                </div>
+
+          
+           
+                      <label for="search" class="sr-only">Search </label>
+                      <form methode="get" action="#" class="relative z-50">
+                        <button type="submit" id="searchsubmit" class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                          <svg class="h-5 w-5 text-white" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z" clip-rule="evenodd"></path>
+                          </svg>
+                        </button>
+                        <input type="text" name="s" id="s" class="block w-full pl-10 pr-3 py-2 border border-transparent rounded-md leading-5  text-gray-300 placeholder-gray-100 focus:outline-none bg-black focus:text-white sm:text-sm transition duration-150 ease-in-out" placeholder="Search">
+                      </form>
+        
+            </div>
+        
+            <!-- Table -->
+            <div class="mt-10">
+                <div class="w-full  bg-white  rounded-sm border  border-gray-200">
+             
+                    <div class="">
+                 
+                            <table class="w-full  bg-neutral-100">
+                                <thead class="text-xs font-semibold uppercase text-gray-600 bg-gray-200">
+                                    <tr>
+                                        <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-center">#</div>
+                                        </th>
+                                        <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-center">اسم المنتج</div>
+                                        </th>
+                                        <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-center"> الصنف</div>
+                                        </th>
+                                        <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-center"> متوفر </div>
+                                        </th>
+                                        <th class="p-2 whitespace-nowrap">
+                                            <div class="font-semibold text-center"> سعر المنتج </div>
+                                        </th>
+                                        <th class="p-2 whitespace-nowrap">
+                                          <div class="font-semibold text-center"> تاريخ الاضافة </div>
+                                      </th>
+                                    </tr>
+                                </thead>
+                                <tbody class="text-sm divide-y   divide-gray-100">
+                                    {% for product in products %}
+                                    <tr>
+                                        <td class="p-5 whitespace-nowrap">
+                                            <div class="text-center text-teal-600"> <a href="{% url 'update_product' product.id %}"> {{ product.id }}</a> </div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-center "> {{ product.ProductName }} </div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-center font-medium "> {{ product.Category.name }} </div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-sm text-center    ">
+    
+                  
+                                                {% if product.is_active %}
+                                                <input id="is_activ" class="form-check-input"
+                                                       data-product_id = {{ product.id }}
+                                                       type="checkbox"  checked />
+                                            {% else %}
+                                                <input id="is_activ" class="form-check-input"
+                                                       data-product_id = {{ product.id }}
+                                                       type="checkbox"  />
+                                            {% endif %}
+                          
+    
+                                                       
+                                                          
+                                            </div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-sm text-center">{{ product.price }} </div>
+                                        </td>
+                                        <td class="p-2 whitespace-nowrap">
+                                            <div class="text-sm text-center">{{ product.Date|date:'Y-m-d a' }} </div>
+                                        </td>
+                                    </tr>
+                          
+        {% endfor %}
+                                </tbody>
+                            </table>
+                
+                    </div>
+                </div>
+            </div>
+         
+        </div>
+ 
+
+        
+     
+      
+ 
+
+
+
+
+    
+             
+    
+
+
+<div class="flex justify-center  p-20">
+
+  <div class="flex flex-col items-center">
+    <!-- Help text -->
+    <span class="text-sm text-gray-700 dark:text-gray-400">
+        Showing <span class="font-semibold text-gray-900 dark:text-white">1</span> to <span class="font-semibold text-gray-900 dark:text-white">10</span> of <span class="font-semibold text-gray-900 dark:text-white">100</span> Entries
+    </span>
+    <div class="inline-flex mt-2 xs:mt-0">
+      <!-- Buttons -->
+      <button class="inline-flex items-center py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+        <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+
+          Prev
+      </button>
+      <button class="inline-flex items-center py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-l border-0 border-l border-gray-700 hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
+          Next
+          <svg class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
+      </button>
+    </div>
+    <div class="mt-16">
+      <button class="  h-12 w-36 rounded  hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-2 focus:outline-none focus:ring-gray-300 ">رجوع</button>
+    </div>
+
+  </div>
+
+
+</div>
+
+    <!-----<div class="container">
 <div class="ms-auto text-muted">
                     Search:
                     <div class="ms-2 d-inline-block">
@@ -32,7 +199,7 @@
       <th scope="col">الصنف</th>
       <th scope="col">التوفر</th>
       <th scope="col">تاريخ الاضافة</th>
-        <th>...</th>
+        <th></th>
     </tr>
   </thead>
   <tbody>
@@ -67,5 +234,18 @@
 
   </tbody>
 </table>
-    </div>
+    </div>----->
+
+
+
+
+
+
+
+
+   
+ 
+    
+
+
 {% endblock %}

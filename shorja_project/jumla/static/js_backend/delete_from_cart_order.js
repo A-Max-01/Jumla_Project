@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function(){
             }else{
                 // console.log('false')
                 ele.innerHTML='اضف الى السلة'
-                ele.className = 'btn btn-primary'
+                // ele.className = 'btn btn-primary'
             }
         })
     })
@@ -95,11 +95,12 @@ function add_or_remove_item_from_cart(ev){
     }
 }
 function button_toggle(element){
-    if (element.innerHTML==='  اضف الى السلة'){
+    // console.log(element.innerHTML)
+    if (element.innerHTML==='اضف الى السلة'){
         element.innerHTML="حذف"
-        element.className = 'btn btn-danger'
+        // element.className = 'btn btn-danger'
     }else{
         element.innerHTML='اضف الى السلة'
-        element.className = 'btn btn-primary'
+        // element.className = 'btn btn-primary'
     }
 }
