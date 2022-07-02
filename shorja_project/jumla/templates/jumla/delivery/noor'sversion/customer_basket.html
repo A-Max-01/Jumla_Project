@@ -77,7 +77,9 @@
                                         <tr>
                                             <td class="p-2 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                    <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3"><img class="rounded-full" src="https://images.unsplash.com/photo-1606248897732-2c5ffe759c04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNDgzNjU3Mg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" width="40" height="40" alt="Alex Shatov"></div>
+                                                    <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
+{#                                                        <img class="rounded-full" src="https://images.unsplash.com/photo-1606248897732-2c5ffe759c04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNDgzNjU3Mg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" width="40" height="40" alt="Alex Shatov"></div>#}
+                                                        <img class="rounded-full" src="{{ product.item.Image_Product.first.image.url}}" width="40" height="40" alt="Alex Shatov"></div>
                                                     <div class="font-medium  mr-2 text-gray-800">
                                                         {{ product.item.ProductName }}
                                                     </div>

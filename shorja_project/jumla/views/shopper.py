@@ -13,16 +13,26 @@ from ..utilities import *
 def home(request):
     #   It displays products to the customer and includes the search process
     #   and includes paginator
+    category_get = request.GET.get('category_get')
+    product_get = request.GET.get('product_get')
+    if product_get:
+        product = Product.objects.get(id=product_get)
+        return render(request, 'jumla/shopper/card_details.html', {'product': product})
+    if category_get:
+        category_name = get_object_or_404(Category, name=category_get)
+        products = Product.objects.filter(is_active=True, Category=category_name.id)
+    else:
+        products = Product.objects.filter(is_active=True)
+
     latest_products = Product.objects.order_by('-Date')[:4]
     random_selected_products = Product.objects.order_by('?')[:4]
     discount = Product.objects.order_by('?')[:4]
-    category = Category.objects.all()
-    products = Product.objects.filter(is_active=True)
-    img = product_Images.objects.all()
+    category_get = Category.objects.all()
+
     paginator_element = MyPaginator(products, 8)
     page_number = request.GET.get('page')
     page_elements = paginator_element.get_pages(page_number)
-    context = {"page_elements": page_elements[1], "page_nums": page_elements[0], "cate": category,
+    context = {"page_elements": page_elements[1], "page_nums": page_elements[0], "cate": category_get,
                'latest_products': latest_products, 'random_selected_products': random_selected_products,
                 'discount_products': discount,
 

@@ -31,7 +31,11 @@ def vendor_home(request):
                 Q(Category__name__icontains=q) |
                 Q(Category__parent__name__icontains=q)
             )
-    context = {'products': shop_products}
+    paginator_element = MyPaginator(shop_products, 10)
+    page_number = request.GET.get('page')
+    page_elements = paginator_element.get_pages(page_number)
+
+    context = {"page_elements": page_elements[1], "page_nums": page_elements[0]}
     return render(request, "jumla/vender/home.html", context)
 
 
@@ -96,7 +100,7 @@ def create_new_product(request):
                     for file in files:
                         image_product = product_Images.objects.create(product_id=create_product.id, image=file)
                         image_product.save()
-            return redirect('vendor_home')
+                    return redirect('vendor_home')
         else:
             return redirect('create_product')
     context = {'categories': categories,
@@ -109,7 +113,6 @@ def create_new_product(request):
 def update_product(request, product_id):
     product = get_object_or_404(Product, id=product_id)
     img = product_Images.objects.all()
-    categories = Category.objects.all()
     form = vendor_forms.Create_product(instance=product)
     if request.method == "PUT":
         return HttpResponse('Put')
@@ -135,15 +138,23 @@ def update_product(request, product_id):
 def view_customer_bills(request):
     bills = Bill.objects.filter(cart__checkout=True, shop__shopOwner_id=request.user.id)
     for bill in bills:
+        bill.total = bill.get_total()
+        print(bill.total)
         if bill.total == 0:
             bill.delete()
-    context = {'bills': bills}
+
+    paginator_element = MyPaginator(bills, 10)
+    page_number = request.GET.get('page')
+    page_elements = paginator_element.get_pages(page_number)
+
+    context = {"page_elements": page_elements[1], "page_nums": page_elements[0]}
     return render(request, 'jumla/vender/view_customer_bills.html', context)
 
 
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['vendor'])
 def view_bill_products(request, bill_id):
-    bill = get_object_or_404(Bill, id=bill_id)
+    # bill = get_object_or_404(Bill, id=bill_id)
+    bill = Bill.objects.filter(id=bill_id).first()
     context = {'bill_products': bill.products.all()}
     return render(request, 'jumla/vender/view_bill_products.html', context)

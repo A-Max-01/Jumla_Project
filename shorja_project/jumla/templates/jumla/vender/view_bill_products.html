@@ -28,7 +28,10 @@
             {% for product in bill_products %}
             <tr>
                 <td class="whitespace-nowrap ">
-                    <div class="flex shrink-0   -ml-20 p-2 "><img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" class="w-14 h-14  rounded" alt="">
+                    <div class="flex shrink-0   -ml-20 p-2 ">
+{#                        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2.2&w=160&h=160&q=80" class="w-14 h-14  rounded" alt="">#}
+                        <img src="{{ product.item.Image_Product.first.image.url}}" class="w-14 h-14  rounded" alt="">
+                    </div>
                 </td>
                
                 <td class="p-2 whitespace-nowrap">

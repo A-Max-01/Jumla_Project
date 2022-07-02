@@ -74,10 +74,10 @@
                 </a>
                 <a href="#" class = "text-white px-3 inline-block pl-10">
                    <h1  class="hover:text-gray-300"> من نحن</h1></a>
-
-                <a href="#" class = "text-white px-3 inline-block pl-10">
+{% if  request.user.groups.all.first.name == "customer" %}
+                <a href="#div_main" class = "text-white px-3 inline-block pl-10">
                     <h1  class="hover:text-gray-300">منتجات متنوعة </h1></a>
-
+{% endif %}
                      <a href="" class = "text-white px-3 inline-block pl-10">
                     <h1  class="hover:text-gray-300" >
                         المتاجر

@@ -2,32 +2,28 @@
 {% load static %}
 
 {% block content %}
-
 <div class="flex justify-center p-5">
     <div class=" shadow-md  rounded-lg max-w-lg">
         <a href="#">
-            <img class="rounded-t-lg" src="https://images.unsplash.com/photo-1468436139062-f60a71c5c892?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
+{#            <img class="rounded-t-lg" src="https://images.unsplash.com/photo-1468436139062-f60a71c5c892?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">#}
+            <img class="rounded-t-lg" src="{{ product.Image_Product.first.image.url }}" alt="">
         </a>
         <div class="flex justify-center p-5 mt-4 ">
-            <div class="card">
-                <img class="w-24 h-24 rounded" src="https://images.unsplash.com/photo-1526570207772-784d36084510?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
+            {% for image in product.Image_Product.all %}
+             <div class="card">
+                <img class="w-24 h-24 rounded" src="{{ image.image.url }}" alt="">
             </div>
-            <div class="card">
-                <img class="w-24 h-24 rounded" src="https://images.unsplash.com/photo-1537498425277-c283d32ef9db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxfDB8MXxhbGx8fHx8fHx8fA&ixlib=rb-1.2.1&q=80&w=1080&utm_source=unsplash_source&utm_medium=referral&utm_campaign=api-credit" alt="">
-            </div>
-            <div class="card">
-                <img class="w-24 h-24 rounded" src="https://images.unsplash.com/photo-1514826786317-59744fe2a548?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNTM0NjUyMw&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt="">
-            </div>
+            {% endfor %}
         </div>
         
     </div>
     <div class=" w-3/6 h-full rounded ">
         <div class="  p-5 -mt-2">
             <div class="flex mb-5 justify-around ">
-                <h1 class="ml-28 -mr-10 text-right text-xl font-semibold">mac book air </h1>
-                <h1 class=" text-lg font-semibold">1500 IQD</h1>
+                <h1 class="ml-28 -mr-10 text-right text-xl font-semibold">{{ product.ProductName }} </h1>
+                <h1 class=" text-lg font-semibold">{{ product.price }} IQD</h1>
             </div>
-            <p class="text-right ">ما الذي يبقى في الغرفة حتى عندما يغادر الجميع؟ أضواء السقف! إنها توفر إضاءة عامة، لكن تصاميمها تعبر عن أشياء خاصة في ذوقك. سواء كنت تريد انطباع صناعي،أو لمسة طبيعية، أو طراز تقليدي أو تصميم آخر، لدينا أضواء سقف مناسبة لك.</p>
+            <p class="text-right ">{{ product.description }}</p>
             <div class="flex mt-5  ">
 
   
@@ -54,26 +50,26 @@
                   </div>
                   </div>
                     <!----quantity-->
-                  <div class="mr-5">
-                      <h1 class=" mb-3 text-center  text-xl font-medium">الكمية</h1>
-                      <div  class = " flex   mx-5 ">  
-              
-                          <!-- adding button and heading to show the digits -->
-                          <!--increment() and decrement() functions on button click-->
-                            <button class="mx-2  focus:outline-none " onclick="increment()">
-                               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 ml-2 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                 </svg></button>  
-                                 <div class=" border-3 shadow-xl   shadow-indigo-500/40  bg-gray-200 outline-none   w-10 h-10 rounded-lg   text-center">
-                                   <h2 id="counting" class="text-xl mt-1 "></h2>
-                                 </div>
-                           
-                            <button  class=" mx-2 focus:outline-none " onclick="decrement()">
-                               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 ml-2 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                   <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />
-                                 </svg></button>         
-                        </div>
-                    </div>
+{#                  <div class="mr-5">#}
+{#                      <h1 class=" mb-3 text-center  text-xl font-medium">الكمية</h1>#}
+{#                      <div  class = " flex   mx-5 ">  #}
+{#              #}
+{#                          <!-- adding button and heading to show the digits -->#}
+{#                          <!--increment() and decrement() functions on button click-->#}
+{#                            <button class="mx-2  focus:outline-none " onclick="increment()">#}
+{#                               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 ml-2 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                   <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />#}
+{#                                 </svg></button>  #}
+{#                                 <div class=" border-3 shadow-xl   shadow-indigo-500/40  bg-gray-200 outline-none   w-10 h-10 rounded-lg   text-center">#}
+{#                                   <h2 id="counting" class="text-xl mt-1 "></h2>#}
+{#                                 </div>#}
+{#                           #}
+{#                            <button  class=" mx-2 focus:outline-none " onclick="decrement()">#}
+{#                               <svg xmlns="http://www.w3.org/2000/svg" class="h-4 ml-2 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                   <path stroke-linecap="round" stroke-linejoin="round" d="M20 12H4" />#}
+{#                                 </svg></button>         #}
+{#                        </div>#}
+{#                    </div>#}
           
               </div>
             <div class="w-full h-px bg-gray-400 mt-5 "></div>
@@ -128,22 +124,37 @@
                 </div>
 
                 <div class="mt-4 mr-36">
-                    <button class=" hover:bg-black  hover:shadow-lg  py-2.5 px-8 border-2 text-center drop-shadow-md  focus:outline-none  border-black  hover:border-white hover:border-lg hover:text-white  rounded ">
-                                <div class="inline-flex items-center">
-                                    <h1 class="mb-1 mr-2 "> اضف الى السلة </h1>
-                                       <svg xmlns="http://www.w3.org/2000/svg"  class="h-4 w-4 mr-2 fill-current "  viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-                                           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                                         </svg>
-                        
-                        
-                    
-                              </div>
-                        
-                
-                
-        
-                    
-                                </button>
+                    {% if user.is_authenticated %}
+          {% if  request.user.groups.all.first.name == "customer" %}
+                                    <button id="btn"
+                                            data-product_id="{{ product.id }}"
+                                            data-bill_id="{{ bill.id }}"
+                                            class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
+                                            <div class="inline-flex items-center">
+                                                <h1 class=" mr-2  text-sm">  اضف الى السلة</h1>
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">
+                                                    <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                                                  </svg>
+                                            </div>
+                                    </button>
+                                    {% endif %}
+                                    {% endif %}
+{#                    <button class=" hover:bg-black  hover:shadow-lg  py-2.5 px-8 border-2 text-center drop-shadow-md  focus:outline-none  border-black  hover:border-white hover:border-lg hover:text-white  rounded ">#}
+{#                                <div class="inline-flex items-center">#}
+{#                                    <h1 class="mb-1 mr-2 "> اضف الى السلة </h1>#}
+{#                                       <svg xmlns="http://www.w3.org/2000/svg"  class="h-4 w-4 mr-2 fill-current "  viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">#}
+{#                                           <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6m0 0v6m0-6h6m-6 0H6" />#}
+{#                                         </svg>#}
+{#                        #}
+{#                        #}
+{#                    #}
+{#                              </div>#}
+{#                        #}
+{#                #}
+{#                #}
+{#        #}
+{#                    #}
+{#                                </button>#}
   
 
                   </div>
@@ -173,5 +184,14 @@
     </div>
 </div>
 
+{% block static %}
 
+      {% if user.is_authenticated %}
+          {% if  request.user.groups.all.first.name == "customer" %}
+    <script  src="{% static 'js_backend/delete_from_cart_order.js' %}"></script>
+
+    {% endif %}
+    {% endif %}
+
+{% endblock %}
 {% endblock content %}

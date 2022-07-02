@@ -1,12 +1,5 @@
-from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.db import IntegrityError
-import json
-from django.db.models import Count
-from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
-from django.shortcuts import render, get_object_or_404
-from django.urls import reverse
-from django.views.decorators.csrf import csrf_exempt
+from django.shortcuts import render
 from ..decorators import *
 from ..models import *
 from ..utilities import *
@@ -17,6 +10,10 @@ from ..utilities import *
 def home(request):
     cities = Governorate.objects.all()
     carts = Cart.objects.filter(checkout=True)
+    for cart in carts:
+        cart.get_cart_total()
+        if cart.total == 0:
+            cart.delete()
     paging_carts = MyPaginator(carts, 10)
     page_number = request.GET.get('page')
     page_carts = paging_carts.get_pages(page_number)

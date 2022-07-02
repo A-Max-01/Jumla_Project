@@ -31,7 +31,7 @@
                     </tr>
                 </thead>
                 <tbody class="text-sm divide-y   divide-gray-100">
-                  {% for bill in bills %}
+                  {% for bill in page_elements %}
                     <tr>
                         <td class="p-5 whitespace-nowrap">
                             <div class="text-center text-teal-600"> <a href="{% url 'view_bill_products' bill.id %}">{{ bill.id }}</a> </div>
@@ -61,69 +61,5 @@
 
 
 
-
-<div class="flex justify-center  p-20">
-
-  <div class="flex flex-col items-center">
-    <!-- Help text -->
-    <span class="text-sm text-gray-700 dark:text-gray-400">
-        Showing <span class="font-semibold text-gray-900 dark:text-white">1</span> to <span class="font-semibold text-gray-900 dark:text-white">10</span> of <span class="font-semibold text-gray-900 dark:text-white">100</span> Entries
-    </span>
-    <div class="inline-flex mt-2 xs:mt-0">
-      <!-- Buttons -->
-      <button class="inline-flex items-center py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-r hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-        <svg class="ml-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
-
-          Prev
-      </button>
-      <button class="inline-flex items-center py-2 px-4 text-sm font-medium text-white bg-gray-800 rounded-l border-0 border-l border-gray-700 hover:bg-gray-900 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">
-          Next
-          <svg class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clip-rule="evenodd"></path></svg>
-      </button>
-    </div>
-    <div class="mt-16">
-      <button class="  h-12 w-36 rounded  hover:text-white border border-gray-800 hover:bg-gray-900 focus:ring-2 focus:outline-none focus:ring-gray-300 ">رجوع</button>
-    </div>
-
-  </div>
-
-
-</div>
-<!------  <div class="container">
-
-    <table class="table p-3 center-block">
-  <thead>
-
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">اسم الزبون</th>
-      <th scope="col">رقم الزبون </th>
-      <th scope="col">العنوان</th>
-      <th scope="col">اجمالي الفاتورة</th>
-    </tr>
-  </thead>
-  <tbody>
-  {% for bill in bills %}
-
-    <tr>
-{#    <th><a href="{% url 'update_product' product.id %}"> {{ product.id }}</a></th>#}
-        <th><a href="{% url 'view_bill_products' bill.id %}">{{ bill.id }}</a> </th>
-      <th scope="row">{{ bill.cart.userOwner.first_name}}</th>
-    <th>{{ bill.cart.userOwner}}</th>
-    <th>{{ bill.cart.userOwner.address}}</th>
-    <th>{{ bill.total}}</th>
-
-
-    </tr>
-
-    {% endfor %}
-
-  </tbody>
-</table>
-
-
-
-
-
-    </div>----->
+{% include 'jumla/base/paginator.html' %}
 {% endblock %}
