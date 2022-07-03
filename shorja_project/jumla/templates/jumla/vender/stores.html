@@ -1,0 +1,145 @@
+{% extends 'jumla/base/base.html' %}
+{% load static %}
+{% block static %}
+    {% if user.is_authenticated %}
+    <script  src="{% static 'js_backend/vendor.js' %}"></script>
+    {% endif %}
+    <script  src="{% static 'jumla/js_frontend/banner.js' %}"></script>
+    <script src="{% static 'jumla/js_frontend/product.js'%}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'jumla/landpage.css' %}">
+    
+{% endblock %}
+
+
+
+    
+{% block content %}
+
+
+
+<div class="">
+
+
+
+
+<div class=" grid grid-cols-3">
+    <!----grids div-->
+    <div class="p-5 col-span-2">
+        <div class="mt-2 p-5">
+
+
+
+            <!----products div-->
+            <div class="product-grid">
+                  {% for product in page_elements %}
+          <div class=" bg-white"  >
+                    <div class = "product">
+                        <div class = "product-img">
+        
+                                <div class="img__description">
+                                    <div class="flex flex-col justify-around">
+                                        <div class="flex flex-col -mt-10  -mr-4 ">
+                                            <a href="?product_get={{ product.id }}"  class="hover:text-teal-600">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 "  fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                  </svg>
+                                            </a>
+                                         <a href="#" class="hover:text-teal-600">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                                                <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                              </svg>
+                                         </a>
+        
+                                        </div>
+        
+        
+                                        <div class="flex -mb-8">
+                                            <h1 class="text-white ml-28"> {{ product.shopOwner.shopName }} </h1>
+                                            <h1  class="text-white">{{ product.price }}</h1>
+                                        </div>
+        
+                                        <div class="-mb-10 -p-5 flex justify-center">
+        {% if user.is_authenticated %}
+                  {% if  request.user.groups.all.first.name == "customer" %}
+                                            <button id="btn"
+                                                    data-product_id="{{ product.id }}"
+                                                    data-bill_id="{{ bill.id }}"
+                                                    class="  transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 mt-4 text-gray-800  font-light  border-t w-30 h-10      focus:ring-0   focus:border-t-2 ">
+                                                    <div class="inline-flex items-center">
+                                                        <h1 class=" mr-2  text-sm">  اضف الى السلة</h1>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1 mb-1" viewBox="0 0 20 20" fill="currentColor">
+                                                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
+                                                          </svg>
+                                                    </div>
+                                            </button>
+                                            {% endif %}
+                                            {% endif %}
+                                        </div>
+        
+                                    </div>
+        
+                                </div>
+                            <img src="{{ product.Image_Product.first.image.url }}"  alt = "front product image">
+                            <img src="{{ product.Image_Product.last.image.url }}" alt = "rear product image" class = "rear-img">
+        
+        {#                    <img src = "https://images.unsplash.com/photo-1531877025030-f7696a50770f?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY0NjQzNDIzOA&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "front product image">#}
+        {##}
+        {#                    <img src = "https://images.unsplash.com/photo-1531876653494-b5c5dc360a5b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNTYxNjU5NQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" alt = "rear product image" class = "rear-img">#}
+        
+        
+                        </div>
+                       <div class ="text-center   p-4 mb-4">
+                        <h1 class="text-gray-500">{{ product.ProductName }} </h1>
+                       </div>
+                    </div>
+                </div>
+        
+        {% endfor %}
+        
+            </div>
+        {% include 'jumla/base/paginator.html' %}
+        </div>
+
+    </div>
+    <!----sotres info -->
+    <div class=" mt-20  ">
+<div class="bg-gray-200 p-5 rounded ">
+    <div class=" flex flex-col  justify-center  py-5" style="border: black;display:flex;flex-direction:row">
+        
+        <div class="-mt-2" style="border: black;margin-top:50px">
+            <div style="display: flex;flex-direction:column">
+                <p class="input_word " style="margin-left: 140px; margin-bottom: 5px;">الأسم</p>
+                <input type="text" class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">
+            </div>
+            <div style="display: flex;flex-direction:column;padding-top:20px">
+                <p class="input_word" style="margin-left: 140px; margin-bottom: 5px;">الصنف</p>
+                <input type="text"  class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">
+            </div>
+            <div style="display: flex;flex-direction:column;padding-top:20px">
+                <p class="input_word" style="margin-left: 140px; margin-bottom: 5px;">الهاتف</p>
+                <input type="text"  class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">
+            </div>
+            <div style="display: flex;flex-direction:column;padding-top:20px">
+                <p class="input_word" style="margin-left: 140px; margin-bottom: 5px;">العنوان</p>
+                <input type="text" class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">
+            </div>
+        </div>      
+  
+     
+    </div>
+</div>
+   
+
+    </div>
+
+</div>
+
+</div>
+
+
+          
+
+
+
+{% endblock %}

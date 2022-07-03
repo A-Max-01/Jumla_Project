@@ -164,13 +164,13 @@
 
     <sectionone >
    {% for cate in cate %}
-  <div class="product" class="bg-red-200">
+  <div class="product ">
 
-            <picture>
+            <picture  class="mr-12">
                 <img src="{{ cate.image.url }}" alt="">
        </picture>
             <div class="detail">
-                <p>  <div class="flex flex-col justify-center items-center pl-16">
+                <p>  <div class="flex flex-col justify-center items-center ">
                     <div class=" flex  mt-5 ">
                         {% if cate.parent %}
                             <h1><span class="text-sm">{{ cate.name }}</span> - <span class="text-sm"> {{ cate.parent.name }}</span></h1>
@@ -293,7 +293,7 @@
                                 </div>
 
 
-                                <div class="flex -mb-8">
+                                <div class="flex -mt-4">
                                     <h1 class="text-white ml-28"> {{ product.shopOwner.shopName }} </h1>
 
                                     
@@ -376,7 +376,7 @@
                                 </div>
 
 
-                                <div class="flex -mb-8">
+                                <div class="flex  -mt-4">
                                     <h1 class="text-white ml-28"> {{ product.shopOwner.shopName }} </h1>
                                     <h1  class="text-white">{{ product.price }}</h1>
                                 </div>
@@ -459,7 +459,7 @@
                                 </div>
 
 
-                                <div class="flex -mb-8">
+                                <div class="flex  -mt-4">
                                     <h1 class="text-white ml-28"> {{ product.shopOwner.shopName }} </h1>
                                     <h1  class="text-white">{{ product.price }}</h1>
                                 </div>
