@@ -20,6 +20,7 @@ urlpatterns = [
         path('add-to-cart', shopper.add_to_cart, name="add_to_cart"),
         path('update_quentity', shopper.update_quentity, name="update_quentity"),
         path('check_item_in_bill_order', shopper.check_item_in_bill_order, name="check_item_in_bill_order"),
+        path('who_are_we', shopper.who, name='who_are_we')
     ])),
     path('vendor/', include([
         path('', vender.vendor_home, name='vendor_home'),
@@ -27,6 +28,7 @@ urlpatterns = [
         path('update_product/<product_id>/', vender.update_product, name='update_product'),
         path('view_customer_bills/', vender.view_customer_bills, name='view_customer_bills'),
         path('view_bill_products/<bill_id>/', vender.view_bill_products, name='view_bill_products'),
+        path('store/<store>/', vender.show_store, name='show_store'),
         # Api
         path('delete_product', vender.delete_product_and_update_is_active, name='delete_product'),
     ])),

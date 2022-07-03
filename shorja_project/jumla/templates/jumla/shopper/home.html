@@ -555,7 +555,7 @@
 
 
                                 <div class="flex -mb-8">
-                                    <h1 class="text-white ml-28"> {{ product.shopOwner.shopName }} </h1>
+                                    <a href="{% url 'show_store' product.shopOwner.shopName %}" class="text-white ml-28"> {{ product.shopOwner.shopName }} </a>
                                     <h1  class="text-white">{{ product.price }}</h1>
                                 </div>
 

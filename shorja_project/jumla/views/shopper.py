@@ -143,3 +143,7 @@ def update_quentity(request):
                                      'cart_total': user_cart.get_cart_total(),
                                      })
     return JsonResponse({'Get': 'the api worked'})
+
+
+def who(request):
+    return render(request, "jumla/base/who.html")
