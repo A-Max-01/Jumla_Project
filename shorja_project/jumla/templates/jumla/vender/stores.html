@@ -2,7 +2,10 @@
 {% load static %}
 {% block static %}
     {% if user.is_authenticated %}
-    <script  src="{% static 'js_backend/vendor.js' %}"></script>
+          {% if  request.user.groups.all.first.name == "customer" %}
+    <script  src="{% static 'js_backend/delete_from_cart_order.js' %}"></script>
+
+    {% endif %}
     {% endif %}
     <script  src="{% static 'jumla/js_frontend/banner.js' %}"></script>
     <script src="{% static 'jumla/js_frontend/product.js'%}"></script>
@@ -110,19 +113,22 @@
         <div class="-mt-2" style="border: black;margin-top:50px">
             <div style="display: flex;flex-direction:column">
                 <p class="input_word " style="margin-left: 140px; margin-bottom: 5px;">الأسم</p>
-                <input type="text" class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">
+                <p>{{ vender.shopName }}</p>
+{#                <input type="text" value="{{ vender.shopName }}" class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">#}
             </div>
-            <div style="display: flex;flex-direction:column;padding-top:20px">
-                <p class="input_word" style="margin-left: 140px; margin-bottom: 5px;">الصنف</p>
-                <input type="text"  class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">
-            </div>
+{#            <div style="display: flex;flex-direction:column;padding-top:20px">#}
+{#                <p class="input_word" style="margin-left: 140px; margin-bottom: 5px;">الصنف</p>#}
+{#                <input type="text"  class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">#}
+{#            </div>#}
             <div style="display: flex;flex-direction:column;padding-top:20px">
                 <p class="input_word" style="margin-left: 140px; margin-bottom: 5px;">الهاتف</p>
-                <input type="text"  class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">
+                <p>{{ vender.shopOwner.phone_number }}</p>
+{#                <input type="text" value="{{ vender.shopOwner.phone_number }}"  class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">#}
             </div>
             <div style="display: flex;flex-direction:column;padding-top:20px">
                 <p class="input_word" style="margin-left: 140px; margin-bottom: 5px;">العنوان</p>
-                <input type="text" class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">
+                <p>{{ vender.shopOwner.address }}</p>
+{#                <input type="text" value="{{ vender.shopOwner.address }}" class="text-center focus:outline-none focus:ring focus:ring-gray-100 border-2 border-gray-300  mb-2 rounded " style="width:200px; ">#}
             </div>
         </div>      
   

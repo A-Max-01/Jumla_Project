@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required
+from django.http import JsonResponse
 from django.shortcuts import render
 from ..decorators import *
 from ..models import *
@@ -8,6 +9,8 @@ from ..utilities import *
 @login_required(login_url='login')
 @allowed_users(allowed_roles=['delivery', 'admin'])
 def home(request):
+    get_city = request.GET.get('city')
+    print(get_city)
     cities = Governorate.objects.all()
     carts = Cart.objects.filter(checkout=True)
     for cart in carts:
@@ -36,3 +39,4 @@ def get_cart_bills(request, cart_id):
         'page_nums': page_bills[0],
     }
     return render(request, "jumla/delivery/noor'sversion/customer_basket.html", context)
+

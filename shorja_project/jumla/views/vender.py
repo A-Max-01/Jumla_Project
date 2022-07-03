@@ -158,3 +158,14 @@ def view_bill_products(request, bill_id):
     bill = Bill.objects.filter(id=bill_id).first()
     context = {'bill_products': bill.products.all()}
     return render(request, 'jumla/vender/view_bill_products.html', context)
+
+
+def show_store(request, store):
+    vender = get_object_or_404(Shop, shopName__contains=store)
+    shop_products = Product.objects.filter(shopOwner__shopName__contains=vender)
+    paginator_element = MyPaginator(shop_products, 10)
+    page_number = request.GET.get('page')
+    page_elements = paginator_element.get_pages(page_number)
+
+    context = {"page_elements": page_elements[1], "page_nums": page_elements[0], 'vender': vender}
+    return render(request, 'jumla/vender/stores.html', context)
