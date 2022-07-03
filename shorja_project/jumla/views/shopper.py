@@ -147,3 +147,12 @@ def update_quentity(request):
 
 def who(request):
     return render(request, "jumla/base/who.html")
+
+
+def show_markets(request):
+    shops = Shop.objects.all()
+    paginator_element = MyPaginator(shops, 8)
+    page_number = request.GET.get('page')
+    page_elements = paginator_element.get_pages(page_number)
+    context = {"page_elements": page_elements[1], "page_nums": page_elements[0], }
+    return render(request, 'jumla/shopper/show_venders.html', context)

@@ -2,7 +2,6 @@
 {% load static %}
 {% block static %}
     {% if user.is_authenticated %}
-    <script  src="{% static 'js_backend/vendor.js' %}"></script>
           {% if  request.user.groups.all.first.name == "customer" %}
     <script  src="{% static 'js_backend/delete_from_cart_order.js' %}"></script>
 

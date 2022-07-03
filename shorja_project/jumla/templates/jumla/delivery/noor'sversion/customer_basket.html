@@ -9,31 +9,29 @@
     <div class="rounded w-5/6  container mx-auto p-2 bg-neutral-100 ">
 
       <div class="flex   flex-col justify-center items-center ">
-       {% for bill in page_elements %}
+          {% for bill in page_elements %}
 
-
-
-        <div class="rounded w-8/12  shadow bg-white mt-5  flex flex-col  ">
+        <div class="rounded w-11/12  shadow bg-white m-5  flex flex-col  ">
             
             <div class="bg-violet-50 rounded-t">
                 <div class="flex  justify-around mt-5 mb-5" >
              
-                    <h1 class="mr-2">اسم المتجر : <span>
+                    <h1 class="mr-2 text-sm ">اسم المتجر : <span>
                       {{ bill.shop.shopName }}
                     </span></h1>
-{#                    <h1 class="mr-2">اسم التاجر : <span>#}
+{#                    <h1 class="mr-2 text-sm">اسم التاجر : <span>#}
 {#                      {{ bill.shop.shopOwner.first_name }}#}
 {#                    </span></h1>#}
 {#                    <h1>#}
-                      <h1>  رقم الهاتف: <span>
+                      <h1  class="mr-2 text-sm">  رقم الهاتف: <span>
                        {{ bill.shop.shopOwner.phone_number }}
                       </span></h1>
 {#                      <h1>#}
-                        <h1>   العنوان المتجر: <span>
+                        <h1  class="mr-2 text-sm">   العنوان المتجر: <span>
                         {{ bill.shop.shopOwner.address }}
                          </span></h1>
 {#                         <h1>#}
-                          <h1>    اجمالي الفاتورة : <span>
+                          <h1  class="mr-2 text-sm">    اجمالي الفاتورة : <span>
                            {{ bill.total }}                          </span></h1>
 {#                             <h1>#}
 
@@ -46,9 +44,9 @@
           
           <div class="flex justify-center">
           
-                <div class="flex flex-col justify-center p-5   h-full">
+                <div class="flex flex-col justify-center p-5  h-full">
                     <!-- Table -->
-                    <div class="w-full max-w-2xl  bg-white  rounded-sm border border-gray-300">
+                    <div class="w-full  bg-white  rounded-sm border border-gray-300">
                      
                         <div class="p-3">
                             <div class="overflow-x-auto">
@@ -77,9 +75,9 @@
                                         <tr>
                                             <td class="p-2 whitespace-nowrap">
                                                 <div class="flex items-center">
-                                                    <div class="w-10 h-10 flex-shrink-0 mr-2 sm:mr-3">
-{#                                                        <img class="rounded-full" src="https://images.unsplash.com/photo-1606248897732-2c5ffe759c04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNDgzNjU3Mg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" width="40" height="40" alt="Alex Shatov"></div>#}
-                                                        <img class="rounded-full" src="{{ product.item.Image_Product.first.image.url}}" width="40" height="40" alt="Alex Shatov"></div>
+                                                    <div class="w-10 h-10 flex-shrink-0 mt-2 mr-2 sm:mr-3">
+{#                                                       {# <img class="rounded-full " src="https://images.unsplash.com/photo-1606248897732-2c5ffe759c04?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTYzNDgzNjU3Mg&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080" width="40" height="40" alt="Alex Shatov"></div>#}
+                                                        <img class="rounded-full" src="{{ product.item.Image_Product.first.image.url}}" width="40" height="40" alt=""></div>
                                                     <div class="font-medium  mr-2 text-gray-800">
                                                         {{ product.item.ProductName }}
                                                     </div>

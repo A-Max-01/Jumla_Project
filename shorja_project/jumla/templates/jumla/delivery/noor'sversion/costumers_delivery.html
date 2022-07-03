@@ -1,6 +1,7 @@
 {% extends 'jumla/base/base.html' %}
 {% load static %}
 {% block Title %}delivery home{% endblock %}
+
 {% block content %}
 
 <div class="mt-20 ">
@@ -10,7 +11,7 @@
       <h1 class="font-semibold text-2xl mx-16 p-4">طلبات الزبائن</h1>
       <div class="flex justify-end mx-28">
           <div class="mb-3 xl:w-90">
-          <form action="#" method="get">
+          <form action="#" method="Get">
     <select class="form-select appearance-none
       block
       w-full
@@ -23,13 +24,12 @@
       border border-solid border-gray-300
       rounded
       transition
-      ease-in-out
-      m-0
+      ease-in-out m-0
       focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none" aria-label="Default select example">
         <option class="text-center" selected>  الكل   </option>
 
         {% for city in cities %}
-        <option name="city" value="{{ city.id }}">
+        <option value="{{ city.id }}">
                 {{ city.name }}
         </option>
         {% endfor %}

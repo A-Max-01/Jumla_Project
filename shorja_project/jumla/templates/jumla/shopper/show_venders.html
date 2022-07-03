@@ -1,0 +1,31 @@
+
+{% extends 'jumla/base/base.html' %}
+
+
+{% load static %}
+
+
+{% block content %}
+    <div class="row container my-lg-5">
+    {% for shop in page_elements %}
+     <div class="col-4">
+        <div class="flex justify-center my-5 py-5">
+  <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+    <h5 class="text-gray-900 text-xl leading-tight font-medium mb-2">{{ shop.shopName}}</h5>
+    <p class="text-gray-700 text-base mb-4">
+        عنوان المحل :
+      {{ shop.shopOwner.address }}
+    </p>
+    <p class="text-gray-700 text-base mb-4">
+        رقم المحل :
+        {{ shop.shopOwner.phone_number }}
+    </p>
+
+    <a href="{% url 'show_store' shop.shopName %}" type="button" class=" inline-block px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">check market</a>
+  </div>
+</div></div>
+    {% endfor %}
+    </div>
+{% include 'jumla/base/paginator.html' %}
+
+{% endblock %}
