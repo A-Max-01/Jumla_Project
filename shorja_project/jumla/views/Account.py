@@ -30,7 +30,9 @@ def register_view(request):
             })
         try:
             group = Group.objects.get(name='customer')
-            user = User.objects.create_user(phone_number, first_name, address, password)
+            user = User.objects.create_user(phone_number, password)
+            user.address = address
+            user.first_name = first_name
             user.groups.add(group)
             user.save()
             # to create cart for this user to first time

@@ -1,6 +1,7 @@
+let btn = document.querySelectorAll('#btn')
 document.addEventListener('DOMContentLoaded', function(){
     console.log('run')
-    let btn = document.querySelectorAll('#btn')
+
     fetch('http://127.0.0.1:8000/shopper/check_item_in_bill_order')
     .then(rep => rep.json())
     .then(data => {
